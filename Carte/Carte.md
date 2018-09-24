@@ -7,3 +7,7 @@ HERO
 Sbire
 
 ![](https://hearthcards.ams3.digitaloceanspaces.com/02/b8/c3/6d/02b8c36d.png)
+
+![](https://hearthcards.ams3.digitaloceanspaces.com/5e/78/78/06/5e787806.png)
+
+![](https://hearthcards.ams3.digitaloceanspaces.com/c3/02/ea/54/c302ea54.png)
