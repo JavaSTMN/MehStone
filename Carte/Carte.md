@@ -12,6 +12,8 @@ Sbire
 
 ![](https://hearthcards.ams3.digitaloceanspaces.com/c3/02/ea/54/c302ea54.png)
 
+![](https://hearthcards.ams3.digitaloceanspaces.com/c8/61/55/9f/c861559f.png)
+
 Arme
 
 ![](https://hearthcards.ams3.digitaloceanspaces.com/e6/57/5f/1f/e6575f1f.png)
