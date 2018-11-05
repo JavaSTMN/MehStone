@@ -1,4 +1,4 @@
-.metadata
+.ametadata
 bin/
 tmp/
 *.tmp
@@ -9,7 +9,7 @@ local.properties
 .settings/
 .loadpath
 .recommenders
-
+.project
 # External tool builders
 .externalToolBuilders/
 
