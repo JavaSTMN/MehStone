@@ -8,7 +8,7 @@
 - get nb cards deck hearthstone
 - 4 champions , LSD , PAPINI, FACCANONI, COSAL
 - Sbire : Loris, Clément, Quentin, Dylan A, Adrian, Lucas, David, Pierre, Micka, dylan R, Kevin
-- monstre : bouftou, tofu, livre de maths, JV, Karen, slime, 
+- monstre : bouftou, tofu, livre de maths, JV, Karen, slime, JUL, 
 - LIMITATIONS => JAVA / SWING / TEMPS 
 
 
