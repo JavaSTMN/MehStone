@@ -8,3 +8,12 @@
 - get nb cards deck hearthstone
 - 4 champions , LSD , PAPINI, FACCANONI, COSAL
 - LIMITATIONS => JAVA / SWING / TEMPS 
+
+
+Deck de carte deja fait
+pas d'animation
+pas voire peu de graphisme
+Utiliser une carte
+Distinguer les cartes
+fonction d'une partie normale
+10 cartes par deck// 5 cartes differentes
