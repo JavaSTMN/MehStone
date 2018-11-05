@@ -7,6 +7,8 @@
 - jeux multi joueur en local
 - get nb cards deck hearthstone
 - 4 champions , LSD , PAPINI, FACCANONI, COSAL
+- Sbire : Loris, Clément, Quentin, Dylan A, Adrian, JV, Lucas Cenceni, Karen, David, Pierre, Micka, dylan R, Kevin
+- monstre : bouftou, tofu, livre de maths
 - LIMITATIONS => JAVA / SWING / TEMPS 
 
 
