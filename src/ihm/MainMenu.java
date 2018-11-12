@@ -89,7 +89,6 @@ public class MainMenu {
 		content.add(buttonPlay);
 		content.add(buttonDeck);
 		content.add(buttonQuit);
-		//TODO Background Image
 		menuFrame.setVisible(true);
 		
 		
@@ -107,39 +106,4 @@ public class MainMenu {
 
 }
 
-class ImagePanel extends JPanel {
-    private Image image;
-    public ImagePanel(Image image) {
-        this.image = image;
-    }
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(image, 0, 0, this);
-    }
-}
 
-class RoundedBorder implements Border {
-
-    private int radius;
-
-
-    RoundedBorder(int radius) {
-        this.radius = radius;
-    }
-
-
-    public Insets getBorderInsets(Component c) {
-        return new Insets(this.radius+1, this.radius+1, this.radius+2, this.radius);
-    }
-
-
-    public boolean isBorderOpaque() {
-        return true;
-    }
-
-
-    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-        g.drawRoundRect(x, y, width-1, height-1, radius, radius);
-    }
-}
