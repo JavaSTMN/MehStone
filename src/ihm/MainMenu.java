@@ -42,7 +42,7 @@ public class MainMenu {
 	 * @throws MalformedURLException 
 	 */
 	public static void main(String[] args) throws MalformedURLException, IOException {
-		BufferedImage myImage = ImageIO.read(new URL("https://www.zupimages.net/up/18/46/20ek.jpg"));
+		BufferedImage myImage = ImageIO.read(new File("background.jpg"));
 		ImagePanel content = new ImagePanel(myImage);
 		
 		
@@ -52,7 +52,6 @@ public class MainMenu {
 		gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
 		MainGame mg = new MainGame(gameFrame);
-		gameFrame = mg.getMyFrame();
 		Frame testFrame = mg.getMyFrame();
 		testFrame.setUndecorated(true); // Permet de set full screen à virer en dev
 		testFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);		
@@ -107,13 +106,26 @@ public class MainMenu {
 		    	menuFrame.dispose();
 		    }
 		});
-		
+
 		
 		buttonPlay.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e)
 		    {
 		    	menuFrame.setVisible(false);
 		    	testFrame.setVisible(true);
+		    }
+		});
+		
+		buttonDeck.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    	content.setVisible(false);
+				CreateDeck c = new CreateDeck(menuFrame);
+				try {
+					c.main();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 		    }
 		});
 	}
