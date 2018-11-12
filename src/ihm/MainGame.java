@@ -9,8 +9,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -38,28 +40,38 @@ public class MainGame {
 		GridBagConstraints gc = new GridBagConstraints();
 		
 		
+		ArrayList<JButton> btns = new ArrayList<JButton>();
+		for (int i = 0; i < 10; i++) {
+			JButton card = new JButton();
+			card.setPreferredSize(new Dimension(120, 240));
+			card.setMinimumSize(new Dimension(120, 240));
+			ImageIcon image = new ImageIcon("D:/PROJECTS/workspace/MehStone/assets/img/papini.png");
+			card.setIcon(image);
+			card.setBackground(Color.WHITE);
+			btns.add(card);
+		}
 		
-		
-		// TODO reponsive Width / Height
 		JPanel opponentPanel = new JPanel();
-		opponentPanel.add(new JButton("1"));
-		opponentPanel.add(new JButton("2"));
-		opponentPanel.add(new JButton("3"));
-		opponentPanel.setBackground(Color.RED);
+		for (int i = 0; i < 5; i++) {
+			opponentPanel.add(btns.get(i));
+			
+		}
+		opponentPanel.setBackground(Color.GRAY);
 		opponentPanel.setPreferredSize(new Dimension(1920, 240));
 		opponentPanel.setMinimumSize(new Dimension(1920, 240));
 		
  		JPanel gamePanel = new JPanel();
-		gamePanel.setBackground(Color.MAGENTA);
+		gamePanel.setBackground(Color.DARK_GRAY);
 		gamePanel.setPreferredSize(new Dimension(1920, 600));
 		gamePanel.setMinimumSize(new Dimension(1920, 600));
 		
 		JPanel playerPanel = new JPanel();
-
-		playerPanel.add(new JButton("1"));
-		playerPanel.add(new JButton("2"));
-		playerPanel.add(new JButton("3"));
-		playerPanel.setBackground(Color.RED);		
+		
+		for (int i = 5; i < 10; i++) {
+			playerPanel.add(btns.get(i));
+			
+		}
+		playerPanel.setBackground(Color.GRAY);		
 		playerPanel.setPreferredSize(new Dimension(1920, 240));
 		playerPanel.setMinimumSize(new Dimension(1920, 240));
 	
