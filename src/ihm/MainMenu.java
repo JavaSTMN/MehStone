@@ -27,6 +27,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class MainMenu {
+	
 
 	public MainMenu() {
 		JPanel panneau = new JPanel();
@@ -43,8 +44,19 @@ public class MainMenu {
 	public static void main(String[] args) throws MalformedURLException, IOException {
 		BufferedImage myImage = ImageIO.read(new URL("https://www.zupimages.net/up/18/46/20ek.jpg"));
 		ImagePanel content = new ImagePanel(myImage);
-		Frame menuFrame = new JFrame();
 		
+		
+		Frame menuFrame = new JFrame();
+		Frame gameFrame = new JFrame();
+		gameFrame.setUndecorated(true); // Permet de set full screen à virer en dev
+		gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		
+		MainGame mg = new MainGame(gameFrame);
+		gameFrame = mg.getMyFrame();
+		Frame testFrame = mg.getMyFrame();
+		testFrame.setUndecorated(true); // Permet de set full screen à virer en dev
+		testFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);		
+
 		menuFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		menuFrame.setUndecorated(true); // Permet de set full screen à virer en dev
 
@@ -77,25 +89,31 @@ public class MainMenu {
 			    	jButton.setBackground(Color.PINK);
 			    	jButton.setForeground(Color.decode("#444444"));
 			    }
-
 			    public void mouseExited(java.awt.event.MouseEvent evt) {
 			    	jButton.setBackground(Color.decode("#121212"));
 			    	jButton.setForeground(Color.decode("#ffffff"));
 			    }
 			});
-			
 		}
 		
 		content.add(buttonPlay);
 		content.add(buttonDeck);
 		content.add(buttonQuit);
 		menuFrame.setVisible(true);
-		
-		
+				
 		buttonQuit.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e)
 		    {
 		    	menuFrame.dispose();
+		    }
+		});
+		
+		
+		buttonPlay.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    	menuFrame.setVisible(false);
+		    	testFrame.setVisible(true);
 		    }
 		});
 	}

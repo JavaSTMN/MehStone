@@ -1,6 +1,7 @@
 .ametadata
 bin/
 tmp/
+*.classpath
 *.tmp
 *.bak
 *.swp
