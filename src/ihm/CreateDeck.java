@@ -30,6 +30,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import tool.ImagePaths;
+
 public class CreateDeck {
 	
 	private Frame myFrame;
@@ -39,7 +41,7 @@ public class CreateDeck {
 	}
 	
 	public void main() throws MalformedURLException, IOException {
-		BufferedImage myImage = ImageIO.read(new File("./assets/img/background.jpg"));
+		BufferedImage myImage = ImageIO.read(new File(ImagePaths._BACKGROUND));
 		JPanel mainPanel = new JPanel();
 		JPanel content = new ImagePanel(myImage);
 		JPanel content2 = new ImagePanel(myImage);

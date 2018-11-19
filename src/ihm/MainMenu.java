@@ -3,6 +3,9 @@ package ihm;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import tool.ImagePaths;
+
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -33,7 +36,7 @@ public class MainMenu {
 	 * @throws MalformedURLException 
 	 */
 	public static void main(String[] args) throws MalformedURLException, IOException {
-		BufferedImage myImage = ImageIO.read(new File("./assets/img/background.jpg"));
+		BufferedImage myImage = ImageIO.read(new File(ImagePaths._BACKGROUND));
 		ImagePanel content = new ImagePanel(myImage);
 		
 		
