@@ -1,6 +1,13 @@
 package core;
 
+import java.awt.Image;
+
 public class Spell extends Card implements ICard, IAttackingCard {
+
+	public Spell(String name, String description, int mana, Image image, String effect) {
+		super(name, description, mana, image, effect);
+		// TODO Auto-generated constructor stub
+	}
 
 	public void action() {
 		System.out.println("Spell does smth");
