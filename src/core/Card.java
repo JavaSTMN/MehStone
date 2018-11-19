@@ -1,11 +1,24 @@
 package core;
 
+import java.awt.Image;
+
 public abstract class Card {
 	private String name;
 	private String description;
 	private int mana;
-	private String imgPath;
+	private Image image;
 	private String effect;
+	
+	
+	
+	public Card(String name, String description, int mana, String imgPath, String effect) {
+		this.name = name;
+		this.description = description;
+		this.mana = mana;
+		this.image = image;
+		this.effect = effect;
+		
+	}
 	/**
 	 * 
 	 * @return
@@ -36,18 +49,17 @@ public abstract class Card {
 		System.out.println("DO SOMETHING");
 	}
 	/**
-	 * 
 	 * @return
 	 */
-	public String getImgPath() {
-		return this.imgPath;
+	public Image getImgPath() {
+		return this.image;
 	}
 	/**
 	 * 
 	 * @param imgPath
 	 */
-	public void setImgPath(String imgPath) {
-		this.imgPath = imgPath;
+	public void setImgPath(Image image) {
+		this.image = image;
 	}
 
 	public Card getCard() {

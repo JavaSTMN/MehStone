@@ -6,13 +6,28 @@ public class Deck {
 
 	private String label;
 	private String heroType;
-	private int nb;
+	private final int _NB_MAX_CARD = 10 ;
 	private ArrayList<Card> cards;
 	public ArrayList<Card> getCards() {
 		return cards;
 	}
 	public void setCards(ArrayList<Card> cards) {
 		this.cards = cards;
+	}
+	
+	
+	/**
+	 * 
+	 * @param label
+	 * @param heroType
+	 * @param nb
+	 * @param cards
+	 */
+	public Deck(String label, String heroType, int nb, ArrayList<Card> cards) {
+		this.label = label;
+		this.heroType = heroType;
+		this.cards = cards;
+		
 	}
 	
 	
@@ -40,11 +55,9 @@ public class Deck {
 	public void setHeroType(String heroType) {
 		this.heroType = heroType;
 	}
-	public int getNb() {
-		return nb;
+	public int get_NB_MAX_CARD() {
+		return _NB_MAX_CARD;
 	}
-	public void setNb(int nb) {
-		this.nb = nb;
-	}
+
 	
 }
