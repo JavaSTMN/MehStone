@@ -23,6 +23,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import tool.ImagePaths;
@@ -30,6 +31,7 @@ import core.Card;
 import core.Deck;
 import core.Hero;
 import core.Monster;
+import core.Spell;
 
 public class CreateDeck {
 	
@@ -71,6 +73,10 @@ public class CreateDeck {
 		Image sbire_ivan = new ImageIcon(ImagePaths._SBIRE_IVAN).getImage();
 		Image sbire_lapeyrle = new ImageIcon(ImagePaths._SBIRE_LAPEYRLE).getImage();
 		Image sbire_mamie = new ImageIcon(ImagePaths._SBIRE_MAMIE).getImage();
+		Image spell_katon = new ImageIcon(ImagePaths._SPELL_KATON).getImage();
+		Image spell_raiton = new ImageIcon(ImagePaths._SPELL_RAITON).getImage();
+		Image spell_rasengan = new ImageIcon(ImagePaths._SPELL_RASENGAN).getImage();
+
 
 
 		listCard.add(new Monster("3k",1, sbire_3k,"Détruit 2 sbires aléatoire",4,1));
@@ -79,7 +85,10 @@ public class CreateDeck {
 		listCard.add(new Monster("ivan",9, sbire_ivan,"Donne +2/+2 à une perlouse sur le terrain",3,8));
 		listCard.add(new Monster("lapeyrle",2, sbire_lapeyrle,"Fait perdre 1 d'attaque à ses alliés",1,3));
 		listCard.add(new Monster("mamie",2, sbire_mamie,"Donne +1/-1 à un bodybuilder sur le terrain",5,4));
-		
+		listCard.add(new Spell("katon",5, spell_katon,"Inflige 6 point(s) de dégats"));
+		listCard.add(new Spell("raiton",7, spell_raiton,"Inflige 9 point(s) de dégats"));
+		listCard.add(new Spell("rasengan",7, spell_rasengan,"Inflige 4 points de dégats à tous les serviteurs adverses"));
+
 		///////////////////////
 		JPanel panelGestionDeck = new ImagePanel(myImage);
 		JPanel panelGestionCards = new JPanel();
@@ -92,7 +101,7 @@ public class CreateDeck {
 		panelGestionCardsInDeck.setOpaque(false);
 		panelGestionDeck.setVisible(false);
 		panelGestionDeck.setLayout(new GridLayout(1,2));
-		panelGestionDeck.setBorder(new EmptyBorder(100, 100, 100, 100));
+		panelGestionDeck.setBorder(new EmptyBorder(50, 50, 50, 50));
 		
 		// gestion panel selection cards
 		
@@ -106,7 +115,10 @@ public class CreateDeck {
 			buttonsListCard.add(temp);
 			panelGestionCards.add(temp);
 		}
-		panelGestionDeck.add(panelGestionCards);
+		JScrollPane scroller = new JScrollPane(panelGestionCards);
+		scroller.setOpaque(false);
+		scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		panelGestionDeck.add(scroller);
 		panelGestionDeck.add(panelGestionCardsInDeck);
 
 
