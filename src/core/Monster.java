@@ -25,5 +25,8 @@ public class Monster extends Card implements ICard, IAttackingCard{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
+	
 
 }
