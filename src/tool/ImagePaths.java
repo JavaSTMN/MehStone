@@ -21,6 +21,8 @@ public class ImagePaths {
 	/* HERO IMG PATHS */
 	public static String _HERO_PAPOUNOU = "./assets/img/Cards/Heroes/papounou.png";
 	public static String _HERO_CHAUVINATOR = "./assets/img/Cards/Heroes/chauvinator.png";
+	public static String _HERO_LSD = "./assets/img/cards/Heroes/LSD.png";
+	public static String _HERO_GLORIA = "./assets/img/cards/Heroes/Gloria.png";
 
 	/* HEREO IMG PATHS */
 	public static String _BACKGROUND = "./assets/img/background.jpg";
