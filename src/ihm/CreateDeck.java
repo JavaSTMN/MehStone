@@ -27,28 +27,81 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
 import tool.ImagePaths;
+import core.Card;
+import core.Deck;
 import core.Hero;
+import core.Monster;
 
 public class CreateDeck {
 	
 	private Frame myFrame;
 	int cpt = 0;
+	private Deck deckJoueur1;
+	private Deck deckJoueur2;
+	private int jSelected = 0;
+
 	public CreateDeck(Frame menuFrame) {
 		this.myFrame = menuFrame;
 	}
 	
 	public void main() throws MalformedURLException, IOException {
+		
 		BufferedImage myImage = ImageIO.read(new File(ImagePaths._BACKGROUND));
 		JPanel mainPanel = new JPanel();
 		JPanel content = new ImagePanel(myImage);
 		JPanel content2 = new ImagePanel(myImage);
+		
+
 
 		JPanel test = new JPanel(new GridLayout(1,5, 10, 10));
 		test.setOpaque(false);
 		content.setLayout(new GridLayout(5,1, 100, 100));
 
 		content2.setVisible(false);
+		
+		/////////////// Création IHM sélection des cartes du deck ///////////////
+		// Création des cartes
+		ArrayList<Card> listCard = new ArrayList<Card>();
+		ArrayList<JButton> buttonsListCard = new ArrayList<JButton>();
+
+		Image sbire_3k = new ImageIcon(ImagePaths._SBIRE_3K).getImage();
+		Image sbire_furry = new ImageIcon(ImagePaths._SBIRE_FURRY).getImage();
+		Image sbire_garou = new ImageIcon(ImagePaths._SBIRE_GAROU).getImage();
+
+		listCard.add(new Monster("3k",1, sbire_3k,"Détruit 2 sbires aléatoire",4,1));
+		listCard.add(new Monster("furry",6, sbire_furry,"Invoque un sbire à ses côtés",6,5));
+		listCard.add(new Monster("garou",6, sbire_garou,"Motive ses alliés en leurs donnant +1 de vie",6,6));
+		
+		///////////////////////
+		JPanel panelGestionDeck = new ImagePanel(myImage);
+		JPanel panelGestionCards = new JPanel();
+		JPanel panelGestionCardsInDeck = new JPanel();
+		panelGestionCards.setLayout(new GridLayout(3,3));
+		panelGestionCardsInDeck.setLayout(new GridLayout(1,1));
+		panelGestionCards.setVisible(true);
+		panelGestionCardsInDeck.setVisible(true);
+		panelGestionDeck.setVisible(false);
+		panelGestionDeck.setLayout(new GridLayout(1,2));
+		panelGestionDeck.setBorder(new EmptyBorder(100, 100, 100, 100));
+		
+		// gestion panel selection cards
+		
+		for (Card myCard : listCard) {
+			JButton temp = new JButton("");
+			temp.setBorderPainted(false);
+			temp.setBorder(null);
+			temp.setMargin(new Insets(0, 0, 0, 0));
+			temp.setContentAreaFilled(false);
+			temp.setIcon(new ImageIcon(getScaledImage(myCard.getImg(), 200, 275)));
+			buttonsListCard.add(temp);
+			panelGestionCards.add(temp);
+		}
+		panelGestionDeck.add(panelGestionCards);
+		panelGestionDeck.add(panelGestionCardsInDeck);
+
 
 		//content.setBorder(new EmptyBorder(160, 500, 160, 500));
 		
@@ -134,6 +187,18 @@ public class CreateDeck {
 		    {
 		    	content.setVisible(false);
 		    	content2.setVisible(true);
+		    	deckJoueur1 = new Deck();
+		    	jSelected = 1;
+		    }
+		});
+		
+		buttonJ2.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    	content.setVisible(false);
+		    	content2.setVisible(true);
+		    	deckJoueur2 = new Deck();
+		    	jSelected = 2;
 		    }
 		});
 		SuivantBtn.addActionListener(new ActionListener() {
@@ -150,6 +215,23 @@ public class CreateDeck {
 		    	cpt--;
 		    	cpt = (cpt < 0)?listHero.size()-1:cpt;
 				heroBtn.setIcon(new ImageIcon(getScaledImage(listHero.get(cpt).getImage(), 430, 569)));
+		    }
+		});
+		
+		heroBtn.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    	if(jSelected == 1) {
+		    		// Choix du joueur 1
+		    		deckJoueur1.setHero(listHero.get(cpt));
+		    		content2.setVisible(false);
+		    		panelGestionDeck.setVisible(true);
+		    	}else if(jSelected == 2) {
+		    		// Choix du joueur 2
+		    		deckJoueur2.setHero(listHero.get(cpt));
+		    		content2.setVisible(false);
+		    		panelGestionDeck.setVisible(true);
+		    	}
 		    }
 		});
 		
