@@ -68,11 +68,17 @@ public class CreateDeck {
 		Image sbire_3k = new ImageIcon(ImagePaths._SBIRE_3K).getImage();
 		Image sbire_furry = new ImageIcon(ImagePaths._SBIRE_FURRY).getImage();
 		Image sbire_garou = new ImageIcon(ImagePaths._SBIRE_GAROU).getImage();
+		Image sbire_ivan = new ImageIcon(ImagePaths._SBIRE_IVAN).getImage();
+		Image sbire_lapeyrle = new ImageIcon(ImagePaths._SBIRE_LAPEYRLE).getImage();
+		Image sbire_mamie = new ImageIcon(ImagePaths._SBIRE_MAMIE).getImage();
+
 
 		listCard.add(new Monster("3k",1, sbire_3k,"Détruit 2 sbires aléatoire",4,1));
 		listCard.add(new Monster("furry",6, sbire_furry,"Invoque un sbire à ses côtés",6,5));
 		listCard.add(new Monster("garou",6, sbire_garou,"Motive ses alliés en leurs donnant +1 de vie",6,6));
-		
+		listCard.add(new Monster("ivan",9, sbire_ivan,"Donne +2/+2 à une perlouse sur le terrain",3,8));
+		listCard.add(new Monster("lapeyrle",2, sbire_lapeyrle,"Fait perdre 1 d'attaque à ses alliés",1,3));
+		listCard.add(new Monster("mamie",2, sbire_mamie,"Donne +1/-1 à un bodybuilder sur le terrain",5,4));
 		
 		///////////////////////
 		JPanel panelGestionDeck = new ImagePanel(myImage);
@@ -155,13 +161,19 @@ public class CreateDeck {
 		
 		ImageIcon imageIcon = new ImageIcon(ImagePaths._HERO_PAPOUNOU); 
 		ImageIcon imageIcon2 = new ImageIcon(ImagePaths._HERO_CHAUVINATOR); 
+		ImageIcon imageIcon3 = new ImageIcon(ImagePaths._HERO_LSD); 
+		ImageIcon imageIcon4 = new ImageIcon(ImagePaths._HERO_GLORIA); 
 
 		Image imgPapounou = imageIcon.getImage();
 		Image imgChauvinator = imageIcon2.getImage();
+		Image imgLsd = imageIcon3.getImage();
+		Image imgGloria = imageIcon4.getImage();
 		ArrayList<Hero> listHero = new ArrayList<Hero>();
 		listHero.add(new Hero("Papounou", imgPapounou));
 		listHero.add(new Hero("Chauvinator", imgChauvinator));
-
+		listHero.add(new Hero("Lsd", imgLsd));
+		listHero.add(new Hero("Gloria", imgGloria));
+		
 		JButton heroBtn = new JButton("");  
 		JButton SuivantBtn = new JButton("Suivant");  
 		JButton RetourBtn = new JButton("Précédent");  
