@@ -11,7 +11,7 @@ public abstract class Card {
 	
 	
 	
-	public Card(String name, String description, int mana, String imgPath, String effect) {
+	public Card(String name, String description, int mana, Image image, String effect) {
 		this.name = name;
 		this.description = description;
 		this.mana = mana;
