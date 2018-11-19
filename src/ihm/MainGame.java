@@ -35,7 +35,6 @@ public class MainGame {
 		}
 		ImagePanel content = new ImagePanel(myImage);
 		
-		
 		content.setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
 		

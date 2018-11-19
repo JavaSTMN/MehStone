@@ -5,14 +5,17 @@ public abstract class Card {
 	private String description;
 	private int mana;
 	private String imgPath;
-	private int hp;
-	
+	private String effect;
 	/**
 	 * 
 	 * @return
 	 */
 	public String getName() {
 	return this.name;
+	}
+	
+	public String getEffect() {
+		return this.effect;
 	}
 	
 	/**
@@ -29,7 +32,9 @@ public abstract class Card {
 	public int getMana() {
 		return this.mana;
 	}
-	
+	public void action() {
+		System.out.println("DO SOMETHING");
+	}
 	/**
 	 * 
 	 * @return
@@ -44,16 +49,7 @@ public abstract class Card {
 	public void setImgPath(String imgPath) {
 		this.imgPath = imgPath;
 	}
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public int getHp() {
-		return this.hp;
-	}
-	
-	
+
 	public Card getCard() {
 		return this;
 	}

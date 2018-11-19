@@ -1,11 +1,9 @@
 package core;
 
-public class Monster extends Card implements ICard, IAttackingCard{
+public class Spell extends Card implements ICard, IAttackingCard {
 
-	
-	
 	public void action() {
-		System.out.println("Monster does smth");
+		System.out.println("Spell does smth");
 	}
 
 	@Override
@@ -25,5 +23,4 @@ public class Monster extends Card implements ICard, IAttackingCard{
 		// TODO Auto-generated method stub
 		
 	}
-
 }

@@ -1,6 +1,5 @@
 package core;
 
-public interface IAttackingCard {
-
-	public void attack();
+public interface IAttackingCard  {
+	public void attack(Card card);
 }
