@@ -30,6 +30,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import core.Hero;
+
 public class CreateDeck {
 	
 	private Frame myFrame;
@@ -99,13 +101,14 @@ public class CreateDeck {
 		
 		// Chargement des images des héros
 		
-		ImageIcon imageIcon = new ImageIcon("./assets/img/papounou.png"); // load the image to a imageIcon
+		ImageIcon imageIcon = new ImageIcon("./assets/img/papounou.png"); 
+		ImageIcon imageIcon2 = new ImageIcon("./assets/img/chauvinator.png"); 
+
 		Image imgPapounou = imageIcon.getImage();
-		ImageIcon imageIcon2 = new ImageIcon("./assets/img/chauvinator.png"); // load the image to a imageIcon
 		Image imgChauvinator = imageIcon2.getImage();
-		ArrayList<Image> listImgHero = new ArrayList<Image>();
-		listImgHero.add(imgPapounou);
-		listImgHero.add(imgChauvinator);
+		ArrayList<Hero> listHero = new ArrayList<Hero>();
+		listHero.add(new Hero("Papounou", imgPapounou));
+		listHero.add(new Hero("Chauvinator", imgChauvinator));
 
 		// 
 		JButton heroBtn = new JButton("");  
@@ -139,16 +142,16 @@ public class CreateDeck {
 		    public void actionPerformed(ActionEvent e)
 		    {
 		    	cpt++;
-		    	cpt = (cpt == listImgHero.size())?0:cpt;
-				heroBtn.setIcon(new ImageIcon(getScaledImage(listImgHero.get(cpt), 430, 569)));
+		    	cpt = (cpt == listHero.size())?0:cpt;
+				heroBtn.setIcon(new ImageIcon(getScaledImage(listHero.get(cpt).getImage(), 430, 569)));
 		    }
 		});
 		RetourBtn.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e)
 		    {
 		    	cpt--;
-		    	cpt = (cpt < 0)?listImgHero.size()-1:cpt;
-				heroBtn.setIcon(new ImageIcon(getScaledImage(listImgHero.get(cpt), 430, 569)));
+		    	cpt = (cpt < 0)?listHero.size()-1:cpt;
+				heroBtn.setIcon(new ImageIcon(getScaledImage(listHero.get(cpt).getImage(), 430, 569)));
 		    }
 		});
 		
