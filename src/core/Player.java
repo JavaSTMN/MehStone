@@ -4,32 +4,23 @@ public class Player {
 
 	private String userName;
 	private Hand hand;
-	private int crystals;
+	private Mana mana;
 	private Deck deck;
 	private Hero hero;
-	public static int _NB_MAX_CRYSTAL;
 	
-	public Player(String username, Hand hand) {
+	public Player(String username, Hand hand, Mana mana) {
 		this.userName = username;
 		this.hand = hand;
-		this.crystals = _NB_MAX_CRYSTAL;
+		this.mana = mana;
 	}
 
-	public void addCrystals() {
-		// TODO c'est ça non?
-		this.setCrystals(this.getCrystals() + 1);
+	public Mana getMana() {
+		return this.mana;
 	}
-
-	public void removeCrystal() {
-		// TODO j'sais pas ce que ça fait
-	}
-
-	public void getRemainingCrystals() {
-		// TODO C'est de la merde, on return just crystals
-	}
-
 	
-	
+	public void setMana(Mana mana) {
+		this.mana = mana;
+	}	
 	
 	public String getUserName() {
 		return userName;
@@ -47,14 +38,6 @@ public class Player {
 		this.hand = hand;
 	}
 
-	public int getCrystals() {
-		return crystals;
-	}
-
-	public void setCrystals(int crystals) {
-		this.crystals = crystals;
-	}
-
 	public Deck getDeck() {
 		return deck;
 	}
@@ -70,5 +53,4 @@ public class Player {
 	public void setHero(Hero hero) {
 		this.hero = hero;
 	}
-
 }
