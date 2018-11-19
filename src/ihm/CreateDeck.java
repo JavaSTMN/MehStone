@@ -4,9 +4,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Frame;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
@@ -14,12 +12,10 @@ import java.awt.LayoutManager;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -27,33 +23,92 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
 import tool.ImagePaths;
+import core.Card;
+import core.Deck;
 import core.Hero;
+import core.Monster;
 
 public class CreateDeck {
 	
 	private Frame myFrame;
 	int cpt = 0;
+	private Deck deckJoueur1;
+	private Deck deckJoueur2;
+	private int jSelected = 0;
+
 	
-	/**
-	 * @param menuFrame
-	 */
 	public CreateDeck(Frame menuFrame) {
 		this.myFrame = menuFrame;
 	}
 	
 	
 	public void main() throws MalformedURLException, IOException {
+		
 		BufferedImage myImage = ImageIO.read(new File(ImagePaths._BACKGROUND));
 		JPanel mainPanel = new JPanel();
 		JPanel content = new ImagePanel(myImage);
 		JPanel content2 = new ImagePanel(myImage);
+		
+
 
 		JPanel test = new JPanel(new GridLayout(1,5, 10, 10));
 		test.setOpaque(false);
 		content.setLayout(new GridLayout(5,1, 100, 100));
 
 		content2.setVisible(false);
+		
+		/////////////// Création IHM sélection des cartes du deck ///////////////
+		// Création des cartes
+		ArrayList<Card> listCard = new ArrayList<Card>();
+		ArrayList<JButton> buttonsListCard = new ArrayList<JButton>();
+
+		Image sbire_3k = new ImageIcon(ImagePaths._SBIRE_3K).getImage();
+		Image sbire_furry = new ImageIcon(ImagePaths._SBIRE_FURRY).getImage();
+		Image sbire_garou = new ImageIcon(ImagePaths._SBIRE_GAROU).getImage();
+		Image sbire_ivan = new ImageIcon(ImagePaths._SBIRE_IVAN).getImage();
+		Image sbire_lapeyrle = new ImageIcon(ImagePaths._SBIRE_LAPEYRLE).getImage();
+		Image sbire_mamie = new ImageIcon(ImagePaths._SBIRE_MAMIE).getImage();
+
+
+		listCard.add(new Monster("3k",1, sbire_3k,"Détruit 2 sbires aléatoire",4,1));
+		listCard.add(new Monster("furry",6, sbire_furry,"Invoque un sbire à ses côtés",6,5));
+		listCard.add(new Monster("garou",6, sbire_garou,"Motive ses alliés en leurs donnant +1 de vie",6,6));
+		listCard.add(new Monster("ivan",9, sbire_ivan,"Donne +2/+2 à une perlouse sur le terrain",3,8));
+		listCard.add(new Monster("lapeyrle",2, sbire_lapeyrle,"Fait perdre 1 d'attaque à ses alliés",1,3));
+		listCard.add(new Monster("mamie",2, sbire_mamie,"Donne +1/-1 à un bodybuilder sur le terrain",5,4));
+		
+		///////////////////////
+		JPanel panelGestionDeck = new ImagePanel(myImage);
+		JPanel panelGestionCards = new JPanel();
+		JPanel panelGestionCardsInDeck = new JPanel();
+		panelGestionCards.setLayout(new GridLayout(0,3));
+		panelGestionCardsInDeck.setLayout(new GridLayout(1,1));
+		panelGestionCards.setVisible(true);
+		panelGestionCardsInDeck.setVisible(true);
+		panelGestionCards.setOpaque(false);
+		panelGestionCardsInDeck.setOpaque(false);
+		panelGestionDeck.setVisible(false);
+		panelGestionDeck.setLayout(new GridLayout(1,2));
+		panelGestionDeck.setBorder(new EmptyBorder(100, 100, 100, 100));
+		
+		// gestion panel selection cards
+		
+		for (Card myCard : listCard) {
+			JButton temp = new JButton("");
+			temp.setBorderPainted(false);
+			temp.setBorder(null);
+			temp.setMargin(new Insets(0, 0, 0, 0));
+			temp.setContentAreaFilled(false);
+			temp.setIcon(new ImageIcon(getScaledImage(myCard.getImg(), 200, 275)));
+			buttonsListCard.add(temp);
+			panelGestionCards.add(temp);
+		}
+		panelGestionDeck.add(panelGestionCards);
+		panelGestionDeck.add(panelGestionCardsInDeck);
+
 
 		//content.setBorder(new EmptyBorder(160, 500, 160, 500));
 		
@@ -106,13 +161,19 @@ public class CreateDeck {
 		
 		ImageIcon imageIcon = new ImageIcon(ImagePaths._HERO_PAPOUNOU); 
 		ImageIcon imageIcon2 = new ImageIcon(ImagePaths._HERO_CHAUVINATOR); 
+		ImageIcon imageIcon3 = new ImageIcon(ImagePaths._HERO_LSD); 
+		ImageIcon imageIcon4 = new ImageIcon(ImagePaths._HERO_GLORIA); 
 
 		Image imgPapounou = imageIcon.getImage();
 		Image imgChauvinator = imageIcon2.getImage();
+		Image imgLsd = imageIcon3.getImage();
+		Image imgGloria = imageIcon4.getImage();
 		ArrayList<Hero> listHero = new ArrayList<Hero>();
 		listHero.add(new Hero("Papounou", imgPapounou));
 		listHero.add(new Hero("Chauvinator", imgChauvinator));
-
+		listHero.add(new Hero("Lsd", imgLsd));
+		listHero.add(new Hero("Gloria", imgGloria));
+		
 		JButton heroBtn = new JButton("");  
 		JButton SuivantBtn = new JButton("Suivant");  
 		JButton RetourBtn = new JButton("Précédent");  
@@ -130,6 +191,7 @@ public class CreateDeck {
 		content2.add(SuivantBtn);
 		mainPanel.add(content);
 		mainPanel.add(content2);
+		mainPanel.add(panelGestionDeck);
 	    mainPanel.setLayout((LayoutManager) new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
 		//heroSelectFrame.add(heroSelect);
@@ -138,6 +200,18 @@ public class CreateDeck {
 		    {
 		    	content.setVisible(false);
 		    	content2.setVisible(true);
+		    	deckJoueur1 = new Deck();
+		    	jSelected = 1;
+		    }
+		});
+		
+		buttonJ2.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    	content.setVisible(false);
+		    	content2.setVisible(true);
+		    	deckJoueur2 = new Deck();
+		    	jSelected = 2;
 		    }
 		});
 		SuivantBtn.addActionListener(new ActionListener() {
@@ -156,6 +230,26 @@ public class CreateDeck {
 				heroBtn.setIcon(new ImageIcon(getScaledImage(listHero.get(cpt).getImage(), 430, 569)));
 		    }
 		});
+		
+		heroBtn.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    	System.out.println(jSelected);
+		    	if(jSelected == 1) {
+		    		// Choix du joueur 1
+		    		deckJoueur1.setHero(listHero.get(cpt));
+		    		content2.setVisible(false);
+		    		panelGestionDeck.setVisible(true);
+		    		System.out.println(panelGestionDeck.getComponentCount());
+		    	}else if(jSelected == 2) {
+		    		// Choix du joueur 2
+		    		deckJoueur2.setHero(listHero.get(cpt));
+		    		content2.setVisible(false);
+		    		panelGestionDeck.setVisible(true);
+		    	}
+		    }
+		});
+		
 	}
 	
 	private Image getScaledImage(Image srcImg, int w, int h){

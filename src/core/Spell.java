@@ -4,8 +4,8 @@ import java.awt.Image;
 
 public class Spell extends Card implements ICard, IAttackingCard {
 
-	public Spell(String name, String description, int mana, Image image, String effect) {
-		super(name, description, mana, image, effect);
+	public Spell(String name, int mana, Image image, String effect) {
+		super(name, mana, image, effect);
 		// TODO Auto-generated constructor stub
 	}
 

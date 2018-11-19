@@ -53,4 +53,5 @@ public class Player {
 	public void setHero(Hero hero) {
 		this.hero = hero;
 	}
+	
 }
