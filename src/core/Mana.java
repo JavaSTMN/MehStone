@@ -1,12 +1,12 @@
 package core;
 
 public class Mana {
-	private int _MAX_CRYSTALS;
+	private int _MAX_MANA;
 	private int manaTurn;
 	private int manaMaxByTurn;
 	
 	public Mana(int init) {
-		this._MAX_CRYSTALS = 10;
+		this._MAX_MANA = 10;
 		this.manaTurn = init;
 		this.manaMaxByTurn = init;
 	}
@@ -14,7 +14,7 @@ public class Mana {
 	//Fonction qui ajoute du mana a chaque tour
 		public void addManaTurn(int number) {
 			this.manaMaxByTurn = this.manaMaxByTurn + number;
-			this.manaMaxByTurn = (this.manaMaxByTurn >= _MAX_CRYSTALS)?_MAX_CRYSTALS:this.manaMaxByTurn;
+			this.manaMaxByTurn = (this.manaMaxByTurn >= _MAX_MANA)?_MAX_MANA:this.manaMaxByTurn;
 		}
 
 		//Fonction qui enleve les cristaux
