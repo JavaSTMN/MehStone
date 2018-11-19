@@ -34,9 +34,14 @@ public class CreateDeck {
 	
 	private Frame myFrame;
 	int cpt = 0;
+	
+	/**
+	 * @param menuFrame
+	 */
 	public CreateDeck(Frame menuFrame) {
 		this.myFrame = menuFrame;
 	}
+	
 	
 	public void main() throws MalformedURLException, IOException {
 		BufferedImage myImage = ImageIO.read(new File(ImagePaths._BACKGROUND));
@@ -108,7 +113,6 @@ public class CreateDeck {
 		listHero.add(new Hero("Papounou", imgPapounou));
 		listHero.add(new Hero("Chauvinator", imgChauvinator));
 
-		// 
 		JButton heroBtn = new JButton("");  
 		JButton SuivantBtn = new JButton("Suivant");  
 		JButton RetourBtn = new JButton("Précédent");  
