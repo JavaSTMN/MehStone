@@ -61,7 +61,7 @@ public class CreateDeck {
 		JButton buttonJ1 = new JButton("JOUEUR 1");
 		buttonJ1.setPreferredSize(new Dimension(100, 60));
 
-		JButton buttonJ2 = new JButton("JOUEUR 2");
+		JButton buttonJ2 = new JButton("JOUEUR 2") ;
 		buttonJ2.setPreferredSize(new Dimension(100, 60));
 		JButton poubelle = new JButton("");
 		poubelle.setVisible(false);
