@@ -36,6 +36,22 @@ public class Monster extends Card implements ICard, IAttackingCard{
 		
 	}
 	
+	public void removeHP(int number) {
+		this.hp -= number;
+	}
+	
+	public void addHP(int number) {
+		this.hp += number;
+	}
+		
+	public void removeAttack(int number) {
+		this.damage -= number;
+	}
+
+	public void addAttack(int number) {
+		this.damage += number;
+	}
+	
 	
 	
 
