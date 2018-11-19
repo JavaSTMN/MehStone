@@ -4,6 +4,7 @@ import java.awt.Image;
 
 public class Monster extends Card implements ICard, IAttackingCard{
 
+
 	private int hp;
 	private int damage;
 	

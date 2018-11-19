@@ -4,9 +4,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Frame;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
@@ -14,12 +12,10 @@ import java.awt.LayoutManager;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -43,9 +39,11 @@ public class CreateDeck {
 	private Deck deckJoueur2;
 	private int jSelected = 0;
 
+	
 	public CreateDeck(Frame menuFrame) {
 		this.myFrame = menuFrame;
 	}
+	
 	
 	public void main() throws MalformedURLException, IOException {
 		
@@ -161,7 +159,6 @@ public class CreateDeck {
 		listHero.add(new Hero("Papounou", imgPapounou));
 		listHero.add(new Hero("Chauvinator", imgChauvinator));
 
-		// 
 		JButton heroBtn = new JButton("");  
 		JButton SuivantBtn = new JButton("Suivant");  
 		JButton RetourBtn = new JButton("Précédent");  

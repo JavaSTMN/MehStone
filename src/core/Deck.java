@@ -15,8 +15,6 @@ public class Deck {
 	public void setCards(ArrayList<Card> cards) {
 		this.cards = cards;
 	}
-	
-	
 	/**
 	 * @param deck
 	 * @param card
