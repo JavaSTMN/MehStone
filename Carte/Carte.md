@@ -26,3 +26,4 @@ Sbire
 ![](https://hearthcards.ams3.digitaloceanspaces.com/2b/e1/28/04/2be12804.png)
 ![](https://hearthcards.ams3.digitaloceanspaces.com/1e/3a/fb/f0/1e3afbf0.png)
 ![](https://hearthcards.ams3.digitaloceanspaces.com/d7/7b/cf/52/d77bcf52.png)
+![](https://hearthcards.ams3.digitaloceanspaces.com/5e/78/78/06/5e787806.png)
