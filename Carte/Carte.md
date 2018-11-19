@@ -22,3 +22,4 @@ Sort de Classe
 Sbire
 
 ![](https://hearthcards.ams3.digitaloceanspaces.com/02/6b/0c/e3/026b0ce3.png)
+![](https://hearthcards.ams3.digitaloceanspaces.com/b7/44/3d/76/b7443d76.png)
