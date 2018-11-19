@@ -3,8 +3,6 @@ package core;
 import java.awt.Image;
 
 public class Monster extends Card implements ICard, IAttackingCard{
-
-	
 	
 	public Monster(String name, String description, int mana, Image image, String effect) {
 		super(name, description, mana, image, effect);

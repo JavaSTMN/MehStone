@@ -156,7 +156,6 @@ public class CreateDeck {
 				heroBtn.setIcon(new ImageIcon(getScaledImage(listHero.get(cpt).getImage(), 430, 569)));
 		    }
 		});
-		
 	}
 	
 	private Image getScaledImage(Image srcImg, int w, int h){

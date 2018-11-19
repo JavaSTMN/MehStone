@@ -17,10 +17,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import tool.ImagePaths;
+
 public class MainGame {
 	// DIS IS MAIN CLASS GAME	
 	private JFrame myFrame;
-	public MainGame(Frame gameFrame) throws MalformedURLException, IOException {
+	public MainGame(Frame gameFrame)  {
 		
 		
 		this.myFrame = (JFrame) gameFrame;
@@ -28,23 +30,22 @@ public class MainGame {
 		/**  MAIN CONTENT COMPOSé D'UN BACKGROUND + 3 LIGNES */
 		BufferedImage myImage = null;
 		try {
-			myImage = ImageIO.read(new File("20ek.jpg"));
+			myImage = ImageIO.read(new File(ImagePaths._BACKGROUND));
 			
 		} catch (Exception e) {
-			myImage = ImageIO.read(new URL("https://www.zupimages.net/up/18/46/20ek.jpg"));
+			System.out.println(e.getMessage());
 		}
 		ImagePanel content = new ImagePanel(myImage);
 		
 		content.setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
 		
-		
 		ArrayList<JButton> btns = new ArrayList<JButton>();
 		for (int i = 0; i < 10; i++) {
 			JButton card = new JButton();
 			card.setPreferredSize(new Dimension(120, 240));
 			card.setMinimumSize(new Dimension(120, 240));
-			ImageIcon image = new ImageIcon("D:/PROJECTS/workspace/MehStone/assets/img/papini.png");
+			ImageIcon image = new ImageIcon(ImagePaths._HERO_PAPOUNOU);
 			card.setIcon(image);
 			card.setBackground(Color.WHITE);
 			btns.add(card);
@@ -63,12 +64,11 @@ public class MainGame {
 		gamePanel.setBackground(Color.DARK_GRAY);
 		gamePanel.setPreferredSize(new Dimension(1920, 600));
 		gamePanel.setMinimumSize(new Dimension(1920, 600));
-		
+
 		JPanel playerPanel = new JPanel();
 		
 		for (int i = 5; i < 10; i++) {
-			playerPanel.add(btns.get(i));
-			
+			playerPanel.add(btns.get(i));	
 		}
 		playerPanel.setBackground(Color.GRAY);		
 		playerPanel.setPreferredSize(new Dimension(1920, 240));
