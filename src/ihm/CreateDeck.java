@@ -33,6 +33,7 @@ import javax.swing.border.EmptyBorder;
 public class CreateDeck {
 	
 	private Frame myFrame;
+	int cpt = 0;
 	public CreateDeck(Frame menuFrame) {
 		this.myFrame = menuFrame;
 	}
@@ -95,24 +96,33 @@ public class CreateDeck {
 		
 		this.myFrame.add(mainPanel);
 		// SELECTION DU HERO 
+		
+		// Chargement des images des héros
+		
+		ImageIcon imageIcon = new ImageIcon("papounou.png"); // load the image to a imageIcon
+		Image imgPapounou = imageIcon.getImage();
+		ImageIcon imageIcon2 = new ImageIcon("chauvinator.png"); // load the image to a imageIcon
+		Image imgChauvinator = imageIcon2.getImage();
+		ArrayList<Image> listImgHero = new ArrayList<Image>();
+		listImgHero.add(imgPapounou);
+		listImgHero.add(imgChauvinator);
 
-		// heroBtn = new JPersoButton("");
+		// 
 		JButton heroBtn = new JButton("");  
+		JButton SuivantBtn = new JButton("Suivant");  
+		JButton RetourBtn = new JButton("Précédent");  
 		heroBtn.setBorderPainted(false);
 		heroBtn.setBorder(null);
 		heroBtn.setMargin(new Insets(0, 0, 0, 0));
 		heroBtn.setContentAreaFilled(false);
-		ImageIcon imageIcon = new ImageIcon("papounou.png"); // load the image to a imageIcon
-		Image image = imageIcon.getImage();
-		heroBtn.setIcon(new ImageIcon(getScaledImage(image, 300, 100)));
-		heroBtn.setRolloverIcon(new ImageIcon(getScaledImage(image, 300, 100)));
-		heroBtn.setPressedIcon(new ImageIcon(getScaledImage(image, 300, 100)));
 		
-		heroBtn.setDisabledIcon(new ImageIcon(getScaledImage(image, 300, 100)));
+		heroBtn.setIcon(new ImageIcon(getScaledImage(imgPapounou, 430, 569)));
 		heroBtn.setFocusPainted(false);
 		heroBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		heroBtn.setPreferredSize(new Dimension(1000, 600));
+		heroBtn.setPreferredSize(new Dimension(430, 569));
+		content2.add(RetourBtn);
 		content2.add(heroBtn);
+		content2.add(SuivantBtn);
 		mainPanel.add(content);
 		mainPanel.add(content2);
 	    mainPanel.setLayout((LayoutManager) new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -125,6 +135,23 @@ public class CreateDeck {
 		    	content2.setVisible(true);
 		    }
 		});
+		SuivantBtn.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    	cpt++;
+		    	cpt = (cpt == listImgHero.size())?0:cpt;
+				heroBtn.setIcon(new ImageIcon(getScaledImage(listImgHero.get(cpt), 430, 569)));
+		    }
+		});
+		RetourBtn.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e)
+		    {
+		    	cpt--;
+		    	cpt = (cpt < 0)?listImgHero.size()-1:cpt;
+				heroBtn.setIcon(new ImageIcon(getScaledImage(listImgHero.get(cpt), 430, 569)));
+		    }
+		});
+		
 	}
 	
 	private Image getScaledImage(Image srcImg, int w, int h){
@@ -140,28 +167,3 @@ public class CreateDeck {
 }
 
 
-class JPersoButton extends JButton {
-
-	BufferedImage aBackgroundImage;
-	AffineTransform aTransform;
-
-	public JPersoButton(String test){
-		super(test);
-		aTransform=new AffineTransform();
-		try {
-			aBackgroundImage=ImageIO.read(new File("papounou.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		this.setOpaque(false);
-	}
-
-	@Override
-	protected void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		aTransform.setToIdentity();
-		Graphics2D g2d=(Graphics2D) g;
-		g2d.drawRenderedImage(aBackgroundImage,aTransform);
-
-	}
-}
