@@ -39,7 +39,7 @@ public class CreateDeck {
 	}
 	
 	public void main() throws MalformedURLException, IOException {
-		BufferedImage myImage = ImageIO.read(new File("background.jpg"));
+		BufferedImage myImage = ImageIO.read(new File("./assets/img/background.jpg"));
 		JPanel mainPanel = new JPanel();
 		JPanel content = new ImagePanel(myImage);
 		JPanel content2 = new ImagePanel(myImage);
@@ -99,9 +99,9 @@ public class CreateDeck {
 		
 		// Chargement des images des héros
 		
-		ImageIcon imageIcon = new ImageIcon("papounou.png"); // load the image to a imageIcon
+		ImageIcon imageIcon = new ImageIcon("./assets/img/papounou.png"); // load the image to a imageIcon
 		Image imgPapounou = imageIcon.getImage();
-		ImageIcon imageIcon2 = new ImageIcon("chauvinator.png"); // load the image to a imageIcon
+		ImageIcon imageIcon2 = new ImageIcon("./assets/img/chauvinator.png"); // load the image to a imageIcon
 		Image imgChauvinator = imageIcon2.getImage();
 		ArrayList<Image> listImgHero = new ArrayList<Image>();
 		listImgHero.add(imgPapounou);

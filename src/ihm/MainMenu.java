@@ -33,7 +33,7 @@ public class MainMenu {
 	 * @throws MalformedURLException 
 	 */
 	public static void main(String[] args) throws MalformedURLException, IOException {
-		BufferedImage myImage = ImageIO.read(new File("background.jpg"));
+		BufferedImage myImage = ImageIO.read(new File("./assets/img/background.jpg"));
 		ImagePanel content = new ImagePanel(myImage);
 		
 		

@@ -28,5 +28,23 @@ public class Deck {
 	public void removeCardFromDeck(Card card) {
 		this.cards.remove(card);
 	}
+	public String getLabel() {
+		return label;
+	}
+	public void setLabel(String label) {
+		this.label = label;
+	}
+	public String getHeroType() {
+		return heroType;
+	}
+	public void setHeroType(String heroType) {
+		this.heroType = heroType;
+	}
+	public int getNb() {
+		return nb;
+	}
+	public void setNb(int nb) {
+		this.nb = nb;
+	}
 	
 }
