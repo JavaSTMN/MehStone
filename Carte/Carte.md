@@ -17,3 +17,8 @@ Sbire
 Sort de Classe
 
 ![](https://hearthcards.ams3.digitaloceanspaces.com/e6/57/5f/1f/e6575f1f.png)
+
+
+Sbire
+
+![](https://hearthcards.ams3.digitaloceanspaces.com/02/6b/0c/e3/026b0ce3.png)
