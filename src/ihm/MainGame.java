@@ -18,12 +18,22 @@ import tool.ImagePaths;
 public class MainGame {
 	// DIS IS MAIN CLASS GAME	
 	private JFrame myFrame;
+	ArrayList<JButton> cardsCurrentPlayer = new ArrayList<JButton>();
+	ArrayList<JButton> cardsCurrentOpponent = new ArrayList<JButton>();
+	private int nbCardsPerPlayer = 5;
+	private int _CARD_HEIGHT_FIXED = 240;
+	private int _CARD_WIDTH_FIXED = 120;
+	private int _GAME_HEIGHT_FIXED = 1080;
+	private int _GAME_WIDTH_FIXED = 1920;
+	
+	
+	
 	public MainGame(Frame gameFrame)  {
 		
 		
 		this.myFrame = (JFrame) gameFrame;
 		this.myFrame.setBackground(Color.cyan);
-		/**  MAIN CONTENT COMPOSé D'UN BACKGROUND + 3 LIGNES */
+		
 		BufferedImage myImage = null;
 		try {
 			myImage = ImageIO.read(new File(ImagePaths._BACKGROUND));
@@ -35,40 +45,17 @@ public class MainGame {
 		
 		content.setLayout(new GridBagLayout());
 		GridBagConstraints gc = new GridBagConstraints();
-		
-		ArrayList<JButton> btns = new ArrayList<JButton>();
-		for (int i = 0; i < 10; i++) {
-			JButton card = new JButton();
-			card.setPreferredSize(new Dimension(120, 240));
-			card.setMinimumSize(new Dimension(120, 240));
-			ImageIcon image = new ImageIcon(ImagePaths._HERO_PAPOUNOU);
-			card.setIcon(image);
-			card.setBackground(Color.WHITE);
-			btns.add(card);
-		}
-		
 		JPanel opponentPanel = new JPanel();
-		for (int i = 0; i < 5; i++) {
-			opponentPanel.add(btns.get(i));
-			
-		}
-		opponentPanel.setBackground(Color.GRAY);
-		opponentPanel.setPreferredSize(new Dimension(1920, 240));
-		opponentPanel.setMinimumSize(new Dimension(1920, 240));
+		JPanel playerPanel = new JPanel();
+		
+		setupCards(cardsCurrentPlayer,ImagePaths._HERO_PAPOUNOU, playerPanel);
+		setupCards(cardsCurrentOpponent,ImagePaths._HERO_CHAUVINATOR, opponentPanel);
 		
  		JPanel gamePanel = new JPanel();
 		gamePanel.setBackground(Color.DARK_GRAY);
-		gamePanel.setPreferredSize(new Dimension(1920, 600));
-		gamePanel.setMinimumSize(new Dimension(1920, 600));
+		gamePanel.setPreferredSize(new Dimension(_GAME_WIDTH_FIXED, 600));
+		gamePanel.setMinimumSize(new Dimension(_GAME_WIDTH_FIXED, 600));
 
-		JPanel playerPanel = new JPanel();
-		
-		for (int i = 5; i < 10; i++) {
-			playerPanel.add(btns.get(i));	
-		}
-		playerPanel.setBackground(Color.GRAY);		
-		playerPanel.setPreferredSize(new Dimension(1920, 240));
-		playerPanel.setMinimumSize(new Dimension(1920, 240));
 	
 		gc.gridy = 0;
 		content.add(opponentPanel, gc);
@@ -82,6 +69,25 @@ public class MainGame {
 	}
 	
 	
+	public void setupCards(ArrayList<JButton> cards, String defaultImgPath, JPanel panel) {
+		for (int i = 0; i < this.nbCardsPerPlayer; i++) {
+			JButton card = new JButton();
+			card.setPreferredSize(new Dimension(_CARD_WIDTH_FIXED, _CARD_HEIGHT_FIXED));
+			card.setMinimumSize(new Dimension(_CARD_WIDTH_FIXED, _CARD_HEIGHT_FIXED));
+			//ImageIcon image = new ImageIcon(defaultImgPath);
+			//card.setIcon(image);
+			card.setBackground(new Color((int)(Math.random() * 0x1000000)));
+			cards.add(card);
+			panel.add(card);
+		}
+		
+		panel.setBackground(Color.GRAY);
+		panel.setPreferredSize(new Dimension(_GAME_WIDTH_FIXED, 240));
+		panel.setMinimumSize(new Dimension(_GAME_WIDTH_FIXED, 240));
+		
+		
+
+	}
 	/**
 	 * 
 	 * @return
@@ -89,5 +95,7 @@ public class MainGame {
 	public JFrame getMyFrame() {
 		return this.myFrame;
 	}
+	
+	
 
 }

@@ -11,7 +11,7 @@ public class ImagePaths {
 	public static String _SBIRE_SBIRE_FEMININ = "./assets/img/Cards/Sbirs/SbireFeminin.png";
 	/* HEREO IMG PATHS */
 	public static String _HERO_PAPOUNOU = "./assets/img/Cards/Heroes/papounou.png";
-	public static String _HERO_CHAUVINATOR = "./assets/img/Cards/Heroes/papounou.png";
+	public static String _HERO_CHAUVINATOR = "./assets/img/Cards/Heroes/chauvinator.png";
 	/* HEREO IMG PATHS */
 	public static String _BACKGROUND = "./assets/img/background.jpg";
 
