@@ -73,14 +73,17 @@ public class CreateDeck {
 		listCard.add(new Monster("furry",6, sbire_furry,"Invoque un sbire à ses côtés",6,5));
 		listCard.add(new Monster("garou",6, sbire_garou,"Motive ses alliés en leurs donnant +1 de vie",6,6));
 		
+		
 		///////////////////////
 		JPanel panelGestionDeck = new ImagePanel(myImage);
 		JPanel panelGestionCards = new JPanel();
 		JPanel panelGestionCardsInDeck = new JPanel();
-		panelGestionCards.setLayout(new GridLayout(3,3));
+		panelGestionCards.setLayout(new GridLayout(0,3));
 		panelGestionCardsInDeck.setLayout(new GridLayout(1,1));
 		panelGestionCards.setVisible(true);
 		panelGestionCardsInDeck.setVisible(true);
+		panelGestionCards.setOpaque(false);
+		panelGestionCardsInDeck.setOpaque(false);
 		panelGestionDeck.setVisible(false);
 		panelGestionDeck.setLayout(new GridLayout(1,2));
 		panelGestionDeck.setBorder(new EmptyBorder(100, 100, 100, 100));
@@ -176,6 +179,7 @@ public class CreateDeck {
 		content2.add(SuivantBtn);
 		mainPanel.add(content);
 		mainPanel.add(content2);
+		mainPanel.add(panelGestionDeck);
 	    mainPanel.setLayout((LayoutManager) new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
 		//heroSelectFrame.add(heroSelect);
@@ -218,11 +222,13 @@ public class CreateDeck {
 		heroBtn.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e)
 		    {
+		    	System.out.println(jSelected);
 		    	if(jSelected == 1) {
 		    		// Choix du joueur 1
 		    		deckJoueur1.setHero(listHero.get(cpt));
 		    		content2.setVisible(false);
 		    		panelGestionDeck.setVisible(true);
+		    		System.out.println(panelGestionDeck.getComponentCount());
 		    	}else if(jSelected == 2) {
 		    		// Choix du joueur 2
 		    		deckJoueur2.setHero(listHero.get(cpt));
