@@ -29,16 +29,9 @@ public class MainMenu {
 		panneau.setLayout(new GridLayout(1, 1));
 	}
 
-	/**
-	 * 
-	 * @param args
-	 * @throws IOException 
-	 * @throws MalformedURLException 
-	 */
 	public static void main(String[] args) throws MalformedURLException, IOException {
 		BufferedImage myImage = ImageIO.read(new File(ImagePaths._BACKGROUND));
 		ImagePanel content = new ImagePanel(myImage);
-		
 		
 		Frame menuFrame = new JFrame();
 		Frame gameFrame = new JFrame();
@@ -88,7 +81,7 @@ public class MainMenu {
 			    }
 			});
 		}
-		
+
 		content.add(buttonPlay);
 		content.add(buttonDeck);
 		content.add(buttonQuit);
