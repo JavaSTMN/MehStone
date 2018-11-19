@@ -4,16 +4,14 @@ import java.awt.Image;
 
 public abstract class Card {
 	private String name;
-	private String description;
 	private int mana;
 	private Image image;
 	private String effect;
 	
 	
 	
-	public Card(String name, String description, int mana, Image image, String effect) {
+	public Card(String name, int mana, Image image, String effect) {
 		this.name = name;
-		this.description = description;
 		this.mana = mana;
 		this.image = image;
 		this.effect = effect;
@@ -35,13 +33,6 @@ public abstract class Card {
 	 * 
 	 * @return
 	 */
-	public String getDescription() {
-		return this.description;
-	}
-	/**
-	 * 
-	 * @return
-	 */
 	public int getMana() {
 		return this.mana;
 	}
@@ -51,14 +42,14 @@ public abstract class Card {
 	/**
 	 * @return
 	 */
-	public Image getImgPath() {
+	public Image getImg() {
 		return this.image;
 	}
 	/**
 	 * 
 	 * @param imgPath
 	 */
-	public void setImgPath(Image image) {
+	public void setImg(Image image) {
 		this.image = image;
 	}
 
