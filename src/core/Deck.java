@@ -8,6 +8,10 @@ public class Deck {
 	private final int _NB_MAX_CARD = 10 ;
 	private ArrayList<Card> cards;
 	
+	public Deck() {
+		cards = new ArrayList<Card>();
+	}
+	
 
 	public ArrayList<Card> getCards() {
 		return cards;
