@@ -32,8 +32,11 @@ public class MainMenu {
 		BufferedImage myImage = ImageIO.read(new File(ImagePaths._BACKGROUND));
 		ImagePanel content = new ImagePanel(myImage);
 		
+		
 		Frame menuFrame = new JFrame();
 		Frame gameFrame = new JFrame();
+		CreateDeck c = new CreateDeck(menuFrame);
+		c.chargement();
 		gameFrame.setUndecorated(true); // Permet de set full screen à virer en dev
 		gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
@@ -106,7 +109,6 @@ public class MainMenu {
 		    public void actionPerformed(ActionEvent e)
 		    {
 		    	content.setVisible(false);
-				CreateDeck c = new CreateDeck(menuFrame);
 				try {
 					c.main();
 				} catch (IOException e1) {
