@@ -117,7 +117,11 @@ public class CreateDeck {
 		}
 		JScrollPane scroller = new JScrollPane(panelGestionCards);
 		scroller.setOpaque(false);
+		scroller.getViewport().setOpaque(false);
 		scroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scroller.setViewportBorder(null);
+		scroller.setBorder(null);
+		scroller.getViewport().setBorder(null);
 		panelGestionDeck.add(scroller);
 		panelGestionDeck.add(panelGestionCardsInDeck);
 
