@@ -182,6 +182,23 @@ public class CreateDeck {
 				}
 			});
 		}
+		for (JReferencingButton jButton : buttonsListCardDeck) {
+			jButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e)
+				{
+					Card tempCard = (Card)jButton.getValue();
+					jButton.setVisible(false);
+					jButton.setValue(null);
+					jButton.setText("");
+					
+					if(jSelected == 1) {
+						deckJoueur1.removeCardFromDeck(tempCard);
+					}else if(jSelected == 2) {
+						deckJoueur1.removeCardFromDeck(tempCard);
+					}
+				}
+			});
+		}
 		JScrollPane scroller = new JScrollPane(panelGestionCards);
 		scroller.setOpaque(false);
 		scroller.getViewport().setOpaque(false);
