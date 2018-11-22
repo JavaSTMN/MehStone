@@ -23,6 +23,7 @@ import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
@@ -52,8 +53,10 @@ public class CreateDeck {
 	public CreateDeck(Frame menuFrame) {
 		this.myFrame = menuFrame;
 	}
+	
 
 	public void chargement() throws IOException {
+		
 		myImage = ImageIO.read(new File(ImagePaths._BACKGROUND));
 		/////////////// Création IHM sélection des cartes du deck ///////////////
 		// Création des cartes
@@ -82,34 +85,38 @@ public class CreateDeck {
 		listCard.add(new Spell("katon",5, spell_katon,"Inflige 6 point(s) de dégats"));
 		listCard.add(new Spell("raiton",7, spell_raiton,"Inflige 9 point(s) de dégats"));
 		listCard.add(new Spell("rasengan",7, spell_rasengan,"Inflige 4 points de dégats à tous les serviteurs adverses"));
-		
-		
+
+
 		// Chargement des images des héros
 
-				ImageIcon imageIcon = new ImageIcon(ImagePaths._HERO_PAPOUNOU); 
-				ImageIcon imageIcon2 = new ImageIcon(ImagePaths._HERO_CHAUVINATOR); 
-				ImageIcon imageIcon3 = new ImageIcon(ImagePaths._HERO_LSD); 
-				ImageIcon imageIcon4 = new ImageIcon(ImagePaths._HERO_GLORIA); 
+		ImageIcon imageIcon = new ImageIcon(ImagePaths._HERO_PAPOUNOU); 
+		ImageIcon imageIcon2 = new ImageIcon(ImagePaths._HERO_CHAUVINATOR); 
+		ImageIcon imageIcon3 = new ImageIcon(ImagePaths._HERO_LSD); 
+		ImageIcon imageIcon4 = new ImageIcon(ImagePaths._HERO_GLORIA); 
 
-				Image imgPapounou = imageIcon.getImage();
-				Image imgChauvinator = imageIcon2.getImage();
-				Image imgLsd = imageIcon3.getImage();
-				Image imgGloria = imageIcon4.getImage();
-				listHero = new ArrayList<Hero>();
-				listHero.add(new Hero("Papounou", imgPapounou));
-				listHero.add(new Hero("Chauvinator", imgChauvinator));
-				listHero.add(new Hero("Lsd", imgLsd));
-				listHero.add(new Hero("Gloria", imgGloria));
+		Image imgPapounou = imageIcon.getImage();
+		Image imgChauvinator = imageIcon2.getImage();
+		Image imgLsd = imageIcon3.getImage();
+		Image imgGloria = imageIcon4.getImage();
+		listHero = new ArrayList<Hero>();
+		listHero.add(new Hero("Papounou", imgPapounou));
+		listHero.add(new Hero("Chauvinator", imgChauvinator));
+		listHero.add(new Hero("Lsd", imgLsd));
+		listHero.add(new Hero("Gloria", imgGloria));
 
 	}
 
 
-	public void main() throws MalformedURLException, IOException {
-
+	public void main(ImagePanel panel) throws MalformedURLException, IOException {
+		panel.setVisible(false);
 
 		JPanel mainPanel = new JPanel();
+		mainPanel.setVisible(true);
 		JPanel content = new ImagePanel(myImage);
+		content.setVisible(true);
 		JPanel content2 = new ImagePanel(myImage);
+		JButton buttonJ1 = new JButton("JOUEUR 1");
+		JButton buttonJ2 = new JButton("JOUEUR 2") ;
 
 
 
@@ -149,7 +156,7 @@ public class CreateDeck {
 			temp.setValue(myCard);
 			buttonsListCard.add(temp);
 			panelGestionCards.add(temp);
-			
+
 			JReferencingButton temp2 = new JReferencingButton();
 			temp2.setCursor(new Cursor(Cursor.HAND_CURSOR));
 			temp2.setBounds(100, 100, 30, 25);
@@ -163,8 +170,7 @@ public class CreateDeck {
 				public void actionPerformed(ActionEvent e)
 				{
 					Card tempCard = (Card)jButton.getValue();
-					System.out.println(tempCard.getName());
-					
+
 					for (JReferencingButton jButton : buttonsListCardDeck) {
 						if(jButton.getValue() == null) {
 							jButton.setVisible(true);
@@ -173,11 +179,99 @@ public class CreateDeck {
 							break; 
 						}
 					}
-					
+
 					if(jSelected == 1) {
-						deckJoueur1.addCardToDeck(tempCard);
+						if(deckJoueur1.getNbCards()< 9) {
+							deckJoueur1.addCardToDeck(tempCard);
+							if(deckJoueur1.getNbCards() == 9) {
+								Object[] options = {"Oui",
+								"Non"};
+								int n = JOptionPane.showOptionDialog(myFrame,
+										"Valider le deck ?",
+										"Validation",
+										JOptionPane.YES_NO_OPTION,
+										JOptionPane.QUESTION_MESSAGE,
+										null,     //do not use a custom Icon
+										options,  //the titles of buttons
+										options[0]);
+								if(n == 0) {
+									content.setVisible(true);
+									panelGestionDeck.setVisible(false);
+									jSelected = 0;
+									for (int i = 0; i < buttonsListCardDeck.size(); i++) {
+										JReferencingButton jButton = buttonsListCardDeck.get(i);
+										jButton.setVisible(false);
+										jButton.setValue(null);
+										jButton.setText("");
+									}
+									buttonJ1.setText("JOUEUR 1 - Deck crée !");
+									for( ActionListener al : buttonJ1.getActionListeners() ) {
+										buttonJ1.removeActionListener( al );
+								    }
+									buttonJ1.addActionListener(new ActionListener() {
+										public void actionPerformed(ActionEvent e)
+										{
+											JOptionPane.showMessageDialog(myFrame,
+													"DECK JOUEUR 1\n"
+													+ "Hero : "+deckJoueur1.getHero().getName()
+													+"\nListe cartes :\n"
+													+ deckJoueur1.getCardsToString());
+										}
+									});
+								}
+							}
+						}else {
+							JOptionPane.showMessageDialog(myFrame,
+									"Impossible d'ajouter une carte, le deck est plein",
+									"Erreur",
+									JOptionPane.ERROR_MESSAGE);
+						}
 					}else if(jSelected == 2) {
-						deckJoueur2.addCardToDeck(tempCard);
+						if(deckJoueur2.getNbCards()< 9) {
+							deckJoueur2.addCardToDeck(tempCard);
+							if(deckJoueur2.getNbCards() == 9) {
+								Object[] options = {"Oui",
+								"Non"};
+								int n = JOptionPane.showOptionDialog(myFrame,
+										"Valider le deck ?",
+										"Validation",
+										JOptionPane.YES_NO_OPTION,
+										JOptionPane.QUESTION_MESSAGE,
+										null,     //do not use a custom Icon
+										options,  //the titles of buttons
+										options[0]);
+								if(n == 0) {
+									content.setVisible(true);
+									panelGestionDeck.setVisible(false);
+									jSelected = 0;
+									for (int i = 0; i < buttonsListCardDeck.size(); i++) {
+										JReferencingButton jButton = buttonsListCardDeck.get(i);
+										jButton.setVisible(false);
+										jButton.setValue(null);
+										jButton.setText("");
+									}
+									buttonJ2.setText("JOUEUR 2 - Deck crée !");
+									for( ActionListener al : buttonJ2.getActionListeners() ) {
+										buttonJ2.removeActionListener( al );
+								    }
+									buttonJ2.addActionListener(new ActionListener() {
+										public void actionPerformed(ActionEvent e)
+										{
+											JOptionPane.showMessageDialog(myFrame,
+													"DECK JOUEUR 2\n"
+													+ "Hero : "+deckJoueur2.getHero().getName()
+													+"\nListe cartes :\n"
+													+ deckJoueur2.getCardsToString());
+										}
+									});
+								}
+							}
+						}else {
+							JOptionPane.showMessageDialog(myFrame,
+									"Impossible d'ajouter une carte, le deck est plein",
+									"Erreur",
+									JOptionPane.ERROR_MESSAGE);
+						}
 					}
 				}
 			});
@@ -207,7 +301,7 @@ public class CreateDeck {
 							jButtonSuivant.setText("");
 						}
 					}
-					
+
 				}
 			});
 		}
@@ -221,7 +315,7 @@ public class CreateDeck {
 		scroller.getViewport().setBorder(null);
 		panelGestionDeck.add(scroller);
 		panelGestionDeck.add(panelGestionCardsInDeck);
-		
+
 
 
 		//content.setBorder(new EmptyBorder(160, 500, 160, 500));
@@ -232,10 +326,10 @@ public class CreateDeck {
 		JButton buttonRetour = new JButton("RETOUR");
 		buttonRetour.setPreferredSize(new Dimension(30, 10));
 
-		JButton buttonJ1 = new JButton("JOUEUR 1");
+		
 		buttonJ1.setPreferredSize(new Dimension(100, 60));
 
-		JButton buttonJ2 = new JButton("JOUEUR 2") ;
+		
 		buttonJ2.setPreferredSize(new Dimension(100, 60));
 		JButton poubelle = new JButton("");
 		poubelle.setVisible(false);
@@ -269,9 +363,10 @@ public class CreateDeck {
 		content.add(buttonJ2);
 
 		this.myFrame.add(mainPanel);
+
 		// SELECTION DU HERO 
 
-		
+
 
 		JButton heroBtn = new JButton("");  
 		JButton SuivantBtn = new JButton("Suivant");  
@@ -294,6 +389,15 @@ public class CreateDeck {
 		mainPanel.setLayout((LayoutManager) new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
 		//heroSelectFrame.add(heroSelect);
+		
+		buttonRetour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				content.setVisible(false);
+				panel.setVisible(true);
+			}
+		});
+		
 		buttonJ1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{

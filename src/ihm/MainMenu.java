@@ -108,9 +108,8 @@ public class MainMenu {
 		buttonDeck.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e)
 		    {
-		    	content.setVisible(false);
 				try {
-					c.main();
+					c.main(content);
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
