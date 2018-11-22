@@ -182,6 +182,35 @@ public class CreateDeck {
 				}
 			});
 		}
+		for (JReferencingButton jButton : buttonsListCardDeck) {
+			jButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e)
+				{
+					Card tempCard = (Card)jButton.getValue();
+					if(jSelected == 1) {
+						deckJoueur1.removeCardFromDeck(tempCard);
+					}else if(jSelected == 2) {
+						deckJoueur1.removeCardFromDeck(tempCard);
+					}
+					jButton.setVisible(false);
+					jButton.setValue(null);
+					jButton.setText("");
+					for (int i = 0; i < buttonsListCardDeck.size()-1; i++) {
+						JReferencingButton jButton = buttonsListCardDeck.get(i);
+						JReferencingButton jButtonSuivant = buttonsListCardDeck.get(i+1);
+						if(jButton.getValue() == null && jButtonSuivant.getValue() != null) {
+							jButton.setValue(jButtonSuivant.getValue());
+							jButton.setText(jButtonSuivant.getText());
+							jButton.setVisible(true);
+							jButtonSuivant.setVisible(false);
+							jButtonSuivant.setValue(null);
+							jButtonSuivant.setText("");
+						}
+					}
+					
+				}
+			});
+		}
 		JScrollPane scroller = new JScrollPane(panelGestionCards);
 		scroller.setOpaque(false);
 		scroller.getViewport().setOpaque(false);
