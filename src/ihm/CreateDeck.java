@@ -48,6 +48,7 @@ public class CreateDeck {
 	ArrayList<JReferencingButton> buttonsListCard;
 	ArrayList<JReferencingButton> buttonsListCardDeck;
 	ArrayList<Hero> listHero;
+	JPanel mainPanel;
 
 
 	public CreateDeck(Frame menuFrame) {
@@ -56,7 +57,7 @@ public class CreateDeck {
 	
 
 	public void chargement() throws IOException {
-		
+		mainPanel = new JPanel();
 		myImage = ImageIO.read(new File(ImagePaths._BACKGROUND));
 		/////////////// Création IHM sélection des cartes du deck ///////////////
 		// Création des cartes
@@ -105,12 +106,16 @@ public class CreateDeck {
 		listHero.add(new Hero("Gloria", imgGloria));
 
 	}
+	
+	public void visible(ImagePanel panel) {
+		panel.setVisible(false);
+		mainPanel.setVisible(true);
+	}
 
 
 	public void main(ImagePanel panel) throws MalformedURLException, IOException {
 		panel.setVisible(false);
-
-		JPanel mainPanel = new JPanel();
+		
 		mainPanel.setVisible(true);
 		JPanel content = new ImagePanel(myImage);
 		content.setVisible(true);
@@ -393,7 +398,7 @@ public class CreateDeck {
 		buttonRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-				content.setVisible(false);
+				mainPanel.setVisible(false);
 				panel.setVisible(true);
 			}
 		});

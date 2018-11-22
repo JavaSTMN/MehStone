@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class MainMenu {
 	
-
+	static boolean deck = false;
 	public MainMenu() {
 		JPanel panneau = new JPanel();
 		panneau.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -29,6 +29,7 @@ public class MainMenu {
 	}
 
 	public static void main(String[] args) throws MalformedURLException, IOException {
+		
 		BufferedImage myImage = ImageIO.read(new File(ImagePaths._BACKGROUND));
 		ImagePanel content = new ImagePanel(myImage);
 		
@@ -108,11 +109,17 @@ public class MainMenu {
 		buttonDeck.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e)
 		    {
-				try {
-					c.main(content);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+		    	if(!deck) {
+		    		try {
+						c.main(content);
+						deck = true;
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+		    	}else {
+		    		c.visible(content);
+		    	}
+				
 		    }
 		});
 	}
