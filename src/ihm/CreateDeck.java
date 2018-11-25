@@ -55,6 +55,14 @@ public class CreateDeck {
 		this.myFrame = menuFrame;
 	}
 	
+	public Deck getDeckJ1() {
+		return deckJoueur1;
+	}
+	
+	public Deck getDeckJ2() {
+		return deckJoueur2;
+	}
+	
 
 	public void chargement() throws IOException {
 		mainPanel = new JPanel();
@@ -77,15 +85,15 @@ public class CreateDeck {
 
 
 
-		listCard.add(new Monster("3k",1, sbire_3k,"Détruit 2 sbires aléatoire",4,1));
-		listCard.add(new Monster("furry",6, sbire_furry,"Invoque un sbire à ses côtés",6,5));
-		listCard.add(new Monster("garou",6, sbire_garou,"Motive ses alliés en leurs donnant +1 de vie",6,6));
-		listCard.add(new Monster("ivan",9, sbire_ivan,"Donne +2/+2 à une perlouse sur le terrain",3,8));
-		listCard.add(new Monster("lapeyrle",2, sbire_lapeyrle,"Fait perdre 1 d'attaque à ses alliés",1,3));
-		listCard.add(new Monster("mamie",2, sbire_mamie,"Donne +1/-1 à un bodybuilder sur le terrain",5,4));
-		listCard.add(new Spell("katon",5, spell_katon,"Inflige 6 point(s) de dégats"));
-		listCard.add(new Spell("raiton",7, spell_raiton,"Inflige 9 point(s) de dégats"));
-		listCard.add(new Spell("rasengan",7, spell_rasengan,"Inflige 4 points de dégats à tous les serviteurs adverses"));
+		listCard.add(new Monster("3k",1, sbire_3k,"Détruit 2 sbires aléatoire",2,1));
+		listCard.add(new Monster("furry",3, sbire_furry,"Invoque un sbire à ses côtés",3,3));
+		listCard.add(new Monster("garou",2, sbire_garou,"Motive ses alliés en leurs donnant +1 de vie",2,3));
+		listCard.add(new Monster("ivan",3, sbire_ivan,"Donne +2/+2 à une perlouse sur le terrain",3,2));
+		listCard.add(new Monster("lapeyrle",1, sbire_lapeyrle,"Fait perdre 1 d'attaque à ses alliés",1,1));
+		listCard.add(new Monster("mamie",2, sbire_mamie,"Donne +1/-1 à un bodybuilder sur le terrain",3,1));
+		listCard.add(new Spell("katon",3, spell_katon,"Inflige 3 point(s) de dégats"));
+		listCard.add(new Spell("raiton",5, spell_raiton,"Inflige 6 point(s) de dégats"));
+		listCard.add(new Spell("rasengan",4, spell_rasengan,"Inflige 2 points de dégats à tous les serviteurs adverses"));
 
 
 		// Chargement des images des héros

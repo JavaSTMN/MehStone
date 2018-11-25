@@ -8,6 +8,7 @@ public class Hero {
 	private int hp;
 	private Image img;
 	public static int _NB_MAX_HP = 20;
+	private boolean death = false;
 	
 	public Hero(String name, Image img) {
 		this.setName(name);
@@ -27,7 +28,13 @@ public class Hero {
 	}
 	
 	public void loseHp(int hp) {
+		if(this.getHp() - hp <= 0)
+			death = true;
 		this.setHp(this.getHp() - hp);
+	}
+	
+	public boolean isDeath() {
+		return death;
 	}
 
 	public String getName() {

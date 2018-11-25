@@ -1,7 +1,7 @@
 package tool;
 
 public class ImagePaths {
-	/** SBIRE IMG PATHS **/
+	/* SBIRE IMG PATHS */
 	public static String _SBIRE_3K = "./assets/img/Cards/Sbirs/3K.png";
 	public static String _SBIRE_FURRY = "./assets/img/Cards/Sbirs/Furry.png";
 	public static String _SBIRE_GAROU = "./assets/img/Cards/Sbirs/Garou.png";
@@ -9,6 +9,9 @@ public class ImagePaths {
 	public static String _SBIRE_LAPEYRLE = "./assets/img/Cards/Sbirs/Lapeyrle.png";
 	public static String _SBIRE_MAMIE = "./assets/img/Cards/Sbirs/mamie.png";
 	public static String _SBIRE_SBIRE_FEMININ = "./assets/img/Cards/Sbirs/SbireFeminin.png";
+	public static String _SLIME_3 = "./assets/img/Cards/Sbirs/slime_3.png";
+	public static String _SLIME_2 = "./assets/img/Cards/Sbirs/slime_2.png";
+	public static String _SLIME_1 = "./assets/img/Cards/Sbirs/slime_1.png";
 
 	/* SPELL IMG PATHS */
 	public static String _SPELL_CAFE = "./assets/img/Cards/Spells/cafe.png";
@@ -25,5 +28,6 @@ public class ImagePaths {
 
 	/* Background IMG PATHS */
 	public static String _BACKGROUND = "./assets/img/background.jpg";
+	public static String _DECK = "./assets/img/cards/deck.png";
 
 }

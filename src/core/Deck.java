@@ -1,16 +1,39 @@
 package core;
 
+import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+
+import tool.ImagePaths;
 
 public class Deck {
 
 	private Hero hero;
-	private final int _NB_MAX_CARD = 10 ;
+	private final int _NB_MAX_CARD = 9 ;
 	private ArrayList<Card> cards;
 	
 	public Deck() {
 		cards = new ArrayList<Card>();
+	}
+	
+	public Deck(String test) {
+		cards = new ArrayList<Card>();
+		ImageIcon imageIcon = new ImageIcon(ImagePaths._HERO_PAPOUNOU); 
+		Image imgPapounou = imageIcon.getImage();
+		hero = new Hero("Papounou", imgPapounou);
+		Image sbire_slime = new ImageIcon(ImagePaths._SLIME_3).getImage();
+		Image spell_katon = new ImageIcon(ImagePaths._SPELL_KATON).getImage();
+		cards.add(new Monster("slime",1, sbire_slime,"Slurp",1,3));
+		cards.add(new Monster("slime",1, sbire_slime,"Slurp",1,3));
+		cards.add(new Monster("slime",1, sbire_slime,"Slurp",1,3));
+		cards.add(new Monster("slime",1, sbire_slime,"Slurp",1,3));
+		cards.add(new Monster("slime",1, sbire_slime,"Slurp",1,3));
+		cards.add(new Spell("katon",3, spell_katon,"Inflige 2 point(s) de dégats"));
+		cards.add(new Spell("katon",3, spell_katon,"Inflige 2 point(s) de dégats"));
+		cards.add(new Spell("katon",3, spell_katon,"Inflige 2 point(s) de dégats"));
+		cards.add(new Spell("katon",3, spell_katon,"Inflige 2 point(s) de dégats"));
 	}
 	
 

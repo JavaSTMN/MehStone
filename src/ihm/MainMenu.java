@@ -4,6 +4,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import core.Deck;
+import core.GameManager;
 import tool.ImagePaths;
 
 import java.awt.Color;
@@ -37,6 +39,8 @@ public class MainMenu {
 		Frame menuFrame = new JFrame();
 		Frame gameFrame = new JFrame();
 		CreateDeck c = new CreateDeck(menuFrame);
+		GameManager gameManager = new GameManager(menuFrame);
+		gameManager.chargement();
 		c.chargement();
 		gameFrame.setUndecorated(true); // Permet de set full screen à virer en dev
 		gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -101,8 +105,9 @@ public class MainMenu {
 		buttonPlay.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e)
 		    {
-		    	menuFrame.setVisible(false);
-		    	testFrame.setVisible(true);
+		    	content.setVisible(false);
+		    	//gameManager.startGame(c.getDeckJ1(),c.getDeckJ2());
+		    	gameManager.startGame(new Deck("test"),new Deck("test"));
 		    }
 		});
 		

@@ -11,10 +11,6 @@ public class Hand {
 	public Hand(ArrayList<Card> cards) {
 		this.cards = cards;
 	}
-	public void shuffleCards() {
-		Collections.shuffle(this.cards);
-	}
-	
 	public void displayCard(Card card) {
 		//TODO Display a card, meh
 
