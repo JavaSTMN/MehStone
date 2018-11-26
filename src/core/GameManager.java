@@ -30,8 +30,6 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.BadLocationException;
 
-import com.sun.glass.ui.Application;
-
 import ihm.ImagePanel;
 import tool.ImagePaths;
 import tool.JReferencingButton;
@@ -315,7 +313,7 @@ public class GameManager {
 		btnFinDeTour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-				// Clean JtextArea =>  si le nombre de ligne trop élévé, clean les premières 
+				// Clean JtextArea =>  si le nombre de ligne trop ï¿½lï¿½vï¿½, clean les premiï¿½res 
 				cleanTextArea(gameText);
 
 				pioche = false;
@@ -403,7 +401,7 @@ public class GameManager {
 							}else {
 								cardsJ1.remove(0);
 								JOptionPane.showMessageDialog(myFrame,
-										"Votre main est pleine, votre carte piochée est détruite",
+										"Votre main est pleine, votre carte piochï¿½e est dï¿½truite",
 										"Erreur",
 										JOptionPane.ERROR_MESSAGE);
 							}
@@ -428,7 +426,7 @@ public class GameManager {
 							}else {
 								cardsJ2.remove(0);
 								JOptionPane.showMessageDialog(myFrame,
-										"Votre main est pleine, votre carte piochée est détruite",
+										"Votre main est pleine, votre carte piochï¿½e est dï¿½truite",
 										"Erreur",
 										JOptionPane.ERROR_MESSAGE);
 							}
@@ -447,7 +445,7 @@ public class GameManager {
 					}
 				}else {
 					JOptionPane.showMessageDialog(myFrame,
-							"Impossible de piocher deux fois dans le même tour",
+							"Impossible de piocher deux fois dans le mï¿½me tour",
 							"Erreur",
 							JOptionPane.ERROR_MESSAGE);
 				}
@@ -526,20 +524,20 @@ public class GameManager {
 					if(jSelected == 1) {
 						if(cardAttack instanceof Monster) {
 							Monster m = (Monster)cardAttack;
-							gameText.append(cardAttack.getName()+" enlève "+m.getDamage()+" point(s) de vie à "+heroJ2.getName()+"\n");
+							gameText.append(cardAttack.getName()+" enlï¿½ve "+m.getDamage()+" point(s) de vie ï¿½ "+heroJ2.getName()+"\n");
 						}else {
 							Spell s = (Spell)cardAttack;
-							gameText.append(cardAttack.getName()+" enlève "+s.getDamage()+" point(s) de vie à "+heroJ2.getName()+"\n");
+							gameText.append(cardAttack.getName()+" enlï¿½ve "+s.getDamage()+" point(s) de vie ï¿½ "+heroJ2.getName()+"\n");
 							s.action(heroJ2);
 							lifeAdversaire.setText("Vie : "+heroJ2.getHp());
 						}
 					}else if(jSelected == 2) {
 						if(cardAttack instanceof Monster) {
 							Monster m = (Monster)cardAttack;
-							gameText.append(cardAttack.getName()+" enlève "+m.getDamage()+" point(s) de vie à "+heroJ1.getName()+"\n");
+							gameText.append(cardAttack.getName()+" enlï¿½ve "+m.getDamage()+" point(s) de vie ï¿½ "+heroJ1.getName()+"\n");
 						}else {
 							Spell s = (Spell)cardAttack;
-							gameText.append(cardAttack.getName()+" enlève "+s.getDamage()+" point(s) de vie à "+heroJ1.getName()+"\n");
+							gameText.append(cardAttack.getName()+" enlï¿½ve "+s.getDamage()+" point(s) de vie ï¿½ "+heroJ1.getName()+"\n");
 							s.action(heroJ1);
 							lifeAdversaire.setText("Vie : "+heroJ1.getHp());
 						}
