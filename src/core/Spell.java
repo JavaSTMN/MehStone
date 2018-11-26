@@ -33,6 +33,7 @@ public class Spell extends Card implements ICard, IAttackingCard {
 		return false;
 	}
 
+	
 	@Override
 	public boolean canAttack() {
 		// TODO Auto-generated method stub

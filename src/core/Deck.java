@@ -36,10 +36,10 @@ public class Deck {
 		cards.add(new Monster("slime",1, sbire_slime,"Slurp",1,3));
 		cards.add(new Monster("slime",1, sbire_slime,"Slurp",1,3));
 		cards.add(new Monster("slime",1, sbire_slime,"Slurp",1,3));
-		cards.add(new Spell("katon",3, spell_katon,"Inflige 2 point(s) de dégats"));
-		cards.add(new Spell("katon",3, spell_katon,"Inflige 2 point(s) de dégats"));
-		cards.add(new Spell("katon",3, spell_katon,"Inflige 2 point(s) de dégats"));
-		cards.add(new Spell("katon",3, spell_katon,"Inflige 2 point(s) de dégats"));
+		cards.add(new Spell("katon",3, spell_katon,"Inflige 2 point(s) de dégats", 2));
+		cards.add(new Spell("katon",3, spell_katon,"Inflige 2 point(s) de dégats", 2));
+		cards.add(new Spell("katon",3, spell_katon,"Inflige 2 point(s) de dégats", 2));
+		cards.add(new Spell("katon",3, spell_katon,"Inflige 2 point(s) de dégats", 2));
 	}
 	
 
