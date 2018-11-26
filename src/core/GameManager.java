@@ -60,6 +60,8 @@ public class GameManager {
 	Hero heroJ2;
 	ArrayList<Card> cardsJ1;
 	ArrayList<Card> cardsJ2;
+	ArrayList<Card> monstresJ1;
+	ArrayList<Card> monstresJ2;
 	Mana manaJ1;
 	Mana manaJ2;
 	Hand handJ1;
@@ -115,6 +117,8 @@ public class GameManager {
 		panelFinDeTour.setOpaque(false);
 		cardsJ1 = new ArrayList<Card>();
 		cardsJ2 = new ArrayList<Card>();
+		monstresJ1 = new ArrayList<Card>();
+		monstresJ2 = new ArrayList<Card>();
 		listBtnHand = new ArrayList<JReferencingButton>();
 		listBtnMonstre = new ArrayList<JReferencingButton>();
 		listBtnAdversaire = new ArrayList<JReferencingButton>();
@@ -405,8 +409,36 @@ public class GameManager {
 				}
 			}
 		});
+		
+		for (JReferencingButton jButton : listBtnHand) {
+			jButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e)
+				{
+					cleanTextArea(gameText);
+					Card tempCard = (Card)jButton.getValue();
+					if(jSelected == 1) {
+						System.out.println(tempCard.getClass().getSimpleName());
+						if(tempCard.getClass().getSimpleName() == "Monster") {
+							monstresJ1.add(tempCard);
+							gameText.append("Pose sur le plateau le monstre : "+tempCard.getName());
+							for(int i = 0; i < monstresJ1.size(); i++) {
+								listBtnMonstre.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ1.get(i).getImg(), 150, 225)));
+								listBtnMonstre.get(i).setValue(monstresJ1.get(i));
+							}
+						}else {
+							
+						}
+					}else if(jSelected == 2) {
+						if(tempCard.getClass().getSimpleName() == "Monster") {
+							
+						}else {
+							
+						}
+					}
+				}
+			});
+		}
 	}
-
 	
 	/**
 	 * @param ta
@@ -444,7 +476,7 @@ public class GameManager {
 		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 		g2.drawImage(srcImg, 0, 0, w, h, null);
 		g2.dispose();
-
+		
 		return resizedImg;
 	}
 
