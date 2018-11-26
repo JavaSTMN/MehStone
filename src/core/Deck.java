@@ -59,14 +59,6 @@ public class Deck {
 	 * @param card
 	 */
 	public void addCardToDeck(Card card) {
-		/*
-		Card c = null;
-		if(card instanceof Monster) {
-			c = new Monster(card.getName(),card.getMana(), card.getImg(),card.getEffect(),((Monster) card).getDamage(),((Monster) card).getHp());
-		}else {
-			c = new Spell(card.getName(),card.getMana(), card.getImg(),card.getEffect(),((Spell) card).getDamage());
-		}
-		*/
 		this.cards.add(card);
 	}
 	

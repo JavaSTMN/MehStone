@@ -258,6 +258,7 @@ public class GameManager {
 		JReferencingButton btnPioche = getBtn();
 		Image imgDeck = new ImageIcon(ImagePaths._DECK).getImage();
 		btnPioche.setIcon(new ImageIcon(getScaledImage(imgDeck, 180, 255)));
+		btnPioche.setValue(cardsJ1);
 
 		heroLifeAdversaire.setLayout(new GridLayout(1,1));
 		manaAndDeck.setLayout(new GridLayout(1,1));
@@ -347,9 +348,12 @@ public class GameManager {
 					lifeAdversaire.setText("Vie : "+heroJ1.getHp());
 					manaJ2.addManaTurn(1);
 					labelMana.setText("Mana : "+manaJ2.getRemainingMana());
+					
 					if(cardsJ2.size() == 0) {
 						btnPioche.setIcon(null);
+						btnPioche.setValue(null);
 					}else {
+						btnPioche.setValue(cardsJ2);
 						btnPioche.setIcon(new ImageIcon(getScaledImage(imgDeck, 180, 255)));
 					}
 				}else {
@@ -385,7 +389,9 @@ public class GameManager {
 					labelMana.setText("Mana : "+manaJ1.getRemainingMana());
 					if(cardsJ1.size() == 0) {
 						btnPioche.setIcon(null);
+						btnPioche.setValue(null);
 					}else {
+						btnPioche.setValue(cardsJ1);
 						btnPioche.setIcon(new ImageIcon(getScaledImage(imgDeck, 180, 255)));
 					}
 				}
@@ -418,6 +424,7 @@ public class GameManager {
 							}
 							if(cardsJ1.size() == 0) {
 								btnPioche.setIcon(null);
+								btnPioche.setValue(null);
 							}
 
 						}
@@ -443,6 +450,7 @@ public class GameManager {
 							}
 							if(cardsJ2.size() == 0) {
 								btnPioche.setIcon(null);
+								btnPioche.setValue(null);
 							}
 						}
 					}
