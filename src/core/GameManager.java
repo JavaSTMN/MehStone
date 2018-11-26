@@ -26,6 +26,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.BadLocationException;
 
 import ihm.ImagePanel;
 import tool.ImagePaths;
@@ -302,6 +303,25 @@ public class GameManager {
 		btnFinDeTour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
+			
+				////////////////////////////////////////////////////////////////
+				// Gestion du nombre de lignes 
+				////////////////////////////////////////////////////////////////
+				
+				int end = 0;
+				try {
+					end = gameText.getLineEndOffset(0);
+				} catch (BadLocationException e1) {
+					e1.printStackTrace();
+				}
+				if(gameText.getLineCount() >= 17) 
+					gameText.replaceRange("", 0, end );
+
+				////////////////////////////////////////////////////////////////
+				// Fin Gestion du nombre de lignes 
+				////////////////////////////////////////////////////////////////
+				
+				
 				pioche = false;
 				if(jSelected == 1) {
 					jSelected = 2;
