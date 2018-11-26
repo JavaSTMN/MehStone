@@ -30,6 +30,8 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.BadLocationException;
 
+import com.sun.glass.ui.Application;
+
 import ihm.ImagePanel;
 import tool.ImagePaths;
 import tool.JReferencingButton;
@@ -73,6 +75,7 @@ public class GameManager {
 	ArrayList<JReferencingButton> listBtnAdversaire;
 	boolean pioche = false;
 	Card cardAttack = null;
+	int tourNumber = 0;
 
 	public GameManager(Frame menuFrame) {
 		this.myFrame = menuFrame;
@@ -152,7 +155,8 @@ public class GameManager {
 
 		actionsText.setLayout(new GridLayout(0,1));
 		JTextArea gameText = new JTextArea(5,25);
-		gameText.append("TOUR DU JOUEUR 1\n");
+		endTurn();
+		gameText.append("TOUR DU JOUEUR 1 - TOUR ["+tourNumber+"]\n");
 		gameText.setEditable(false);
 		gameText.setFont(new Font("Serif", Font.ITALIC, 16));
 		gameText.setLineWrap(true);
@@ -266,7 +270,7 @@ public class GameManager {
 		heroLifeAdversaire.add(btnHeroAdversaire);
 		heroLifeAdversaire.add(lifeAdversaire);
 
-		JButton btnFinDeTour = new JButton("Fin de tour");  
+		JButton btnFinDeTour = new JButton("Fin de tour");
 		panelFinDeTour.add(btnFinDeTour);
 		panelFinDeTour.setBorder(new EmptyBorder(150, 0, 0, 0));
 
@@ -591,9 +595,11 @@ public class GameManager {
 
 	public void endGame() {
 		//TODO
+		this.tourNumber = 0;
 	}
 
 	public void endTurn() {
+		this.tourNumber +=1;
 		//TODO
 	}
 
