@@ -8,8 +8,8 @@ public class Hand {
 	private int maxCard;
 	private ArrayList<Card> cards;
 	
-	public Hand(ArrayList<Card> cards) {
-		this.cards = cards;
+	public Hand() {
+		cards = new ArrayList<Card>();
 	}
 	public void displayCard(Card card) {
 		//TODO Display a card, meh
@@ -19,12 +19,16 @@ public class Hand {
 	public void moveCard(Card card) {
 		//TODO Move a specific card, meh
 	}
-	public int getMaxCard() {
-		return maxCard;
+	
+	public void addCard(Card card) {
+		this.cards.add(card);
 	}
-	public void setMaxCard(int maxCard) {
-		this.maxCard = maxCard;
+	
+	
+	public void removeCard(Card card) {
+		this.cards.remove(card);
 	}
+	
 	public ArrayList<Card> getCards() {
 		return cards;
 	}

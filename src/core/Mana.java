@@ -6,7 +6,7 @@ public class Mana {
 	private int manaMaxByTurn;
 	
 	public Mana(int init) {
-		this._MAX_MANA = 10;
+		this._MAX_MANA = 6;
 		this.manaTurn = init;
 		this.manaMaxByTurn = init;
 	}
@@ -15,6 +15,7 @@ public class Mana {
 		public void addManaTurn(int number) {
 			this.manaMaxByTurn = this.manaMaxByTurn + number;
 			this.manaMaxByTurn = (this.manaMaxByTurn >= _MAX_MANA)?_MAX_MANA:this.manaMaxByTurn;
+			this.manaTurn = this.manaMaxByTurn;
 		}
 
 		//Fonction qui enleve les cristaux
@@ -38,9 +39,5 @@ public class Mana {
 			this.manaTurn = crystals;
 		}
 		
-		//Fonction qui remet le nombre de manaTurn à manaMaxByTurn
-		public void fillManaTurn() {
-			this.manaTurn = this.manaMaxByTurn;
-		}
 
 }

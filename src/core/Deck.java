@@ -18,11 +18,17 @@ public class Deck {
 		cards = new ArrayList<Card>();
 	}
 	
-	public Deck(String test) {
+	public Deck(int test) {
 		cards = new ArrayList<Card>();
-		ImageIcon imageIcon = new ImageIcon(ImagePaths._HERO_PAPOUNOU); 
-		Image imgPapounou = imageIcon.getImage();
-		hero = new Hero("Papounou", imgPapounou);
+		if(test == 1) {
+			ImageIcon imageIcon = new ImageIcon(ImagePaths._HERO_GLORIA); 
+			Image imgGloria = imageIcon.getImage();
+			hero = new Hero("Gloria", imgGloria);
+		}else {
+			ImageIcon imageIcon = new ImageIcon(ImagePaths._HERO_LSD); 
+			Image imgLsd = imageIcon.getImage();
+			hero = new Hero("Lsd", imgLsd);
+		}
 		Image sbire_slime = new ImageIcon(ImagePaths._SLIME_3).getImage();
 		Image spell_katon = new ImageIcon(ImagePaths._SPELL_KATON).getImage();
 		cards.add(new Monster("slime",1, sbire_slime,"Slurp",1,3));
