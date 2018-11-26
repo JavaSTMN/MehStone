@@ -71,6 +71,7 @@ public class GameManager {
 	ArrayList<JReferencingButton> listBtnMonstre;
 	ArrayList<JReferencingButton> listBtnAdversaire;
 	boolean pioche = false;
+	Card cardAttack = null;
 
 	public GameManager(Frame menuFrame) {
 		this.myFrame = menuFrame;
@@ -305,23 +306,37 @@ public class GameManager {
 
 
 
+
 		btnFinDeTour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
 				// Clean JtextArea =>  si le nombre de ligne trop élévé, clean les premières 
 				cleanTextArea(gameText);
-				
+
 				pioche = false;
 				if(jSelected == 1) {
 					jSelected = 2;
 					gameText.append("TOUR DU JOUEUR 2\n");
-					for (JReferencingButton jButton : listBtnHand) {
-						jButton.setIcon(null);
-						jButton.setValue(null);
+					for (int i = 0; i < listBtnHand.size(); i++) {
+						listBtnHand.get(i).setIcon(null);
+						listBtnHand.get(i).setValue(null);
+						listBtnMonstre.get(i).setIcon(null);
+						listBtnMonstre.get(i).setValue(null);
+						listBtnAdversaire.get(i).setIcon(null);
+						listBtnAdversaire.get(i).setValue(null);
 					}
+
 					for(int i = 0; i < handJ2.getCards().size(); i++) {
 						listBtnHand.get(i).setIcon(new ImageIcon(getScaledImage(handJ2.getCards().get(i).getImg(), 150, 225)));
 						listBtnHand.get(i).setValue(handJ2.getCards().get(i));
+					}
+					for(int i = 0; i < monstresJ2.size(); i++) {
+						listBtnMonstre.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ2.get(i).getImg(), 150, 225)));
+						listBtnMonstre.get(i).setValue(monstresJ2.get(i));
+					}
+					for(int i = 0; i < monstresJ1.size(); i++) {
+						listBtnAdversaire.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ1.get(i).getImg(), 150, 225)));
+						listBtnAdversaire.get(i).setValue(monstresJ1.get(i));
 					}
 					btnHero.setIcon(new ImageIcon(getScaledImage(heroJ2.getImage(), 180, 255)));
 					life.setText("Vie : "+heroJ2.getHp());
@@ -337,13 +352,23 @@ public class GameManager {
 				}else {
 					jSelected = 1;
 					gameText.append("TOUR DU JOUEUR 1\n");
-					for (JReferencingButton jButton : listBtnHand) {
-						jButton.setIcon(null);
-						jButton.setValue(null);
+					for (int i = 0; i < listBtnHand.size(); i++) {
+						listBtnHand.get(i).setIcon(null);
+						listBtnHand.get(i).setValue(null);
+						listBtnMonstre.get(i).setIcon(null);
+						listBtnMonstre.get(i).setValue(null);
 					}
 					for(int i = 0; i < handJ1.getCards().size(); i++) {
 						listBtnHand.get(i).setIcon(new ImageIcon(getScaledImage(handJ1.getCards().get(i).getImg(), 150, 225)));
 						listBtnHand.get(i).setValue(handJ1.getCards().get(i));
+					}
+					for(int i = 0; i < monstresJ1.size(); i++) {
+						listBtnMonstre.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ1.get(i).getImg(), 150, 225)));
+						listBtnMonstre.get(i).setValue(monstresJ1.get(i));
+					}
+					for(int i = 0; i < monstresJ2.size(); i++) {
+						listBtnAdversaire.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ2.get(i).getImg(), 150, 225)));
+						listBtnAdversaire.get(i).setValue(monstresJ2.get(i));
 					}
 					btnHero.setIcon(new ImageIcon(getScaledImage(heroJ1.getImage(), 180, 255)));
 					life.setText("Vie : "+heroJ1.getHp());
@@ -383,7 +408,7 @@ public class GameManager {
 							if(cardsJ1.size() == 0) {
 								btnPioche.setIcon(null);
 							}
-								
+
 						}
 					}else {
 						if(cardsJ2.size()>0) {
@@ -409,35 +434,62 @@ public class GameManager {
 				}
 			}
 		});
-		
+
 		for (JReferencingButton jButton : listBtnHand) {
 			jButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e)
 				{
 					cleanTextArea(gameText);
 					Card tempCard = (Card)jButton.getValue();
+					jButton.setIcon(null);
+					jButton.setValue(null);
 					if(jSelected == 1) {
-						System.out.println(tempCard.getClass().getSimpleName());
-						if(tempCard.getClass().getSimpleName() == "Monster") {
+						handJ1.removeCard(tempCard);
+						if(tempCard instanceof Monster) {
 							monstresJ1.add(tempCard);
-							gameText.append("Pose sur le plateau le monstre : "+tempCard.getName());
+							gameText.append("Pose sur le plateau le monstre : "+tempCard.getName()+"\n");
 							for(int i = 0; i < monstresJ1.size(); i++) {
 								listBtnMonstre.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ1.get(i).getImg(), 150, 225)));
 								listBtnMonstre.get(i).setValue(monstresJ1.get(i));
 							}
 						}else {
-							
+							if(tempCard.getName() == "katon") {
+								gameText.append("Choisir la cible du sort : "+tempCard.getName()+"\n");
+								cardAttack = tempCard;
+							}
 						}
 					}else if(jSelected == 2) {
-						if(tempCard.getClass().getSimpleName() == "Monster") {
-							
+						handJ2.removeCard(tempCard);
+						if(tempCard instanceof Monster) {
+							monstresJ2.add(tempCard);
+							gameText.append("Pose sur le plateau le monstre : "+tempCard.getName());
+							for(int i = 0; i < monstresJ2.size(); i++) {
+								listBtnMonstre.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ2.get(i).getImg(), 150, 225)));
+								listBtnMonstre.get(i).setValue(monstresJ2.get(i));
+							}
 						}else {
-							
+
 						}
 					}
 				}
 			});
 		}
+
+		btnHeroAdversaire.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				cleanTextArea(gameText);
+				Spell s = (Spell)cardAttack;
+				if(cardAttack != null) {
+					gameText.append(cardAttack.getName()+" enlève ");
+					if(jSelected == 1) {
+						
+					}else if(jSelected == 2) {
+
+					}
+				}
+			}
+		});
 	}
 	/**
 	 * @param ta
@@ -452,7 +504,7 @@ public class GameManager {
 		if(ta.getLineCount() >= 17) 
 			ta.replaceRange("", 0, end );
 	}
-	
+
 	private JReferencingButton getBtn() {
 		JReferencingButton btn = new JReferencingButton();
 		btn.setFocusPainted(false);
@@ -479,7 +531,7 @@ public class GameManager {
 		g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
 		g2.drawImage(srcImg, 0, 0, w, h, null);
 		g2.dispose();
-		
+
 		return resizedImg;
 	}
 
