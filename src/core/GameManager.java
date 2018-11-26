@@ -439,7 +439,6 @@ public class GameManager {
 			});
 		}
 	}
-	
 	/**
 	 * @param ta
 	 */
@@ -452,8 +451,6 @@ public class GameManager {
 		}
 		if(ta.getLineCount() >= 17) 
 			ta.replaceRange("", 0, end );
-
-
 	}
 	
 	private JReferencingButton getBtn() {
@@ -469,6 +466,12 @@ public class GameManager {
 		return btn;
 	}
 
+	/**
+	 * @param srcImg
+	 * @param w
+	 * @param h
+	 * @return
+	 */
 	private Image getScaledImage(Image srcImg, int w, int h){
 		BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = resizedImg.createGraphics();

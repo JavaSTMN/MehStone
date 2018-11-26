@@ -91,9 +91,9 @@ public class CreateDeck {
 		listCard.add(new Monster("ivan",3, sbire_ivan,"Donne +2/+2 à une perlouse sur le terrain",3,2));
 		listCard.add(new Monster("lapeyrle",1, sbire_lapeyrle,"Fait perdre 1 d'attaque à ses alliés",1,1));
 		listCard.add(new Monster("mamie",2, sbire_mamie,"Donne +1/-1 à un bodybuilder sur le terrain",3,1));
-		listCard.add(new Spell("katon",3, spell_katon,"Inflige 3 point(s) de dégats"));
-		listCard.add(new Spell("raiton",5, spell_raiton,"Inflige 6 point(s) de dégats"));
-		listCard.add(new Spell("rasengan",4, spell_rasengan,"Inflige 2 points de dégats à tous les serviteurs adverses"));
+		listCard.add(new Spell("katon",3, spell_katon,"Inflige 3 point(s) de dégats", 2));
+		listCard.add(new Spell("raiton",5, spell_raiton,"Inflige 6 point(s) de dégats", 2));
+		listCard.add(new Spell("rasengan",4, spell_rasengan,"Inflige 2 points de dégats à tous les serviteurs adverses",  2));
 
 
 		// Chargement des images des héros
