@@ -24,11 +24,12 @@ public class Deck {
 			ImageIcon imageIcon = new ImageIcon(ImagePaths._HERO_GLORIA); 
 			Image imgGloria = imageIcon.getImage();
 			hero = new Hero("Gloria", imgGloria);
-		}else {
+		} else {
 			ImageIcon imageIcon = new ImageIcon(ImagePaths._HERO_LSD); 
 			Image imgLsd = imageIcon.getImage();
 			hero = new Hero("Lsd", imgLsd);
 		}
+		
 		Image sbire_slime = new ImageIcon(ImagePaths._SLIME_3).getImage();
 		Image spell_katon = new ImageIcon(ImagePaths._SPELL_KATON).getImage();
 		cards.add(new Monster("slime",1, sbire_slime,"Slurp",1,3));
