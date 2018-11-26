@@ -313,7 +313,6 @@ public class GameManager {
 		btnFinDeTour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-				// Clean JtextArea =>  si le nombre de ligne trop ï¿½lï¿½vï¿½, clean les premiï¿½res 
 				cleanTextArea(gameText);
 
 				pioche = false;
@@ -405,7 +404,7 @@ public class GameManager {
 							}else {
 								cardsJ1.remove(0);
 								JOptionPane.showMessageDialog(myFrame,
-										"Votre main est pleine, votre carte piochï¿½e est dï¿½truite",
+										"Votre main est pleine, votre carte piochée est détruite",
 										"Erreur",
 										JOptionPane.ERROR_MESSAGE);
 							}
@@ -430,7 +429,7 @@ public class GameManager {
 							}else {
 								cardsJ2.remove(0);
 								JOptionPane.showMessageDialog(myFrame,
-										"Votre main est pleine, votre carte piochï¿½e est dï¿½truite",
+										"Votre main est pleine, votre carte piochée est détruite",
 										"Erreur",
 										JOptionPane.ERROR_MESSAGE);
 							}
@@ -449,7 +448,7 @@ public class GameManager {
 					}
 				}else {
 					JOptionPane.showMessageDialog(myFrame,
-							"Impossible de piocher deux fois dans le mï¿½me tour",
+							"Impossible de piocher deux fois dans le même tour",
 							"Erreur",
 							JOptionPane.ERROR_MESSAGE);
 				}
@@ -501,7 +500,7 @@ public class GameManager {
 										s.action(m);
 										if(m.isDeath()) {
 											Jbutton.setIcon(null);
-											jButton.setValue(null);
+											Jbutton.setValue(null);
 											monstresJ2.remove(m);
 										}
 									}
@@ -552,7 +551,7 @@ public class GameManager {
 										s.action(m);
 										if(m.isDeath()) {
 											Jbutton.setIcon(null);
-											jButton.setValue(null);
+											Jbutton.setValue(null);
 											monstresJ1.remove(m);
 										}
 									}
@@ -601,10 +600,20 @@ public class GameManager {
 								Monster m = (Monster)cardAttack;
 								gameText.append(cardAttack.getName()+" enlève "+m.getDamage()+" point(s) de vie à "+tempCard.getName()+"\n");
 								m.action(tempCard);
+								tempCard.action(m);
 								if(tempCard.isDeath()) {
 									jButton.setIcon(null);
 									jButton.setValue(null);
 									monstresJ2.remove(tempCard);
+								}
+								if(m.isDeath()) {
+									for (JReferencingButton jButton : listBtnMonstre) {
+										if(jButton.getValue() == cardAttack) {
+											jButton.setIcon(null);
+											jButton.setValue(null);
+											monstresJ1.remove(cardAttack);
+										}
+									}
 								}
 							}else {
 								Spell s = (Spell)cardAttack;
@@ -621,10 +630,20 @@ public class GameManager {
 								Monster m = (Monster)cardAttack;
 								gameText.append(cardAttack.getName()+" enlève "+m.getDamage()+" point(s) de vie à "+tempCard.getName()+"\n");
 								m.action(tempCard);
+								tempCard.action(m);
 								if(tempCard.isDeath()) {
 									jButton.setIcon(null);
 									jButton.setValue(null);
 									monstresJ1.remove(tempCard);
+								}
+								if(m.isDeath()) {
+									for (JReferencingButton jButton : listBtnMonstre) {
+										if(jButton.getValue() == cardAttack) {
+											jButton.setIcon(null);
+											jButton.setValue(null);
+											monstresJ2.remove(cardAttack);
+										}
+									}
 								}
 							}else {
 								Spell s = (Spell)cardAttack;
@@ -663,7 +682,7 @@ public class GameManager {
 							}
 						}else {
 							Spell s = (Spell)cardAttack;
-							gameText.append(cardAttack.getName()+" enlï¿½ve "+s.getDamage()+" point(s) de vie ï¿½ "+heroJ2.getName()+"\n");
+							gameText.append(cardAttack.getName()+" enlève "+s.getDamage()+" point(s) de vie à "+heroJ2.getName()+"\n");
 							s.action(heroJ2);
 							lifeAdversaire.setText("Vie : "+heroJ2.getHp());
 							if(heroJ2.isDeath()) {
@@ -687,7 +706,7 @@ public class GameManager {
 							}
 						}else {
 							Spell s = (Spell)cardAttack;
-							gameText.append(cardAttack.getName()+" enlï¿½ve "+s.getDamage()+" point(s) de vie ï¿½ "+heroJ1.getName()+"\n");
+							gameText.append(cardAttack.getName()+" enlève "+s.getDamage()+" point(s) de vie à "+heroJ1.getName()+"\n");
 							s.action(heroJ1);
 							lifeAdversaire.setText("Vie : "+heroJ1.getHp());
 							if(heroJ1.isDeath()) {

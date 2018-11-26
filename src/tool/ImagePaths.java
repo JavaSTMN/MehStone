@@ -31,6 +31,7 @@ public class ImagePaths {
 	/* Background IMG PATHS */
 	public static String _BACKGROUND = "./assets/img/background.jpg";
 	public static String _DECK = "./assets/img/cards/deck.png";
+	public static String _FONT = "./assets/img/BelweBdBTBold.ttf";
 
 }
 
