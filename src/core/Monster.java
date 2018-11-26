@@ -1,6 +1,6 @@
 package core;
-
 import java.awt.Image;
+import java.util.ArrayList;
 
 public class Monster extends Card implements ICard, IAttackingCard{
 
@@ -14,10 +14,14 @@ public class Monster extends Card implements ICard, IAttackingCard{
 		this.damage = damage;
 	}
 
-	public void action() {
-		System.out.println("Monster does smth");
+	public void action(Monster target) {
+		target.removeHP(this.damage);
 	}
-
+	
+	public void action(Hero hero) {
+		hero.loseHp(this.damage);
+	}
+	
 	@Override
 	public boolean isSummonable() {
 		// TODO Auto-generated method stub
