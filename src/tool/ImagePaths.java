@@ -12,6 +12,7 @@ public class ImagePaths {
 	public static String _SLIME_3 = "./assets/img/Cards/Sbirs/slime_3.png";
 	public static String _SLIME_2 = "./assets/img/Cards/Sbirs/slime_2.png";
 	public static String _SLIME_1 = "./assets/img/Cards/Sbirs/slime_1.png";
+	public static String _SBIRE_KEV = "./assets/img/Cards/Sbirs/kev.png";
 
 	/* SPELL IMG PATHS */
 	public static String _SPELL_CAFE = "./assets/img/Cards/Spells/cafe.png";
@@ -31,3 +32,4 @@ public class ImagePaths {
 	public static String _DECK = "./assets/img/cards/deck.png";
 
 }
+
