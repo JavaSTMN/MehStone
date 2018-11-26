@@ -79,7 +79,6 @@ public class CreateDeck {
 		buttonsListCardDeck = new ArrayList<JReferencingButton>();
 		loadCards();
 		loadHeroes();
-
 	}
 	private void loadHeroes() {
 		// TODO Auto-generated method stub
@@ -123,9 +122,9 @@ public class CreateDeck {
 		Monster ivan = new Monster("ivan",3, sbire_ivan,"Donne +2/+2 à une perlouse sur le terrain",3,2);
 		Monster lapeyrle = new Monster("lapeyrle",1, sbire_lapeyrle,"Fait perdre 1 d'attaque à ses alliés",1,1);
 		Monster mamie = new Monster("mamie",2, sbire_mamie,"Donne +1/-1 à un bodybuilder sur le terrain",3,1);
-		Spell katon = new Spell("katon",3, spell_katon,"Inflige 3 point(s) de dégats", 2);
-		Spell raiton = new Spell("raiton",5, spell_raiton,"Inflige 6 point(s) de dégats", 2);
-		Spell rasegan = new Spell("rasengan",4, spell_rasengan,"Inflige 2 points de dégats à tous les serviteurs adverses",  2);
+		Spell katon = new Spell("katon",2, spell_katon,"Inflige 2 point(s) de dégats", 2);
+		Spell raiton = new Spell("raiton",5, spell_raiton,"Inflige 6 point(s) de dégats", 6);
+		Spell rasegan = new Spell("rasengan",6, spell_rasengan,"Inflige 4 points de dégats à tous les serviteurs adverses",  4);
 		
 		listCard.add(threeK);
 		listCard.add(furry);
@@ -206,7 +205,13 @@ public class CreateDeck {
 			jButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e)
 				{
-					Card tempCard = (Card)jButton.getValue();
+					Card card = (Card)jButton.getValue();
+					Card tempCard = null;
+					if(card instanceof Monster) {
+						tempCard = new Monster(card.getName(),card.getMana(), card.getImg(),card.getEffect(),((Monster) card).getDamage(),((Monster) card).getHp());
+					}else {
+						tempCard = new Spell(card.getName(),card.getMana(), card.getImg(),card.getEffect(),((Spell) card).getDamage());
+					}
 					for (JReferencingButton jButton : buttonsListCardDeck) {
 						if(jButton.getValue() == null) {
 							jButton.setVisible(true);
@@ -473,12 +478,12 @@ public class CreateDeck {
 			{
 				if(jSelected == 1) {
 					// Choix du joueur 1
-					deckJoueur1.setHero(listHero.get(cpt));
+					deckJoueur1.setHero(new Hero(listHero.get(cpt)));
 					content2.setVisible(false);
 					panelGestionDeck.setVisible(true);
 				}else if(jSelected == 2) {
 					// Choix du joueur 2
-					deckJoueur2.setHero(listHero.get(cpt));
+					deckJoueur2.setHero(new Hero(listHero.get(cpt)));
 					content2.setVisible(false);
 					panelGestionDeck.setVisible(true);
 				}

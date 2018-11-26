@@ -6,7 +6,16 @@ public class Monster extends Card implements ICard, IAttackingCard{
 
 
 	private int hp;
+	public int getHp() {
+		return hp;
+	}
+
+	public void setHp(int hp) {
+		this.hp = hp;
+	}
+
 	private int damage;
+	private boolean death = false;
 	
 	public Monster(String name, int mana, Image image, String effect, int damage, int hp) {
 		super(name, mana, image, effect);
@@ -42,12 +51,21 @@ public class Monster extends Card implements ICard, IAttackingCard{
 	
 	public void removeHP(int number) {
 		this.setHp(this.getHp() - number);
+		this.death = (this.getHp() > 0)?false:true;
 	}
 	
 	public void addHP(int number) {
 		this.setHp(this.getHp() + number);
 	}
 		
+	public boolean isDeath() {
+		return death;
+	}
+
+	public void setDeath(boolean death) {
+		this.death = death;
+	}
+
 	public void removeAttack(int number) {
 		this.damage -= number;
 	}
@@ -56,13 +74,6 @@ public class Monster extends Card implements ICard, IAttackingCard{
 		this.damage += number;
 	}
 
-	public int getHp() {
-		return hp;
-	}
-
-	public void setHp(int hp) {
-		this.hp = hp;
-	}
 	
 	public int getDamage() {
 		return this.damage;
