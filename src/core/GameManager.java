@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.LayoutManager;
 import java.awt.RenderingHints;
+import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -303,24 +304,8 @@ public class GameManager {
 		btnFinDeTour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-			
-				////////////////////////////////////////////////////////////////
-				// Gestion du nombre de lignes 
-				////////////////////////////////////////////////////////////////
-				
-				int end = 0;
-				try {
-					end = gameText.getLineEndOffset(0);
-				} catch (BadLocationException e1) {
-					e1.printStackTrace();
-				}
-				if(gameText.getLineCount() >= 17) 
-					gameText.replaceRange("", 0, end );
-
-				////////////////////////////////////////////////////////////////
-				// Fin Gestion du nombre de lignes 
-				////////////////////////////////////////////////////////////////
-				
+				// Clean JtextArea =>  si le nombre de ligne trop élévé, clean les premières 
+				cleanTextArea(gameText);
 				
 				pioche = false;
 				if(jSelected == 1) {
@@ -422,6 +407,23 @@ public class GameManager {
 		});
 	}
 
+	
+	/**
+	 * @param ta
+	 */
+	private void cleanTextArea(JTextArea ta) {
+		int end = 0;
+		try {
+			end = ta.getLineEndOffset(0);
+		} catch (BadLocationException e1) {
+			e1.printStackTrace();
+		}
+		if(ta.getLineCount() >= 17) 
+			ta.replaceRange("", 0, end );
+
+
+	}
+	
 	private JReferencingButton getBtn() {
 		JReferencingButton btn = new JReferencingButton();
 		btn.setFocusPainted(false);
