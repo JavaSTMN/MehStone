@@ -134,7 +134,6 @@ public class MainMenu {
 		    	}else {
 		    		c.visible(content);
 		    	}
-				
 		    }
 		});
 	}

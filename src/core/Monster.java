@@ -22,15 +22,12 @@ public class Monster extends Card implements ICard, IAttackingCard{
 		hero.loseHp(this.damage);
 	}
 	
-	@Override
-	public boolean isSummonable() {
-		// TODO Auto-generated method stub
-		return false;
+	public int getDamage() {
+		return this.damage;
 	}
 
 	@Override
 	public boolean canAttack() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -54,6 +51,12 @@ public class Monster extends Card implements ICard, IAttackingCard{
 
 	public void addAttack(int number) {
 		this.damage += number;
+	}
+
+	@Override
+	public boolean isSummonable() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	

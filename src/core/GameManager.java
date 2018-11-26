@@ -24,6 +24,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
@@ -333,6 +334,7 @@ public class GameManager {
 					for(int i = 0; i < monstresJ2.size(); i++) {
 						listBtnMonstre.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ2.get(i).getImg(), 150, 225)));
 						listBtnMonstre.get(i).setValue(monstresJ2.get(i));
+						monstresJ2.get(i).setAttack(true);
 					}
 					for(int i = 0; i < monstresJ1.size(); i++) {
 						listBtnAdversaire.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ1.get(i).getImg(), 150, 225)));
@@ -396,6 +398,10 @@ public class GameManager {
 								handJ1.addCard(cardsJ1.remove(0));
 							}else {
 								cardsJ1.remove(0);
+								JOptionPane.showMessageDialog(myFrame,
+										"Votre main est pleine, votre carte piochée est détruite",
+										"Erreur",
+										JOptionPane.ERROR_MESSAGE);
 							}
 							for (JReferencingButton jButton : listBtnHand) {
 								jButton.setIcon(null);
@@ -417,6 +423,10 @@ public class GameManager {
 								handJ2.addCard(cardsJ2.remove(0));
 							}else {
 								cardsJ2.remove(0);
+								JOptionPane.showMessageDialog(myFrame,
+										"Votre main est pleine, votre carte piochée est détruite",
+										"Erreur",
+										JOptionPane.ERROR_MESSAGE);
 							}
 							for (JReferencingButton jButton : listBtnHand) {
 								jButton.setIcon(null);
@@ -431,6 +441,11 @@ public class GameManager {
 							}
 						}
 					}
+				}else {
+					JOptionPane.showMessageDialog(myFrame,
+							"Impossible de piocher deux fois dans le même tour",
+							"Erreur",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -441,34 +456,58 @@ public class GameManager {
 				{
 					cleanTextArea(gameText);
 					Card tempCard = (Card)jButton.getValue();
-					jButton.setIcon(null);
-					jButton.setValue(null);
 					if(jSelected == 1) {
-						handJ1.removeCard(tempCard);
-						if(tempCard instanceof Monster) {
-							monstresJ1.add(tempCard);
-							gameText.append("Pose sur le plateau le monstre : "+tempCard.getName()+"\n");
-							for(int i = 0; i < monstresJ1.size(); i++) {
-								listBtnMonstre.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ1.get(i).getImg(), 150, 225)));
-								listBtnMonstre.get(i).setValue(monstresJ1.get(i));
+						if(tempCard.getMana() <= manaJ1.getRemainingMana()) {
+							manaJ1.useManaTurn(tempCard.getMana());
+							labelMana.setText("Mana : "+manaJ1.getRemainingMana());
+							jButton.setIcon(null);
+							jButton.setValue(null);
+							handJ1.removeCard(tempCard);
+							if(tempCard instanceof Monster) {
+								monstresJ1.add(tempCard);
+								gameText.append("Pose sur le plateau le monstre : "+tempCard.getName()+"\n");
+								for(int i = 0; i < monstresJ1.size(); i++) {
+									listBtnMonstre.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ1.get(i).getImg(), 150, 225)));
+									listBtnMonstre.get(i).setValue(monstresJ1.get(i));
+								}
+							}else {
+								if(tempCard.getName() == "katon") {
+									gameText.append("Choisir la cible du sort : "+tempCard.getName()+"\n");
+									cardAttack = tempCard;
+								}
 							}
 						}else {
-							if(tempCard.getName() == "katon") {
-								gameText.append("Choisir la cible du sort : "+tempCard.getName()+"\n");
-								cardAttack = tempCard;
-							}
+							JOptionPane.showMessageDialog(myFrame,
+									"Pas assez de mana pour jouer cette carte !",
+									"Erreur",
+									JOptionPane.ERROR_MESSAGE);
 						}
+						
 					}else if(jSelected == 2) {
-						handJ2.removeCard(tempCard);
-						if(tempCard instanceof Monster) {
-							monstresJ2.add(tempCard);
-							gameText.append("Pose sur le plateau le monstre : "+tempCard.getName());
-							for(int i = 0; i < monstresJ2.size(); i++) {
-								listBtnMonstre.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ2.get(i).getImg(), 150, 225)));
-								listBtnMonstre.get(i).setValue(monstresJ2.get(i));
+						if(tempCard.getMana() <= manaJ2.getRemainingMana()) {
+							manaJ2.useManaTurn(tempCard.getMana());
+							labelMana.setText("Mana : "+manaJ2.getRemainingMana());
+							jButton.setIcon(null);
+							jButton.setValue(null);
+							handJ2.removeCard(tempCard);
+							if(tempCard instanceof Monster) {
+								monstresJ2.add(tempCard);
+								gameText.append("Pose sur le plateau le monstre : "+tempCard.getName());
+								for(int i = 0; i < monstresJ2.size(); i++) {
+									listBtnMonstre.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ2.get(i).getImg(), 150, 225)));
+									listBtnMonstre.get(i).setValue(monstresJ2.get(i));
+								}
+							}else {
+								if(tempCard.getName() == "katon") {
+									gameText.append("Choisir la cible du sort : "+tempCard.getName()+"\n");
+									cardAttack = tempCard;
+								}
 							}
 						}else {
-
+							JOptionPane.showMessageDialog(myFrame,
+									"Pas assez de mana pour jouer cette carte !",
+									"Erreur",
+									JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				}
@@ -479,13 +518,27 @@ public class GameManager {
 			public void actionPerformed(ActionEvent e)
 			{
 				cleanTextArea(gameText);
-				Spell s = (Spell)cardAttack;
 				if(cardAttack != null) {
-					gameText.append(cardAttack.getName()+" enlève ");
 					if(jSelected == 1) {
-						
+						if(cardAttack instanceof Monster) {
+							Monster m = (Monster)cardAttack;
+							gameText.append(cardAttack.getName()+" enlève "+m.getDamage()+" point(s) de vie à "+heroJ2.getName()+"\n");
+						}else {
+							Spell s = (Spell)cardAttack;
+							gameText.append(cardAttack.getName()+" enlève "+s.getDamage()+" point(s) de vie à "+heroJ2.getName()+"\n");
+							s.action(heroJ2);
+							lifeAdversaire.setText("Vie : "+heroJ2.getHp());
+						}
 					}else if(jSelected == 2) {
-
+						if(cardAttack instanceof Monster) {
+							Monster m = (Monster)cardAttack;
+							gameText.append(cardAttack.getName()+" enlève "+m.getDamage()+" point(s) de vie à "+heroJ1.getName()+"\n");
+						}else {
+							Spell s = (Spell)cardAttack;
+							gameText.append(cardAttack.getName()+" enlève "+s.getDamage()+" point(s) de vie à "+heroJ1.getName()+"\n");
+							s.action(heroJ1);
+							lifeAdversaire.setText("Vie : "+heroJ1.getHp());
+						}
 					}
 				}
 			}

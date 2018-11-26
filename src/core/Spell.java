@@ -16,6 +16,10 @@ public class Spell extends Card implements ICard, IAttackingCard {
 	public void action(Monster card) {
 		card.removeHP(this.damage);
 	}
+	
+	public int getDamage() {
+		return this.damage;
+	}
 
 	public void action(ArrayList<Monster> cards) {
 		for (Monster monster : cards) {
