@@ -7,7 +7,7 @@ public abstract class Card {
 	private int mana;
 	private Image image;
 	private String effect;
-	private boolean attack = false;
+	private boolean attack;
 	
 	
 	
@@ -16,7 +16,7 @@ public abstract class Card {
 		this.mana = mana;
 		this.image = image;
 		this.effect = effect;
-		
+		attack = false;
 	}
 	/**
 	 * 
@@ -26,12 +26,12 @@ public abstract class Card {
 	return this.name;
 	}
 	
-	private boolean canAttack() {
+	
+	public boolean isAttack() {
 		return attack;
 	}
-	
-	public void setAttack(boolean attack) {
-		this.attack = attack;
+	public void setAttack(boolean a) {
+		this.attack = a;
 	}
 	
 	public String getEffect() {

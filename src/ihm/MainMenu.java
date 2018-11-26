@@ -105,7 +105,7 @@ public class MainMenu {
 		buttonPlay.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e)
 		    {
-		    	/*
+		    	
 		    	if(c.getDeckJ1() == null || c.getDeckJ2() == null) {
 		    		JOptionPane.showMessageDialog(menuFrame,
 							"Impossible de jouer sans avoir créé le deck du joueur 1 et du joueur 2 !",
@@ -115,9 +115,9 @@ public class MainMenu {
 		    		content.setVisible(false);
 		    		gameManager.startGame(c.getDeckJ1(),c.getDeckJ2());
 		    	}
-		    	*/
-		    	content.setVisible(false);
-		    	gameManager.startGame(new Deck(1),new Deck(2));
+		    	
+		    	//content.setVisible(false);
+		    	//gameManager.startGame(new Deck(1),new Deck(2));
 		    }
 		});
 		
