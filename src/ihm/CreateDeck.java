@@ -53,7 +53,7 @@ public class CreateDeck {
 	private String _buttonFrontColor = "#ffffff";
 	
 	private String _buttonFrontHover = this._buttonBackColor;
-	private String _buttonBackHover = Color.PINK.toString();
+	private String _buttonBackHover = "#FFC0CB";
 	
 
 	public CreateDeck(Frame menuFrame) {
