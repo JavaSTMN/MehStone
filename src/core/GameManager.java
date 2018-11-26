@@ -73,6 +73,7 @@ public class GameManager {
 	ArrayList<JReferencingButton> listBtnAdversaire;
 	boolean pioche = true;
 	Card cardAttack = null;
+	int tourNumber = 0;
 
 	public GameManager(Frame menuFrame) {
 		this.myFrame = menuFrame;
@@ -152,7 +153,8 @@ public class GameManager {
 
 		actionsText.setLayout(new GridLayout(0,1));
 		JTextArea gameText = new JTextArea(5,25);
-		gameText.append("TOUR DU JOUEUR 1\n");
+		endTurn();
+		gameText.append("TOUR DU JOUEUR 1 - TOUR ["+tourNumber+"]\n");
 		gameText.setEditable(false);
 		gameText.setFont(new Font("Serif", Font.ITALIC, 16));
 		gameText.setLineWrap(true);
@@ -266,7 +268,7 @@ public class GameManager {
 		heroLifeAdversaire.add(btnHeroAdversaire);
 		heroLifeAdversaire.add(lifeAdversaire);
 
-		JButton btnFinDeTour = new JButton("Fin de tour");  
+		JButton btnFinDeTour = new JButton("Fin de tour");
 		panelFinDeTour.add(btnFinDeTour);
 		panelFinDeTour.setBorder(new EmptyBorder(150, 0, 0, 0));
 
@@ -311,7 +313,7 @@ public class GameManager {
 		btnFinDeTour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-				// Clean JtextArea =>  si le nombre de ligne trop élévé, clean les premières 
+				// Clean JtextArea =>  si le nombre de ligne trop ï¿½lï¿½vï¿½, clean les premiï¿½res 
 				cleanTextArea(gameText);
 
 				pioche = false;
@@ -403,7 +405,7 @@ public class GameManager {
 							}else {
 								cardsJ1.remove(0);
 								JOptionPane.showMessageDialog(myFrame,
-										"Votre main est pleine, votre carte piochée est détruite",
+										"Votre main est pleine, votre carte piochï¿½e est dï¿½truite",
 										"Erreur",
 										JOptionPane.ERROR_MESSAGE);
 							}
@@ -428,7 +430,7 @@ public class GameManager {
 							}else {
 								cardsJ2.remove(0);
 								JOptionPane.showMessageDialog(myFrame,
-										"Votre main est pleine, votre carte piochée est détruite",
+										"Votre main est pleine, votre carte piochï¿½e est dï¿½truite",
 										"Erreur",
 										JOptionPane.ERROR_MESSAGE);
 							}
@@ -447,7 +449,7 @@ public class GameManager {
 					}
 				}else {
 					JOptionPane.showMessageDialog(myFrame,
-							"Impossible de piocher deux fois dans le même tour",
+							"Impossible de piocher deux fois dans le mï¿½me tour",
 							"Erreur",
 							JOptionPane.ERROR_MESSAGE);
 				}
@@ -661,7 +663,7 @@ public class GameManager {
 							}
 						}else {
 							Spell s = (Spell)cardAttack;
-							gameText.append(cardAttack.getName()+" enlève "+s.getDamage()+" point(s) de vie à "+heroJ2.getName()+"\n");
+							gameText.append(cardAttack.getName()+" enlï¿½ve "+s.getDamage()+" point(s) de vie ï¿½ "+heroJ2.getName()+"\n");
 							s.action(heroJ2);
 							lifeAdversaire.setText("Vie : "+heroJ2.getHp());
 							if(heroJ2.isDeath()) {
@@ -685,7 +687,7 @@ public class GameManager {
 							}
 						}else {
 							Spell s = (Spell)cardAttack;
-							gameText.append(cardAttack.getName()+" enlève "+s.getDamage()+" point(s) de vie à "+heroJ1.getName()+"\n");
+							gameText.append(cardAttack.getName()+" enlï¿½ve "+s.getDamage()+" point(s) de vie ï¿½ "+heroJ1.getName()+"\n");
 							s.action(heroJ1);
 							lifeAdversaire.setText("Vie : "+heroJ1.getHp());
 							if(heroJ1.isDeath()) {
@@ -748,9 +750,11 @@ public class GameManager {
 
 	public void endGame() {
 		//TODO
+		this.tourNumber = 0;
 	}
 
 	public void endTurn() {
+		this.tourNumber +=1;
 		//TODO
 	}
 

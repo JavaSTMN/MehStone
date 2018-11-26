@@ -16,6 +16,12 @@ public class Hero {
 		this.img = img;
 	}
 	
+	public Hero(Hero h) {
+		this.setName(h.getName());
+		this.setHp(_NB_MAX_HP);
+		this.img = h.getImage();
+	}
+	
 	public Image getImage() {
 		return img;
 	}

@@ -49,7 +49,12 @@ public class CreateDeck {
 	ArrayList<JReferencingButton> buttonsListCardDeck;
 	ArrayList<Hero> listHero;
 	JPanel mainPanel;
-
+	private String _buttonBackColor = "#121212";
+	private String _buttonFrontColor = "#ffffff";
+	
+	private String _buttonFrontHover = this._buttonBackColor;
+	private String _buttonBackHover = "#FFC0CB";
+	
 
 	public CreateDeck(Frame menuFrame) {
 		this.myFrame = menuFrame;
@@ -72,6 +77,34 @@ public class CreateDeck {
 		listCard = new ArrayList<Card>();
 		buttonsListCard = new ArrayList<JReferencingButton>();
 		buttonsListCardDeck = new ArrayList<JReferencingButton>();
+		loadCards();
+		loadHeroes();
+	}
+	private void loadHeroes() {
+		// TODO Auto-generated method stub
+		this.listHero = new ArrayList<Hero>();
+		// Chargement des images des héros
+		ImageIcon imageIcon = new ImageIcon(ImagePaths._HERO_PAPOUNOU); 
+		ImageIcon imageIcon2 = new ImageIcon(ImagePaths._HERO_CHAUVINATOR); 
+		ImageIcon imageIcon3 = new ImageIcon(ImagePaths._HERO_LSD); 
+		ImageIcon imageIcon4 = new ImageIcon(ImagePaths._HERO_GLORIA); 
+
+		Image imgPapounou = imageIcon.getImage();
+		Image imgChauvinator = imageIcon2.getImage();
+		Image imgLsd = imageIcon3.getImage();
+		Image imgGloria = imageIcon4.getImage();
+		listHero.add(new Hero("Papounou", imgPapounou));
+		listHero.add(new Hero("Chauvinator", imgChauvinator));
+		listHero.add(new Hero("Lsd", imgLsd));
+		listHero.add(new Hero("Gloria", imgGloria));
+	}
+
+	
+	/**
+	 * Load Monsters & Spells
+	 */
+	private void loadCards() {
+		// TODO Auto-generated method stub
 
 		Image sbire_3k = new ImageIcon(ImagePaths._SBIRE_3K).getImage();
 		Image sbire_furry = new ImageIcon(ImagePaths._SBIRE_FURRY).getImage();
@@ -82,37 +115,26 @@ public class CreateDeck {
 		Image spell_katon = new ImageIcon(ImagePaths._SPELL_KATON).getImage();
 		Image spell_raiton = new ImageIcon(ImagePaths._SPELL_RAITON).getImage();
 		Image spell_rasengan = new ImageIcon(ImagePaths._SPELL_RASENGAN).getImage();
-
-
-
-		listCard.add(new Monster("3k",1, sbire_3k,"Détruit 2 sbires aléatoire",2,1));
-		listCard.add(new Monster("furry",3, sbire_furry,"Invoque un sbire à ses côtés",3,3));
-		listCard.add(new Monster("garou",2, sbire_garou,"Motive ses alliés en leurs donnant +1 de vie",2,3));
-		listCard.add(new Monster("ivan",3, sbire_ivan,"Donne +2/+2 à une perlouse sur le terrain",3,2));
-		listCard.add(new Monster("lapeyrle",1, sbire_lapeyrle,"Fait perdre 1 d'attaque à ses alliés",1,1));
-		listCard.add(new Monster("mamie",2, sbire_mamie,"Donne +1/-1 à un bodybuilder sur le terrain",3,1));
-		listCard.add(new Spell("katon",3, spell_katon,"Inflige 3 point(s) de dégats", 2));
-		listCard.add(new Spell("raiton",5, spell_raiton,"Inflige 6 point(s) de dégats", 6));
-		listCard.add(new Spell("rasengan",4, spell_rasengan,"Inflige 2 points de dégats à tous les serviteurs adverses",  2));
-
-
-		// Chargement des images des héros
-
-		ImageIcon imageIcon = new ImageIcon(ImagePaths._HERO_PAPOUNOU); 
-		ImageIcon imageIcon2 = new ImageIcon(ImagePaths._HERO_CHAUVINATOR); 
-		ImageIcon imageIcon3 = new ImageIcon(ImagePaths._HERO_LSD); 
-		ImageIcon imageIcon4 = new ImageIcon(ImagePaths._HERO_GLORIA); 
-
-		Image imgPapounou = imageIcon.getImage();
-		Image imgChauvinator = imageIcon2.getImage();
-		Image imgLsd = imageIcon3.getImage();
-		Image imgGloria = imageIcon4.getImage();
-		listHero = new ArrayList<Hero>();
-		listHero.add(new Hero("Papounou", imgPapounou));
-		listHero.add(new Hero("Chauvinator", imgChauvinator));
-		listHero.add(new Hero("Lsd", imgLsd));
-		listHero.add(new Hero("Gloria", imgGloria));
-
+		
+		Monster threeK = new Monster("3k",1, sbire_3k,"Détruit 2 sbires aléatoire",2,1);
+		Monster furry = new Monster("furry",3, sbire_furry,"Invoque un sbire à ses côtés",3,3);
+		Monster garou = new Monster("garou",2, sbire_garou,"Motive ses alliés en leurs donnant +1 de vie",2,3);
+		Monster ivan = new Monster("ivan",3, sbire_ivan,"Donne +2/+2 à une perlouse sur le terrain",3,2);
+		Monster lapeyrle = new Monster("lapeyrle",1, sbire_lapeyrle,"Fait perdre 1 d'attaque à ses alliés",1,1);
+		Monster mamie = new Monster("mamie",2, sbire_mamie,"Donne +1/-1 à un bodybuilder sur le terrain",3,1);
+		Spell katon = new Spell("katon",3, spell_katon,"Inflige 3 point(s) de dégats", 2);
+		Spell raiton = new Spell("raiton",5, spell_raiton,"Inflige 6 point(s) de dégats", 6);
+		Spell rasegan = new Spell("rasengan",4, spell_rasengan,"Inflige 2 points de dégats à tous les serviteurs adverses",  2);
+		
+		listCard.add(threeK);
+		listCard.add(furry);
+		listCard.add(garou);
+		listCard.add(ivan);
+		listCard.add(lapeyrle);
+		listCard.add(mamie);
+		listCard.add(katon);
+		listCard.add(raiton);
+		listCard.add(rasegan);	
 	}
 	
 	public void visible(ImagePanel panel) {
@@ -154,11 +176,11 @@ public class CreateDeck {
 		panelGestionDeck.setLayout(new GridLayout(1,2));
 		panelGestionDeck.setBorder(new EmptyBorder(50, 50, 50, 50));
 		panelGestionCardsInDeck.setBorder(new EmptyBorder(0, 30, 0, 30));
-
+		
 		// gestion panel selection cards
-
+		
 		for (Card myCard : listCard) {
-			JReferencingButton temp = new JReferencingButton();
+			JReferencingButton<Card> temp = new JReferencingButton();
 			temp.setFocusPainted(false);
 			temp.setBorderPainted(false);
 			temp.setBorder(null);
@@ -169,6 +191,7 @@ public class CreateDeck {
 			temp.setValue(myCard);
 			buttonsListCard.add(temp);
 			panelGestionCards.add(temp);
+
 
 			JReferencingButton temp2 = new JReferencingButton();
 			temp2.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -183,7 +206,6 @@ public class CreateDeck {
 				public void actionPerformed(ActionEvent e)
 				{
 					Card tempCard = (Card)jButton.getValue();
-
 					for (JReferencingButton jButton : buttonsListCardDeck) {
 						if(jButton.getValue() == null) {
 							jButton.setVisible(true);
@@ -352,19 +374,20 @@ public class CreateDeck {
 		buttons.add(buttonJ2);
 		buttons.add(buttonRetour);
 		for (JButton jButton : buttons) {
+			
 			jButton.setBounds(100, 200, 30, 25);
 			jButton.setBorder(new RoundedBorder(5));
 			jButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-			jButton.setBackground(Color.decode("#121212"));
-			jButton.setForeground(Color.decode("#ffffff"));
+			jButton.setBackground(Color.decode(_buttonBackColor));
+			jButton.setForeground(Color.decode(_buttonFrontColor));
 			jButton.addMouseListener(new java.awt.event.MouseAdapter() {
 				public void mouseEntered(java.awt.event.MouseEvent evt) {
-					jButton.setBackground(Color.PINK);
-					jButton.setForeground(Color.decode("#444444"));
+					jButton.setBackground(Color.decode(_buttonBackHover));
+					jButton.setForeground(Color.decode(_buttonFrontHover));
 				}
 				public void mouseExited(java.awt.event.MouseEvent evt) {
-					jButton.setBackground(Color.decode("#121212"));
-					jButton.setForeground(Color.decode("#ffffff"));
+					jButton.setBackground(Color.decode(_buttonBackColor));
+					jButton.setForeground(Color.decode(_buttonFrontColor));
 				}
 			});
 		}
@@ -378,9 +401,6 @@ public class CreateDeck {
 		this.myFrame.add(mainPanel);
 
 		// SELECTION DU HERO 
-
-
-
 		JButton heroBtn = new JButton("");  
 		JButton SuivantBtn = new JButton("Suivant");  
 		JButton RetourBtn = new JButton("Précédent");  
@@ -452,12 +472,12 @@ public class CreateDeck {
 			{
 				if(jSelected == 1) {
 					// Choix du joueur 1
-					deckJoueur1.setHero(listHero.get(cpt));
+					deckJoueur1.setHero(new Hero(listHero.get(cpt)));
 					content2.setVisible(false);
 					panelGestionDeck.setVisible(true);
 				}else if(jSelected == 2) {
 					// Choix du joueur 2
-					deckJoueur2.setHero(listHero.get(cpt));
+					deckJoueur2.setHero(new Hero(listHero.get(cpt)));
 					content2.setVisible(false);
 					panelGestionDeck.setVisible(true);
 				}
@@ -465,7 +485,7 @@ public class CreateDeck {
 		});
 
 	}
-
+	
 	private Image getScaledImage(Image srcImg, int w, int h){
 		BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2 = resizedImg.createGraphics();

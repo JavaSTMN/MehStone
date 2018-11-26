@@ -19,7 +19,7 @@ public class Monster extends Card implements ICard, IAttackingCard{
 	
 	public Monster(String name, int mana, Image image, String effect, int damage, int hp) {
 		super(name, mana, image, effect);
-		this.hp = hp;
+		this.setHp(hp);
 		this.damage = damage;
 	}
 
@@ -31,12 +31,15 @@ public class Monster extends Card implements ICard, IAttackingCard{
 		hero.loseHp(this.damage);
 	}
 	
-	public int getDamage() {
-		return this.damage;
+	@Override
+	public boolean isSummonable() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public boolean canAttack() {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -47,12 +50,12 @@ public class Monster extends Card implements ICard, IAttackingCard{
 	}
 	
 	public void removeHP(int number) {
-		this.hp -= number;
-		this.death = (this.hp > 0)?false:true;
+		this.setHp(this.getHp() - number);
+		this.death = (this.getHp() > 0)?false:true;
 	}
 	
 	public void addHP(int number) {
-		this.hp += number;
+		this.setHp(this.getHp() + number);
 	}
 		
 	public boolean isDeath() {
@@ -71,13 +74,16 @@ public class Monster extends Card implements ICard, IAttackingCard{
 		this.damage += number;
 	}
 
-	@Override
-	public boolean isSummonable() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
+	public int getDamage() {
+		return this.damage;
+	}
+
+	public void setDamage(int damage) {
+		this.damage = damage;;
+	}
 	
 	
 
 }
+
