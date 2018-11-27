@@ -34,6 +34,7 @@ public class MainMenu {
 		
 		BufferedImage myImage = ImageIO.read(new File(ImagePaths._BACKGROUND));
 		ImagePanel content = new ImagePanel(myImage);
+		content.setMain(true);
 		
 		
 		Frame menuFrame = new JFrame();
