@@ -480,6 +480,7 @@ public class GameManager {
 									handJ1.removeCard(tempCard);
 									monstresJ1.add(tempCard);
 									gameText.append("Pose sur le plateau le monstre : "+tempCard.getName()+"\n");
+									((Monster) tempCard).effect(monstresJ1);
 									for(int i = 0; i < monstresJ1.size(); i++) {
 										listBtnMonstre.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ1.get(i).getImg(), 150, 225)));
 										listBtnMonstre.get(i).setValue(monstresJ1.get(i));
@@ -534,6 +535,7 @@ public class GameManager {
 									handJ2.removeCard(tempCard);
 									monstresJ2.add(tempCard);
 									gameText.append("Pose sur le plateau le monstre : "+tempCard.getName()+"\n");
+									((Monster) tempCard).effect(monstresJ2);
 									for(int i = 0; i < monstresJ2.size(); i++) {
 										listBtnMonstre.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ2.get(i).getImg(), 150, 225)));
 										listBtnMonstre.get(i).setValue(monstresJ2.get(i));

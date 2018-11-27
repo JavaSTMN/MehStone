@@ -2,6 +2,10 @@ package core;
 import java.awt.Image;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
+import tool.ImagePaths;
+
 public class Monster extends Card implements ICard, IAttackingCard{
 
 
@@ -31,9 +35,17 @@ public class Monster extends Card implements ICard, IAttackingCard{
 		hero.loseHp(this.damage);
 	}
 	
-	public void effect() {
+	public void effect(ArrayList<Card> listCard) {
 		if(this.getName() == "furry") {
-			
+			if(listCard.size() < 4) {
+				Image sbire_feminin = new ImageIcon(ImagePaths._SBIRE_SBIRE_FEMININ).getImage();
+				Monster sbire_femen = new Monster("sbire_femen",1, sbire_feminin,"Sbire de Furry",1,1);
+				listCard.add(sbire_femen);
+			}
+		}else if(this.getName() == "garou") {
+			for( Card myCard : listCard) {
+				((Monster) myCard).addHP(1);
+			}
 		}
 	}
 	
