@@ -27,6 +27,7 @@ public class ImagePaths {
 	public static String _HERO_CHAUVINATOR = "./assets/img/Cards/Heroes/chauvinator.png";
 	public static String _HERO_LSD = "./assets/img/cards/Heroes/LSD.png";
 	public static String _HERO_GLORIA = "./assets/img/cards/Heroes/Gloria.png";
+	public static String _HERO_DOGE = "./assets/img/cards/Heroes/doge.png";
 
 	/* Background IMG PATHS */
 	public static String _BACKGROUND = "./assets/img/background.jpg";

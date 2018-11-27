@@ -1,9 +1,14 @@
 package tool;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Shape;
+import java.awt.font.FontRenderContext;
+import java.awt.font.GlyphVector;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,9 +40,10 @@ public class JReferencingButton<T> extends JButton
 	
 	
 	@Override
-	public void paint(Graphics g) {
+	public void paint(Graphics g1) {
 		// TODO Auto-generated method stub
-		super.paint(g);
+		super.paint(g1);
+		Graphics2D g = (Graphics2D) g1;
 		g.setColor(Color.WHITE);
 		Font f = g.getFont();
 		f = new Font(f.getName(), Font.PLAIN, 24);
@@ -52,6 +58,7 @@ public class JReferencingButton<T> extends JButton
 			e.printStackTrace();
 		}
 		g.setFont(font.deriveFont(26f));
+		
 		if(this.value instanceof ArrayList<?>) {
 			ArrayList<Card> cards = (ArrayList<Card>)this.value;
 			g.drawString((String.valueOf((cards.size()))), 120, 210);
