@@ -31,6 +31,12 @@ public class Monster extends Card implements ICard, IAttackingCard{
 		hero.loseHp(this.damage);
 	}
 	
+	public void effect() {
+		if(this.getName() == "furry") {
+			
+		}
+	}
+	
 	@Override
 	public boolean isSummonable() {
 		// TODO Auto-generated method stub

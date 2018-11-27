@@ -504,12 +504,14 @@ public class GameManager {
 									Spell s = (Spell)tempCard;
 									gameText.append(tempCard.getName()+" enlève "+s.getDamage()+" point(s) de vie à tous les monstres\n");
 									for (JReferencingButton Jbutton : listBtnAdversaire) {
-										Monster m = (Monster)Jbutton.getValue();
-										s.action(m);
-										if(m.isDeath()) {
-											Jbutton.setIcon(null);
-											Jbutton.setValue(null);
-											monstresJ2.remove(m);
+										if(Jbutton.getValue() != null) {
+											Monster m = (Monster)Jbutton.getValue();
+											s.action(m);
+											if(m.isDeath()) {
+												Jbutton.setIcon(null);
+												Jbutton.setValue(null);
+												monstresJ2.remove(m);
+											}
 										}
 									}
 								}
@@ -555,12 +557,14 @@ public class GameManager {
 									Spell s = (Spell)tempCard;
 									gameText.append(tempCard.getName()+" enlève "+s.getDamage()+" point(s) de vie à tous les monstres\n");
 									for (JReferencingButton Jbutton : listBtnAdversaire) {
-										Monster m = (Monster)Jbutton.getValue();
-										s.action(m);
-										if(m.isDeath()) {
-											Jbutton.setIcon(null);
-											Jbutton.setValue(null);
-											monstresJ1.remove(m);
+										if(Jbutton.getValue() != null) {
+											Monster m = (Monster)Jbutton.getValue();
+											s.action(m);
+											if(m.isDeath()) {
+												Jbutton.setIcon(null);
+												Jbutton.setValue(null);
+												monstresJ1.remove(m);
+											}
 										}
 									}
 								}
@@ -687,6 +691,7 @@ public class GameManager {
 										"Le joueur 1 Gagne !",
 										"Erreur",
 										JOptionPane.ERROR_MESSAGE);
+								endGame();
 							}
 						}else {
 							Spell s = (Spell)cardAttack;
@@ -698,6 +703,7 @@ public class GameManager {
 										"Le joueur 1 Gagne !",
 										"Erreur",
 										JOptionPane.ERROR_MESSAGE);
+								endGame();
 							}
 						}
 					}else if(jSelected == 2) {
@@ -711,6 +717,7 @@ public class GameManager {
 										"Le joueur 2 Gagne !",
 										"Erreur",
 										JOptionPane.ERROR_MESSAGE);
+								endGame();
 							}
 						}else {
 							Spell s = (Spell)cardAttack;
@@ -722,6 +729,7 @@ public class GameManager {
 										"Le joueur 2 Gagne !",
 										"Erreur",
 										JOptionPane.ERROR_MESSAGE);
+								endGame();
 							}
 						}
 					}
@@ -776,8 +784,7 @@ public class GameManager {
 
 
 	public void endGame() {
-		//TODO
-		this.tourNumber = 0;
+		
 	}
 
 	public void endTurn() {

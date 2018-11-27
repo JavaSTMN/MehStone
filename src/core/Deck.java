@@ -11,7 +11,7 @@ import tool.ImagePaths;
 public class Deck {
 
 	private Hero hero;
-	private final int _NB_MAX_CARD = 9 ;
+	private final int _NB_MAX_CARD = 20 ;
 	private ArrayList<Card> cards;
 	
 	public Deck() {

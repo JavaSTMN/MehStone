@@ -84,19 +84,17 @@ public class CreateDeck {
 		// TODO Auto-generated method stub
 		this.listHero = new ArrayList<Hero>();
 		// Chargement des images des héros
-		ImageIcon imageIcon = new ImageIcon(ImagePaths._HERO_PAPOUNOU); 
-		ImageIcon imageIcon2 = new ImageIcon(ImagePaths._HERO_CHAUVINATOR); 
-		ImageIcon imageIcon3 = new ImageIcon(ImagePaths._HERO_LSD); 
-		ImageIcon imageIcon4 = new ImageIcon(ImagePaths._HERO_GLORIA); 
 
-		Image imgPapounou = imageIcon.getImage();
-		Image imgChauvinator = imageIcon2.getImage();
-		Image imgLsd = imageIcon3.getImage();
-		Image imgGloria = imageIcon4.getImage();
+		Image imgPapounou = new ImageIcon(ImagePaths._HERO_PAPOUNOU).getImage();
+		Image imgChauvinator = new ImageIcon(ImagePaths._HERO_CHAUVINATOR).getImage();
+		Image imgLsd = new ImageIcon(ImagePaths._HERO_LSD).getImage();
+		Image imgGloria = new ImageIcon(ImagePaths._HERO_GLORIA).getImage();
+		Image imgDoge = new ImageIcon(ImagePaths._HERO_DOGE).getImage();
 		listHero.add(new Hero("Papounou", imgPapounou));
 		listHero.add(new Hero("Chauvinator", imgChauvinator));
 		listHero.add(new Hero("Lsd", imgLsd));
 		listHero.add(new Hero("Gloria", imgGloria));
+		listHero.add(new Hero("Doge", imgDoge));
 	}
 
 	
@@ -112,6 +110,11 @@ public class CreateDeck {
 		Image sbire_ivan = new ImageIcon(ImagePaths._SBIRE_IVAN).getImage();
 		Image sbire_lapeyrle = new ImageIcon(ImagePaths._SBIRE_LAPEYRLE).getImage();
 		Image sbire_mamie = new ImageIcon(ImagePaths._SBIRE_MAMIE).getImage();
+		Image sbire_slime = new ImageIcon(ImagePaths._SLIME_3).getImage();
+		Image sbire_kevin = new ImageIcon(ImagePaths._SBIRE_KEVIN).getImage();
+		Image sbire_nick = new ImageIcon(ImagePaths._SBIRE_NICK).getImage();
+		Image sbire_meh = new ImageIcon(ImagePaths._SBIRE_MEH).getImage();
+		Image sbire_kingsman = new ImageIcon(ImagePaths._SBIRE_KINGSMAN).getImage();
 		Image spell_katon = new ImageIcon(ImagePaths._SPELL_KATON).getImage();
 		Image spell_raiton = new ImageIcon(ImagePaths._SPELL_RAITON).getImage();
 		Image spell_rasengan = new ImageIcon(ImagePaths._SPELL_RASENGAN).getImage();
@@ -122,6 +125,11 @@ public class CreateDeck {
 		Monster ivan = new Monster("ivan",3, sbire_ivan,"Donne +2/+2 à une perlouse sur le terrain",3,2);
 		Monster lapeyrle = new Monster("lapeyrle",1, sbire_lapeyrle,"Fait perdre 1 d'attaque à ses alliés",1,1);
 		Monster mamie = new Monster("mamie",2, sbire_mamie,"Donne +1/-1 à un bodybuilder sur le terrain",3,1);
+		Monster slime = new Monster("slime",1, sbire_slime,"Aucun effet",2,2);
+		Monster kevin = new Monster("enigma",3, sbire_kevin,"Au debut de votre tour détruit une carte aléatoirement sur le terrain",1,4);
+		Monster nick = new Monster("nick",4, sbire_nick,"What does the fox say",5,2);
+		Monster meh = new Monster("meh",4, sbire_meh,"meh",2,5);
+		Monster kingsman = new Monster("kingsman",3, sbire_kingsman,"Attend sans jamais désespérer",3,3);
 		Spell katon = new Spell("katon",2, spell_katon,"Inflige 2 point(s) de dégats", 2);
 		Spell raiton = new Spell("raiton",5, spell_raiton,"Inflige 6 point(s) de dégats", 6);
 		Spell rasegan = new Spell("rasengan",6, spell_rasengan,"Inflige 4 points de dégats à tous les serviteurs adverses",  4);
@@ -132,6 +140,11 @@ public class CreateDeck {
 		listCard.add(ivan);
 		listCard.add(lapeyrle);
 		listCard.add(mamie);
+		listCard.add(slime);
+		listCard.add(kevin);
+		listCard.add(nick);
+		listCard.add(meh);
+		listCard.add(kingsman);
 		listCard.add(katon);
 		listCard.add(raiton);
 		listCard.add(rasegan);	
@@ -193,6 +206,8 @@ public class CreateDeck {
 			panelGestionCards.add(temp);
 
 
+		}
+		for (int i=0; i<20;i++) {
 			JReferencingButton temp2 = new JReferencingButton();
 			temp2.setCursor(new Cursor(Cursor.HAND_CURSOR));
 			temp2.setBounds(100, 100, 30, 25);
@@ -222,9 +237,9 @@ public class CreateDeck {
 					}
 
 					if(jSelected == 1) {
-						if(deckJoueur1.getNbCards()< 9) {
+						if(deckJoueur1.getNbCards()< 20) {
 							deckJoueur1.addCardToDeck(tempCard);
-							if(deckJoueur1.getNbCards() == 9) {
+							if(deckJoueur1.getNbCards() == 20) {
 								Object[] options = {"Oui",
 								"Non"};
 								int n = JOptionPane.showOptionDialog(myFrame,
@@ -268,9 +283,9 @@ public class CreateDeck {
 									JOptionPane.ERROR_MESSAGE);
 						}
 					}else if(jSelected == 2) {
-						if(deckJoueur2.getNbCards()< 9) {
+						if(deckJoueur2.getNbCards()< 20) {
 							deckJoueur2.addCardToDeck(tempCard);
-							if(deckJoueur2.getNbCards() == 9) {
+							if(deckJoueur2.getNbCards() == 20) {
 								Object[] options = {"Oui",
 								"Non"};
 								int n = JOptionPane.showOptionDialog(myFrame,

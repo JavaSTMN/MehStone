@@ -10,11 +10,12 @@ public class ImagePaths {
 	public static String _SBIRE_MAMIE = "./assets/img/Cards/Sbirs/mamie.png";
 	public static String _SBIRE_SBIRE_FEMININ = "./assets/img/Cards/Sbirs/SbireFeminin.png";
 	public static String _SLIME_3 = "./assets/img/Cards/Sbirs/slime_3.png";
-	//public static String _SLIME_2 = "./assets/img/Cards/Sbirs/slime_2.png";
-	//public static String _SLIME_1 = "./assets/img/Cards/Sbirs/slime_1.png";
 	public static String _SBIRE_KEVIN = "./assets/img/Cards/Sbirs/Kevin.png";
 	public static String _SBIRE_NICK = "./assets/img/Cards/Sbirs/Nick.png";
+	public static String _SBIRE_MEH = "./assets/img/Cards/Sbirs/Meh.png";
+	public static String _SBIRE_KINGSMAN = "./assets/img/Cards/Sbirs/Kingsman.png";
 
+	
 	/* SPELL IMG PATHS */
 	public static String _SPELL_CAFE = "./assets/img/Cards/Spells/cafe.png";
 	public static String _SPELL_KATON = "./assets/img/Cards/Spells/Katon.png";
