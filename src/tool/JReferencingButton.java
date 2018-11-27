@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
+import java.awt.font.TextLayout;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -60,28 +61,96 @@ public class JReferencingButton<T> extends JButton
 		g.setFont(font.deriveFont(26f));
 		
 		if(this.value instanceof ArrayList<?>) {
+			int x = 120;
+			int y = 210;
 			ArrayList<Card> cards = (ArrayList<Card>)this.value;
-			g.drawString((String.valueOf((cards.size()))), 120, 210);
+			String text = String.valueOf((cards.size()));
+			g.setColor(Color.black);
+			g.drawString(text, x + 1, y - 1);
+			g.drawString(text, x + 1, y + 1);
+			g.drawString(text, x - 1, y - 1);
+			g.drawString(text, x - 1, y + 1);
+
+			g.setColor(Color.white);
+			g.drawString(text, 120, 210);
 		}
 		if (this.value instanceof Card) 
 		{
 			
 			if(this.getIcon() != null) {
 				if(this.getIcon().getIconWidth() == 150) {
-					g.drawString((String.valueOf(((Card)this.value).getMana())), 29, 48);
+					int x = 29;
+					int y = 48;
+					String text = String.valueOf(((Card)this.value).getMana());
+					g.setColor(Color.black);
+					g.drawString(text, x + 1, y - 1);
+					g.drawString(text, x + 1, y + 1);
+					g.drawString(text, x - 1, y - 1);
+					g.drawString(text, x - 1, y + 1);
+					g.setColor(Color.white);
+					g.drawString(text, 29, 48);
 					if(this.value instanceof Monster)
 					{
-						g.drawString((String.valueOf(((Monster)this.value).getHp())), 135, 225);
-						g.drawString((String.valueOf(((Monster)this.value).getDamage())), 29, 224);
+						x = 135;
+						y = 225;
+						String textHp = String.valueOf(((Monster)this.value).getHp());
+						g.setColor(Color.black);
+						g.drawString(textHp, x + 1, y - 1);
+						g.drawString(textHp, x + 1, y + 1);
+						g.drawString(textHp, x - 1, y - 1);
+						g.drawString(textHp, x - 1, y + 1);
+						g.setColor(Color.white);
+						g.drawString(textHp, 135, 225);
+						x = 29;
+						y = 224;
+						String textDmg = String.valueOf(((Monster)this.value).getDamage());
+						g.setColor(Color.black);
+						g.drawString(textDmg, x + 1, y - 1);
+						g.drawString(textDmg, x + 1, y + 1);
+						g.drawString(textDmg, x - 1, y - 1);
+						g.drawString(textDmg, x - 1, y + 1);
+						g.setColor(Color.white);
+						g.drawString(textDmg, 29, 224);
 					}
 				}else if(this.getIcon().getIconWidth() == 200) {
-					g.drawString((String.valueOf(((Card)this.value).getMana())), 29, 34);
+					int x = 29;
+					int y = 34;
+					String text = String.valueOf(((Card)this.value).getMana());
+					g.setColor(Color.black);
+					g.drawString(text, x + 1, y - 1);
+					g.drawString(text, x + 1, y + 1);
+					g.drawString(text, x - 1, y - 1);
+					g.drawString(text, x - 1, y + 1);
+
+					g.setColor(Color.white);
+					g.drawString(text, 29, 34);
+
 					if(this.value instanceof Monster)
 					{
-						g.drawString((String.valueOf(((Monster)this.value).getHp())), 172, 253);
-						g.drawString((String.valueOf(((Monster)this.value).getDamage())), 29, 253);
+						x = 172;
+						y = 253;
+						String textHp = String.valueOf(((Monster)this.value).getHp());
+						g.setColor(Color.black);
+						g.drawString(textHp, x + 1, y - 1);
+						g.drawString(textHp, x + 1, y + 1);
+						g.drawString(textHp, x - 1, y - 1);
+						g.drawString(textHp, x - 1, y + 1);
+						g.setColor(Color.white);
+						g.drawString(textHp, 172, 253);
+						x = 29;
+						y = 253;
+						String textDmg = String.valueOf(((Monster)this.value).getDamage());
+						g.setColor(Color.black);
+						g.drawString(textDmg, x + 1, y - 1);
+						g.drawString(textDmg, x + 1, y + 1);
+						g.drawString(textDmg, x - 1, y - 1);
+						g.drawString(textDmg, x - 1, y + 1);
+						g.setColor(Color.white);
+						g.drawString(textDmg, 29, 253);
 					}
 				}
+				
+				
 			}
 			
 			
