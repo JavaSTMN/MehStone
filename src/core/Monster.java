@@ -44,7 +44,9 @@ public class Monster extends Card implements ICard, IAttackingCard{
 			}
 		}else if(this.getName() == "garou") {
 			for( Card myCard : listCard) {
-				((Monster) myCard).addHP(1);
+				if(myCard != this) {
+					((Monster) myCard).addHP(1);
+				}
 			}
 		}
 	}
