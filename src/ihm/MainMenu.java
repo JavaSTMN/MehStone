@@ -117,8 +117,8 @@ public class MainMenu {
 		    		gameManager.startGame(c.getDeckJ1(),c.getDeckJ2());
 		    	}
 		    	
-		    	//content.setVisible(false);
-		    	//gameManager.startGame(new Deck(1),new Deck(2));
+		    	content.setVisible(false);
+		    	gameManager.startGame(new Deck(1),new Deck(2));
 		    }
 		});
 		

@@ -154,7 +154,7 @@ public class GameManager {
 		actionsText.setLayout(new GridLayout(0,1));
 		JTextArea gameText = new JTextArea(5,25);
 		endTurn();
-		gameText.append("TOUR DU JOUEUR 1 - TOUR ["+tourNumber+"]\n");
+		gameText.append("TOUR DU JOUEUR 1\n");
 		gameText.setEditable(false);
 		gameText.setFont(new Font("Serif", Font.ITALIC, 16));
 		gameText.setLineWrap(true);

@@ -34,11 +34,11 @@ public class Deck {
 		Image spell_katon = new ImageIcon(ImagePaths._SPELL_KATON).getImage();
 		Image spell_rasengan = new ImageIcon(ImagePaths._SPELL_RASENGAN).getImage();
 
-		cards.add(new Monster("slime",1, sbire_slime,"Slurp",1,3));
-		cards.add(new Monster("slime",1, sbire_slime,"Slurp",1,3));
-		cards.add(new Monster("slime",1, sbire_slime,"Slurp",1,3));
-		cards.add(new Monster("slime",1, sbire_slime,"Slurp",1,3));
-		cards.add(new Monster("slime",1, sbire_slime,"Slurp",1,3));
+		//cards.add(new Monster("slime",1, sbire_slime,"Slurp",1,3));
+		//cards.add(new Monster("slime",1, sbire_slime,"Slurp",1,3));
+		//cards.add(new Monster("slime",1, sbire_slime,"Slurp",1,3));
+		//cards.add(new Monster("slime",1, sbire_slime,"Slurp",1,3));
+		//cards.add(new Monster("slime",1, sbire_slime,"Slurp",1,3));
 		cards.add(new Spell("katon",2, spell_katon,"Inflige 2 point(s) de dégats", 2));
 		cards.add(new Spell("katon",2, spell_katon,"Inflige 2 point(s) de dégats", 2));
 		cards.add(new Spell("katon",2, spell_katon,"Inflige 2 point(s) de dégats", 2));
@@ -60,6 +60,16 @@ public class Deck {
 	 */
 	public void addCardToDeck(Card card) {
 		this.cards.add(card);
+	}
+	
+	public boolean canAddCardToDeck(Card card) {
+		int cpt = 0;
+		for(Card myCard : this.cards) {
+			if(myCard.getName() == card.getName())
+				cpt++;
+		}
+		return (cpt<3)?true:false;
+		
 	}
 	
 	
