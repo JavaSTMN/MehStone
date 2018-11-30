@@ -480,11 +480,21 @@ public class GameManager {
 									handJ1.removeCard(tempCard);
 									monstresJ1.add(tempCard);
 									gameText.append("Pose sur le plateau le monstre : "+tempCard.getName()+"\n");
-									((Monster) tempCard).effect(monstresJ1);
+									((Monster) tempCard).effect(monstresJ1,monstresJ2);
 									for(int i = 0; i < monstresJ1.size(); i++) {
 										listBtnMonstre.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ1.get(i).getImg(), 150, 225)));
 										listBtnMonstre.get(i).setValue(monstresJ1.get(i));
 									}
+									for (int i = 0; i < listBtnAdversaire.size(); i++) {
+										listBtnAdversaire.get(i).setIcon(null);
+										listBtnAdversaire.get(i).setValue(null);
+									}
+									for(int i = 0; i < monstresJ2.size(); i++) {
+										listBtnAdversaire.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ2.get(i).getImg(), 150, 225)));
+										listBtnAdversaire.get(i).setValue(monstresJ2.get(i));
+									}
+									
+									
 								}else {
 									JOptionPane.showMessageDialog(myFrame,
 											"Impossible de placer le monstre. Le terrain est plein !",
@@ -535,10 +545,18 @@ public class GameManager {
 									handJ2.removeCard(tempCard);
 									monstresJ2.add(tempCard);
 									gameText.append("Pose sur le plateau le monstre : "+tempCard.getName()+"\n");
-									((Monster) tempCard).effect(monstresJ2);
+									((Monster) tempCard).effect(monstresJ2,monstresJ1);
 									for(int i = 0; i < monstresJ2.size(); i++) {
 										listBtnMonstre.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ2.get(i).getImg(), 150, 225)));
 										listBtnMonstre.get(i).setValue(monstresJ2.get(i));
+									}
+									for (int i = 0; i < listBtnAdversaire.size(); i++) {
+										listBtnAdversaire.get(i).setIcon(null);
+										listBtnAdversaire.get(i).setValue(null);
+									}
+									for(int i = 0; i < monstresJ1.size(); i++) {
+										listBtnAdversaire.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ1.get(i).getImg(), 150, 225)));
+										listBtnAdversaire.get(i).setValue(monstresJ1.get(i));
 									}
 								}else {
 									JOptionPane.showMessageDialog(myFrame,

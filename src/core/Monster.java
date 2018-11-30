@@ -1,6 +1,7 @@
 package core;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.swing.ImageIcon;
 
@@ -20,7 +21,7 @@ public class Monster extends Card implements ICard, IAttackingCard{
 
 	private int damage;
 	private boolean death = false;
-	
+
 	public Monster(String name, int mana, Image image, String effect, int damage, int hp) {
 		super(name, mana, image, effect);
 		this.setHp(hp);
@@ -30,27 +31,66 @@ public class Monster extends Card implements ICard, IAttackingCard{
 	public void action(Monster target) {
 		target.removeHP(this.damage);
 	}
-	
+
 	public void action(Hero hero) {
 		hero.loseHp(this.damage);
 	}
-	
-	public void effect(ArrayList<Card> listCard) {
-		if(this.getName() == "furry") {
+
+	public void effect(ArrayList<Card> listCard,ArrayList<Card> listCardAdversaire) {
+		switch (this.getName()) {
+		case "nick":
+			if(listCard.size() < 4 && listCardAdversaire.size() >= 1) {
+				int randomNum =(listCardAdversaire.size() == 1)?0:ThreadLocalRandom.current().nextInt(0, listCardAdversaire.size()-1);
+				listCard.add(listCardAdversaire.remove(randomNum));
+			}
+			break;
+		case "tortank":
+			if(listCardAdversaire.size() >= 1) {
+				for(int i = listCardAdversaire.size()-1; i>= 0; i--) {
+					Card myCard = listCardAdversaire.get(i);
+					this.addHP(1);
+					((Monster) myCard).removeHP(1);
+					if(((Monster) myCard).isDeath()) {
+						listCardAdversaire.remove(myCard);
+					}
+				}
+			}
+			break;
+		case "meh":
+			if(listCard.size() == 1) {
+				this.addHP(5);
+			}
+			break;
+		case "lithium":
 			if(listCard.size() < 4) {
 				Image sbire_feminin = new ImageIcon(ImagePaths._SBIRE_SBIRE_FEMININ).getImage();
-				Monster sbire_femen = new Monster("sbire_femen",1, sbire_feminin,"Sbire de Furry",1,1);
+				Monster sbire_femen = new Monster("sbire_femen",1, sbire_feminin,"Sbire de lithium",1,1);
 				listCard.add(sbire_femen);
 			}
-		}else if(this.getName() == "garou") {
+			break;
+		case "garou":
+			if(listCard.size() < 4) {
+				Image sbire_feminin2 = new ImageIcon(ImagePaths._SBIRE_SBIRE_FEMININ2).getImage();
+				Monster sbire_femen = new Monster("sbire_femen2",1, sbire_feminin2,"Sbire de garou",1,1);
+				listCard.add(sbire_femen);
+			}
+			break;
+		case "ivan":
+			int randomNum =(listCard.size() == 1)?0:ThreadLocalRandom.current().nextInt(0, listCard.size()-1);
+			((Monster) listCard.get(randomNum)).addHP(2);
+			((Monster) listCard.get(randomNum)).addAttack(2);
+			break;
+		case "furry":
 			for( Card myCard : listCard) {
 				if(myCard != this) {
 					((Monster) myCard).addHP(1);
 				}
 			}
+			break;
 		}
+
 	}
-	
+
 	@Override
 	public boolean isSummonable() {
 		// TODO Auto-generated method stub
@@ -66,18 +106,18 @@ public class Monster extends Card implements ICard, IAttackingCard{
 	@Override
 	public void attack(Card card) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	public void removeHP(int number) {
 		this.setHp(this.getHp() - number);
 		this.death = (this.getHp() > 0)?false:true;
 	}
-	
+
 	public void addHP(int number) {
 		this.setHp(this.getHp() + number);
 	}
-		
+
 	public boolean isDeath() {
 		return death;
 	}
@@ -94,7 +134,7 @@ public class Monster extends Card implements ICard, IAttackingCard{
 		this.damage += number;
 	}
 
-	
+
 	public int getDamage() {
 		return this.damage;
 	}
@@ -102,8 +142,8 @@ public class Monster extends Card implements ICard, IAttackingCard{
 	public void setDamage(int damage) {
 		this.damage = damage;;
 	}
-	
-	
+
+
 
 }
 
