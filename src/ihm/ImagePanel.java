@@ -53,7 +53,7 @@ public class ImagePanel extends JPanel {
     		g.setFont(font.deriveFont(26f));
             int x = 1200;
             int y = 750;
-            String text = "Version 1.00";
+            String text = "Version 1.1";
     		g.setColor(Color.black);
     		g.drawString(text, x + 1, y - 1);
     		g.drawString(text, x + 1, y + 1);
