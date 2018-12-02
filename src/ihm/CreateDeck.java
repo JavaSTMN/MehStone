@@ -90,10 +90,16 @@ public class CreateDeck {
 		Image imgLsd = new ImageIcon(ImagePaths._HERO_LSD).getImage();
 		Image imgGloria = new ImageIcon(ImagePaths._HERO_GLORIA).getImage();
 		Image imgDoge = new ImageIcon(ImagePaths._HERO_DOGE).getImage();
+		Image imgBouchara = new ImageIcon(ImagePaths._HERO_BOUCHARA).getImage();
+		Image imgMartin = new ImageIcon(ImagePaths._HERO_MARTIN).getImage();
+		Image imgMuri = new ImageIcon(ImagePaths._HERO_MURI).getImage();
 		listHero.add(new Hero("Papounou", imgPapounou));
-		listHero.add(new Hero("Chauvinator", imgChauvinator));
+		listHero.add(new Hero("Henriques", imgChauvinator));
 		listHero.add(new Hero("Lsd", imgLsd));
 		listHero.add(new Hero("Gloria", imgGloria));
+		listHero.add(new Hero("Bouchara", imgBouchara));
+		listHero.add(new Hero("Martin", imgMartin));
+		listHero.add(new Hero("Murisasco", imgMuri));
 		listHero.add(new Hero("Doge", imgDoge));
 	}
 
@@ -117,6 +123,7 @@ public class CreateDeck {
 		Image sbire_meh = new ImageIcon(ImagePaths._SBIRE_MEH).getImage();
 		Image sbire_kingsman = new ImageIcon(ImagePaths._SBIRE_KINGSMAN).getImage();
 		Image sbire_lithium = new ImageIcon(ImagePaths._SBIRE_LITHIUM).getImage();
+		Image sbire_alazar = new ImageIcon(ImagePaths._SBIRE_ALAZAR).getImage();
 		Image spell_katon = new ImageIcon(ImagePaths._SPELL_KATON).getImage();
 		Image spell_raiton = new ImageIcon(ImagePaths._SPELL_RAITON).getImage();
 		Image spell_rasengan = new ImageIcon(ImagePaths._SPELL_RASENGAN).getImage();
@@ -132,8 +139,9 @@ public class CreateDeck {
 		Monster lapeyrle = new Monster("lapeyrle",1, sbire_lapeyrle,"Fait perdre 1 d'attaque à ses alliés",1,1);
 		Monster mamie = new Monster("mamie",2, sbire_mamie,"Donne +1/-1 à un bodybuilder sur le terrain",3,1);
 		Monster slime = new Monster("slime",1, sbire_slime,"Aucun effet",2,2);
-		Monster kingsman = new Monster("kingsman",3, sbire_kingsman,"Attend sans jamais désespérer",3,3);
+		Monster kingsman = new Monster("kingsman",3, sbire_kingsman,"Attend sans jamais désespérer",3,2);
 		Monster lithium = new Monster("lithium",4, sbire_lithium,"Invoque un sbire à ses côtés",2,4);
+		Monster alazar = new Monster("alazar",3, sbire_alazar,"Provoque un effet aléatoire",2,2);
 		Spell katon = new Spell("katon",2, spell_katon,"Inflige 2 point(s) de dégats", 2);
 		Spell raiton = new Spell("raiton",5, spell_raiton,"Inflige 6 point(s) de dégats", 6);
 		Spell rasegan = new Spell("rasengan",6, spell_rasengan,"Inflige 4 points de dégats à tous les serviteurs adverses",  4);
@@ -151,6 +159,7 @@ public class CreateDeck {
 		listCard.add(slime);
 		listCard.add(kingsman);
 		listCard.add(lithium);
+		listCard.add(alazar);
 		listCard.add(katon);
 		listCard.add(raiton);
 		listCard.add(rasegan);	

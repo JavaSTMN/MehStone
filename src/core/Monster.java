@@ -36,8 +36,14 @@ public class Monster extends Card implements ICard, IAttackingCard{
 		hero.loseHp(this.damage);
 	}
 
-	public void effect(ArrayList<Card> listCard,ArrayList<Card> listCardAdversaire) {
-		switch (this.getName()) {
+	public void effect(ArrayList<Card> listCard,ArrayList<Card> listCardAdversaire, Hero myHero) {
+		String name = this.getName();
+		if(name == "alazar") {
+			String[] tabName = {"nick", "tortank", "meh","enigma", "3k", "lithium","garou", "ivan", "kingsman","lapeyrle", "mamie", "furry"};
+			int randomNum =ThreadLocalRandom.current().nextInt(0, tabName.length-1);
+			name = tabName[randomNum];
+		}
+		switch (name) {
 		case "nick":
 			if(listCard.size() < 4 && listCardAdversaire.size() >= 1) {
 				int randomNum =(listCardAdversaire.size() == 1)?0:ThreadLocalRandom.current().nextInt(0, listCardAdversaire.size()-1);
@@ -61,11 +67,48 @@ public class Monster extends Card implements ICard, IAttackingCard{
 				this.addHP(5);
 			}
 			break;
+		case "enigma":
+			if(listCardAdversaire.size() >= 1) {
+				for(int i = listCardAdversaire.size()-1; i>= 0; i--) {
+					Card myCard = listCardAdversaire.get(i);
+					((Monster) myCard).removeAttack(1);
+					((Monster) myCard).removeHP(1);
+					if(((Monster) myCard).isDeath()) {
+						listCardAdversaire.remove(myCard);
+					}
+				}
+			}
+			break;
+		case "3k":
+			if(ThreadLocalRandom.current().nextInt(0,1) == 0) {
+				if(listCard.size() >= 1) {
+					int randomNum =(listCard.size() == 1)?0:ThreadLocalRandom.current().nextInt(0, listCard.size()-1);
+					listCard.remove(randomNum);
+				}
+			}else {
+				if(listCardAdversaire.size() >= 1) {
+					int randomNum =(listCardAdversaire.size() == 1)?0:ThreadLocalRandom.current().nextInt(0, listCardAdversaire.size()-1);
+					listCardAdversaire.remove(randomNum);
+				}
+			}
+			if(ThreadLocalRandom.current().nextInt(0,1) == 0) {
+				if(listCard.size() >= 1) {
+					int randomNum =(listCard.size() == 1)?0:ThreadLocalRandom.current().nextInt(0, listCard.size()-1);
+					listCard.remove(randomNum);
+				}
+			}else {
+				if(listCardAdversaire.size() >= 1) {
+					int randomNum =(listCardAdversaire.size() == 1)?0:ThreadLocalRandom.current().nextInt(0, listCardAdversaire.size()-1);
+					listCardAdversaire.remove(randomNum);
+				}
+			}
+			break;
 		case "lithium":
 			if(listCard.size() < 4) {
 				Image sbire_feminin = new ImageIcon(ImagePaths._SBIRE_SBIRE_FEMININ).getImage();
 				Monster sbire_femen = new Monster("sbire_femen",1, sbire_feminin,"Sbire de lithium",1,1);
 				listCard.add(sbire_femen);
+				myHero.heal(2);
 			}
 			break;
 		case "garou":
@@ -80,6 +123,22 @@ public class Monster extends Card implements ICard, IAttackingCard{
 			((Monster) listCard.get(randomNum)).addHP(2);
 			((Monster) listCard.get(randomNum)).addAttack(2);
 			break;
+		case "kingsman":
+			int rd =(listCardAdversaire.size() == 1)?0:ThreadLocalRandom.current().nextInt(0, listCardAdversaire.size()-1);
+			((Monster) listCardAdversaire.get(rd)).removeAttack(2);
+			break;
+		case "lapeyrle":
+			for( Card myCard : listCard) {
+				if(myCard != this) {
+					((Monster) myCard).removeAttack(1);
+				}
+			}
+			break;
+		case "mamie":
+			int r =(listCard.size() == 1)?0:ThreadLocalRandom.current().nextInt(0, listCard.size()-1);
+			((Monster) listCard.get(r)).removeAttack(1);
+			((Monster) listCard.get(r)).addHP(1);
+			break;
 		case "furry":
 			for( Card myCard : listCard) {
 				if(myCard != this) {
@@ -88,6 +147,7 @@ public class Monster extends Card implements ICard, IAttackingCard{
 			}
 			break;
 		}
+
 
 	}
 
@@ -127,12 +187,13 @@ public class Monster extends Card implements ICard, IAttackingCard{
 	}
 
 	public void removeAttack(int number) {
-		this.damage -= number;
+		this.damage = (this.damage == 0 )?0:this.damage-1;
 	}
 
 	public void addAttack(int number) {
 		this.damage += number;
 	}
+
 
 
 	public int getDamage() {

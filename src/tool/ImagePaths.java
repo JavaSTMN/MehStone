@@ -17,6 +17,7 @@ public class ImagePaths {
 	public static String _SBIRE_KINGSMAN = "./assets/img/Cards/Sbirs/Kingsman.png";
 	public static String _SBIRE_LITHIUM = "./assets/img/Cards/Sbirs/Lithium.png";
 	public static String _SBIRE_TORTANK = "./assets/img/Cards/Sbirs/Tortank.png";
+	public static String _SBIRE_ALAZAR = "./assets/img/Cards/Sbirs/alazar.png";
 
 	
 	/* SPELL IMG PATHS */
@@ -32,6 +33,9 @@ public class ImagePaths {
 	public static String _HERO_LSD = "./assets/img/cards/Heroes/LSD.png";
 	public static String _HERO_GLORIA = "./assets/img/cards/Heroes/Gloria.png";
 	public static String _HERO_DOGE = "./assets/img/cards/Heroes/doge.png";
+	public static String _HERO_BOUCHARA = "./assets/img/cards/Heroes/bouchara.png";
+	public static String _HERO_MARTIN = "./assets/img/cards/Heroes/martin.png";
+	public static String _HERO_MURI = "./assets/img/cards/Heroes/murisasco.png";
 
 	/* Background IMG PATHS */
 	public static String _BACKGROUND = "./assets/img/background.jpg";

@@ -7,7 +7,7 @@ public class Hero {
 	private String name;
 	private int hp;
 	private Image img;
-	public static int _NB_MAX_HP = 20;
+	public static int _NB_MAX_HP = 30;
 	private boolean death = false;
 	
 	public Hero(String name, Image img) {
@@ -57,6 +57,10 @@ public class Hero {
 
 	public void setHp(int hp) {
 		this.hp = hp;
+	}
+	
+	public void heal(int hp) {
+		this.hp = (this.hp + hp > _NB_MAX_HP)?this.hp:this.hp+hp;
 	}
 	
 }

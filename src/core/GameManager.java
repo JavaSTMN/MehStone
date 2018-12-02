@@ -72,6 +72,7 @@ public class GameManager {
 	ArrayList<JReferencingButton> listBtnMonstre;
 	ArrayList<JReferencingButton> listBtnAdversaire;
 	boolean pioche = true;
+	boolean afficher = false;
 	Card cardAttack = null;
 	int tourNumber = 0;
 
@@ -234,12 +235,6 @@ public class GameManager {
 		hand2.add(btnHand3);
 		hand2.add(btnHand4);
 
-		btnHand1.setIcon(new ImageIcon(getScaledImage(handJ1.getCards().get(0).getImg(), 150, 225)));
-		btnHand1.setValue(handJ1.getCards().get(0));
-		btnHand2.setIcon(new ImageIcon(getScaledImage(handJ1.getCards().get(1).getImg(), 150, 225)));
-		btnHand2.setValue(handJ1.getCards().get(1));
-
-
 		game2.add(adversaire2);
 		game2.add(monstres2);
 		game2.add(hand2);
@@ -270,7 +265,10 @@ public class GameManager {
 		heroLifeAdversaire.add(lifeAdversaire);
 
 		JButton btnFinDeTour = new JButton("Fin de tour");
+		JButton btnAfficherCarte = new JButton("Afficher les cartes");
+		btnFinDeTour.setVisible(false);
 		panelFinDeTour.add(btnFinDeTour);
+		panelFinDeTour.add(btnAfficherCarte);
 		panelFinDeTour.setBorder(new EmptyBorder(150, 0, 0, 0));
 
 		labelMana = new JLabel("Mana : "+manaJ1.getRemainingMana(),JLabel.CENTER);
@@ -314,149 +312,186 @@ public class GameManager {
 		btnFinDeTour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-				cleanTextArea(gameText);
+				if(pioche) {
+					if(cardAttack == null) {
+						btnFinDeTour.setVisible(false);
+						btnAfficherCarte.setVisible(true);
+						cleanTextArea(gameText);
+						afficher = false;
+						pioche = false;
+						if(jSelected == 1) {
+							jSelected = 2;
+							gameText.append("TOUR DU JOUEUR 2\n");
+							for (int i = 0; i < listBtnHand.size(); i++) {
+								listBtnHand.get(i).setIcon(null);
+								listBtnHand.get(i).setValue(null);
+								listBtnMonstre.get(i).setIcon(null);
+								listBtnMonstre.get(i).setValue(null);
+								listBtnAdversaire.get(i).setIcon(null);
+								listBtnAdversaire.get(i).setValue(null);
+							}
+							for(int i = 0; i < monstresJ2.size(); i++) {
+								listBtnMonstre.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ2.get(i).getImg(), 150, 225)));
+								monstresJ2.get(i).setAttack(true);
+								listBtnMonstre.get(i).setValue(monstresJ2.get(i));
+							}
+							for(int i = 0; i < monstresJ1.size(); i++) {
+								listBtnAdversaire.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ1.get(i).getImg(), 150, 225)));
+								listBtnAdversaire.get(i).setValue(monstresJ1.get(i));
+							}
+							btnHero.setIcon(new ImageIcon(getScaledImage(heroJ2.getImage(), 180, 255)));
+							life.setText("Vie : "+heroJ2.getHp());
+							btnHeroAdversaire.setIcon(new ImageIcon(getScaledImage(heroJ1.getImage(), 180, 255)));
+							lifeAdversaire.setText("Vie : "+heroJ1.getHp());
+							manaJ2.addManaTurn(1);
+							labelMana.setText("Mana : "+manaJ2.getRemainingMana());
 
-				pioche = false;
-				if(jSelected == 1) {
-					jSelected = 2;
-					gameText.append("TOUR DU JOUEUR 2\n");
-					for (int i = 0; i < listBtnHand.size(); i++) {
-						listBtnHand.get(i).setIcon(null);
-						listBtnHand.get(i).setValue(null);
-						listBtnMonstre.get(i).setIcon(null);
-						listBtnMonstre.get(i).setValue(null);
-						listBtnAdversaire.get(i).setIcon(null);
-						listBtnAdversaire.get(i).setValue(null);
-					}
+							if(cardsJ2.size() == 0) {
+								btnPioche.setIcon(null);
+								btnPioche.setValue(null);
+							}else {
+								btnPioche.setValue(cardsJ2);
+								btnPioche.setIcon(new ImageIcon(getScaledImage(imgDeck, 180, 255)));
+							}
+						}else {
+							jSelected = 1;
+							gameText.append("TOUR DU JOUEUR 1\n");
+							for (int i = 0; i < listBtnHand.size(); i++) {
+								listBtnHand.get(i).setIcon(null);
+								listBtnHand.get(i).setValue(null);
+								listBtnMonstre.get(i).setIcon(null);
+								listBtnMonstre.get(i).setValue(null);
+								listBtnAdversaire.get(i).setIcon(null);
+								listBtnAdversaire.get(i).setValue(null);
+							}
+							for(int i = 0; i < monstresJ1.size(); i++) {
+								listBtnMonstre.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ1.get(i).getImg(), 150, 225)));
+								monstresJ1.get(i).setAttack(true);
+								listBtnMonstre.get(i).setValue(monstresJ1.get(i));
 
-					for(int i = 0; i < handJ2.getCards().size(); i++) {
-						listBtnHand.get(i).setIcon(new ImageIcon(getScaledImage(handJ2.getCards().get(i).getImg(), 150, 225)));
-						listBtnHand.get(i).setValue(handJ2.getCards().get(i));
-					}
-					for(int i = 0; i < monstresJ2.size(); i++) {
-						listBtnMonstre.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ2.get(i).getImg(), 150, 225)));
-						monstresJ2.get(i).setAttack(true);
-						listBtnMonstre.get(i).setValue(monstresJ2.get(i));
-					}
-					for(int i = 0; i < monstresJ1.size(); i++) {
-						listBtnAdversaire.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ1.get(i).getImg(), 150, 225)));
-						listBtnAdversaire.get(i).setValue(monstresJ1.get(i));
-					}
-					btnHero.setIcon(new ImageIcon(getScaledImage(heroJ2.getImage(), 180, 255)));
-					life.setText("Vie : "+heroJ2.getHp());
-					btnHeroAdversaire.setIcon(new ImageIcon(getScaledImage(heroJ1.getImage(), 180, 255)));
-					lifeAdversaire.setText("Vie : "+heroJ1.getHp());
-					manaJ2.addManaTurn(1);
-					labelMana.setText("Mana : "+manaJ2.getRemainingMana());
-					
-					if(cardsJ2.size() == 0) {
-						btnPioche.setIcon(null);
-						btnPioche.setValue(null);
+							}
+							for(int i = 0; i < monstresJ2.size(); i++) {
+								listBtnAdversaire.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ2.get(i).getImg(), 150, 225)));
+								listBtnAdversaire.get(i).setValue(monstresJ2.get(i));
+							}
+							btnHero.setIcon(new ImageIcon(getScaledImage(heroJ1.getImage(), 180, 255)));
+							life.setText("Vie : "+heroJ1.getHp());
+							btnHeroAdversaire.setIcon(new ImageIcon(getScaledImage(heroJ2.getImage(), 180, 255)));
+							lifeAdversaire.setText("Vie : "+heroJ2.getHp());
+							manaJ1.addManaTurn(1);
+							labelMana.setText("Mana : "+manaJ1.getRemainingMana());
+							if(cardsJ1.size() == 0) {
+								btnPioche.setIcon(null);
+								btnPioche.setValue(null);
+							}else {
+								btnPioche.setValue(cardsJ1);
+								btnPioche.setIcon(new ImageIcon(getScaledImage(imgDeck, 180, 255)));
+							}
+						}
 					}else {
-						btnPioche.setValue(cardsJ2);
-						btnPioche.setIcon(new ImageIcon(getScaledImage(imgDeck, 180, 255)));
+						JOptionPane.showMessageDialog(myFrame,
+								"L'action en cours doit être fini pour pouvoir finir son tour",
+								"Erreur",
+								JOptionPane.ERROR_MESSAGE);
 					}
 				}else {
-					jSelected = 1;
-					gameText.append("TOUR DU JOUEUR 1\n");
-					for (int i = 0; i < listBtnHand.size(); i++) {
-						listBtnHand.get(i).setIcon(null);
-						listBtnHand.get(i).setValue(null);
-						listBtnMonstre.get(i).setIcon(null);
-						listBtnMonstre.get(i).setValue(null);
-						listBtnAdversaire.get(i).setIcon(null);
-						listBtnAdversaire.get(i).setValue(null);
-					}
+					JOptionPane.showMessageDialog(myFrame,
+							"Vous n'avez pas encore pioché !",
+							"Erreur",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+
+		btnAfficherCarte.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				afficher = true;
+				btnAfficherCarte.setVisible(false);
+				btnFinDeTour.setVisible(true);
+				if(jSelected == 1) {
+
 					for(int i = 0; i < handJ1.getCards().size(); i++) {
 						listBtnHand.get(i).setIcon(new ImageIcon(getScaledImage(handJ1.getCards().get(i).getImg(), 150, 225)));
 						listBtnHand.get(i).setValue(handJ1.getCards().get(i));
 					}
-					for(int i = 0; i < monstresJ1.size(); i++) {
-						listBtnMonstre.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ1.get(i).getImg(), 150, 225)));
-						monstresJ1.get(i).setAttack(true);
-						listBtnMonstre.get(i).setValue(monstresJ1.get(i));
-						
-					}
-					for(int i = 0; i < monstresJ2.size(); i++) {
-						listBtnAdversaire.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ2.get(i).getImg(), 150, 225)));
-						listBtnAdversaire.get(i).setValue(monstresJ2.get(i));
-					}
-					btnHero.setIcon(new ImageIcon(getScaledImage(heroJ1.getImage(), 180, 255)));
-					life.setText("Vie : "+heroJ1.getHp());
-					btnHeroAdversaire.setIcon(new ImageIcon(getScaledImage(heroJ2.getImage(), 180, 255)));
-					lifeAdversaire.setText("Vie : "+heroJ2.getHp());
-					manaJ1.addManaTurn(1);
-					labelMana.setText("Mana : "+manaJ1.getRemainingMana());
-					if(cardsJ1.size() == 0) {
-						btnPioche.setIcon(null);
-						btnPioche.setValue(null);
-					}else {
-						btnPioche.setValue(cardsJ1);
-						btnPioche.setIcon(new ImageIcon(getScaledImage(imgDeck, 180, 255)));
+				}else {
+					for(int i = 0; i < handJ2.getCards().size(); i++) {
+						listBtnHand.get(i).setIcon(new ImageIcon(getScaledImage(handJ2.getCards().get(i).getImg(), 150, 225)));
+						listBtnHand.get(i).setValue(handJ2.getCards().get(i));
 					}
 				}
 			}
 		});
+
+
 		btnPioche.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-				if(!pioche) {
-					pioche = true;
-					if(jSelected == 1) {
-						if(cardsJ1.size()>0) {
-							Collections.shuffle(cardsJ1);
-							if(handJ1.getCards().size()<4){
-								handJ1.addCard(cardsJ1.remove(0));
-							}else {
-								cardsJ1.remove(0);
-								JOptionPane.showMessageDialog(myFrame,
-										"Votre main est pleine, votre carte piochée est détruite",
-										"Erreur",
-										JOptionPane.ERROR_MESSAGE);
-							}
-							for (JReferencingButton jButton : listBtnHand) {
-								jButton.setIcon(null);
-								jButton.setValue(null);
-							}
-							for(int i = 0; i < handJ1.getCards().size(); i++) {
-								listBtnHand.get(i).setIcon(new ImageIcon(getScaledImage(handJ1.getCards().get(i).getImg(), 150, 225)));
-								listBtnHand.get(i).setValue(handJ1.getCards().get(i));
-							}
-							if(cardsJ1.size() == 0) {
-								btnPioche.setIcon(null);
-								btnPioche.setValue(null);
-							}
+				if(afficher) {
+					if(!pioche) {
+						pioche = true;
+						if(jSelected == 1) {
+							if(cardsJ1.size()>0) {
+								Collections.shuffle(cardsJ1);
+								if(handJ1.getCards().size()<4){
+									handJ1.addCard(cardsJ1.remove(0));
+								}else {
+									cardsJ1.remove(0);
+									JOptionPane.showMessageDialog(myFrame,
+											"Votre main est pleine, votre carte piochée est détruite",
+											"Carte détruite",
+											JOptionPane.CLOSED_OPTION);
+								}
+								for (JReferencingButton jButton : listBtnHand) {
+									jButton.setIcon(null);
+									jButton.setValue(null);
+								}
+								for(int i = 0; i < handJ1.getCards().size(); i++) {
+									listBtnHand.get(i).setIcon(new ImageIcon(getScaledImage(handJ1.getCards().get(i).getImg(), 150, 225)));
+									listBtnHand.get(i).setValue(handJ1.getCards().get(i));
+								}
+								if(cardsJ1.size() == 0) {
+									btnPioche.setIcon(null);
+									btnPioche.setValue(null);
+								}
 
+							}
+						}else {
+							if(cardsJ2.size()>0) {
+								Collections.shuffle(cardsJ2);
+								if(handJ2.getCards().size()<4){
+									handJ2.addCard(cardsJ2.remove(0));
+								}else {
+									cardsJ2.remove(0);
+									JOptionPane.showMessageDialog(myFrame,
+											"Votre main est pleine, votre carte piochée est détruite",
+											"Erreur",
+											JOptionPane.ERROR_MESSAGE);
+								}
+								for (JReferencingButton jButton : listBtnHand) {
+									jButton.setIcon(null);
+									jButton.setValue(null);
+								}
+								for(int i = 0; i < handJ2.getCards().size(); i++) {
+									listBtnHand.get(i).setIcon(new ImageIcon(getScaledImage(handJ2.getCards().get(i).getImg(), 150, 225)));
+									listBtnHand.get(i).setValue(handJ2.getCards().get(i));
+								}
+								if(cardsJ2.size() == 0) {
+									btnPioche.setIcon(null);
+									btnPioche.setValue(null);
+								}
+							}
 						}
 					}else {
-						if(cardsJ2.size()>0) {
-							Collections.shuffle(cardsJ2);
-							if(handJ2.getCards().size()<4){
-								handJ2.addCard(cardsJ2.remove(0));
-							}else {
-								cardsJ2.remove(0);
-								JOptionPane.showMessageDialog(myFrame,
-										"Votre main est pleine, votre carte piochée est détruite",
-										"Erreur",
-										JOptionPane.ERROR_MESSAGE);
-							}
-							for (JReferencingButton jButton : listBtnHand) {
-								jButton.setIcon(null);
-								jButton.setValue(null);
-							}
-							for(int i = 0; i < handJ2.getCards().size(); i++) {
-								listBtnHand.get(i).setIcon(new ImageIcon(getScaledImage(handJ2.getCards().get(i).getImg(), 150, 225)));
-								listBtnHand.get(i).setValue(handJ2.getCards().get(i));
-							}
-							if(cardsJ2.size() == 0) {
-								btnPioche.setIcon(null);
-								btnPioche.setValue(null);
-							}
-						}
+						JOptionPane.showMessageDialog(myFrame,
+								"Impossible de piocher deux fois dans le même tour",
+								"Erreur",
+								JOptionPane.ERROR_MESSAGE);
 					}
 				}else {
 					JOptionPane.showMessageDialog(myFrame,
-							"Impossible de piocher deux fois dans le même tour",
+							"Afficher les cartes du joueur avant de piocher",
 							"Erreur",
 							JOptionPane.ERROR_MESSAGE);
 				}
@@ -467,131 +502,157 @@ public class GameManager {
 			jButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e)
 				{
-					cleanTextArea(gameText);
 					Card tempCard = (Card)jButton.getValue();
-					if(jSelected == 1) {
-						if(tempCard.getMana() <= manaJ1.getRemainingMana()) {
-							if(tempCard instanceof Monster) {
-								if(monstresJ1.size()!=4) {
-									manaJ1.useManaTurn(tempCard.getMana());
-									labelMana.setText("Mana : "+manaJ1.getRemainingMana());
-									jButton.setIcon(null);
-									jButton.setValue(null);
-									handJ1.removeCard(tempCard);
-									monstresJ1.add(tempCard);
-									gameText.append("Pose sur le plateau le monstre : "+tempCard.getName()+"\n");
-									((Monster) tempCard).effect(monstresJ1,monstresJ2);
-									for(int i = 0; i < monstresJ1.size(); i++) {
-										listBtnMonstre.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ1.get(i).getImg(), 150, 225)));
-										listBtnMonstre.get(i).setValue(monstresJ1.get(i));
-									}
-									for (int i = 0; i < listBtnAdversaire.size(); i++) {
-										listBtnAdversaire.get(i).setIcon(null);
-										listBtnAdversaire.get(i).setValue(null);
-									}
-									for(int i = 0; i < monstresJ2.size(); i++) {
-										listBtnAdversaire.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ2.get(i).getImg(), 150, 225)));
-										listBtnAdversaire.get(i).setValue(monstresJ2.get(i));
-									}
-									
-									
-								}else {
-									JOptionPane.showMessageDialog(myFrame,
-											"Impossible de placer le monstre. Le terrain est plein !",
-											"Erreur",
-											JOptionPane.ERROR_MESSAGE);
-								}
-								
-							}else {
-								manaJ1.useManaTurn(tempCard.getMana());
-								labelMana.setText("Mana : "+manaJ1.getRemainingMana());
-								jButton.setIcon(null);
-								jButton.setValue(null);
-								handJ1.removeCard(tempCard);
-								if(tempCard.getName() == "katon"  || tempCard.getName() == "raiton") {
-									gameText.append("Choisir la cible du sort : "+tempCard.getName()+"\n");
-									cardAttack = tempCard;
-								}else if(tempCard.getName() == "rasengan") {
-									Spell s = (Spell)tempCard;
-									gameText.append(tempCard.getName()+" enlève "+s.getDamage()+" point(s) de vie à tous les monstres\n");
-									for (JReferencingButton Jbutton : listBtnAdversaire) {
-										if(Jbutton.getValue() != null) {
-											Monster m = (Monster)Jbutton.getValue();
-											s.action(m);
-											if(m.isDeath()) {
-												Jbutton.setIcon(null);
-												Jbutton.setValue(null);
-												monstresJ2.remove(m);
+					if(tempCard != null) {
+						if(pioche == true) {
+							if(cardAttack == null) {
+								cleanTextArea(gameText);
+								if(jSelected == 1) {
+									if(tempCard.getMana() <= manaJ1.getRemainingMana()) {
+										if(tempCard instanceof Monster) {
+											if(monstresJ1.size()!=4) {
+												manaJ1.useManaTurn(tempCard.getMana());
+												labelMana.setText("Mana : "+manaJ1.getRemainingMana());
+												jButton.setIcon(null);
+												jButton.setValue(null);
+												handJ1.removeCard(tempCard);
+												monstresJ1.add(tempCard);
+												gameText.append("Pose sur le plateau le monstre : "+tempCard.getName()+"\n");
+												((Monster) tempCard).effect(monstresJ1,monstresJ2,heroJ1);
+												life.setText("Vie : "+heroJ1.getHp());
+												for (int i = 0; i < listBtnMonstre.size(); i++) {
+													listBtnMonstre.get(i).setIcon(null);
+													listBtnMonstre.get(i).setValue(null);
+												}
+												for(int i = 0; i < monstresJ1.size(); i++) {
+													listBtnMonstre.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ1.get(i).getImg(), 150, 225)));
+													listBtnMonstre.get(i).setValue(monstresJ1.get(i));
+												}
+												for (int i = 0; i < listBtnAdversaire.size(); i++) {
+													listBtnAdversaire.get(i).setIcon(null);
+													listBtnAdversaire.get(i).setValue(null);
+												}
+												for(int i = 0; i < monstresJ2.size(); i++) {
+													listBtnAdversaire.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ2.get(i).getImg(), 150, 225)));
+													listBtnAdversaire.get(i).setValue(monstresJ2.get(i));
+												}
+
+
+											}else {
+												JOptionPane.showMessageDialog(myFrame,
+														"Impossible de placer le monstre. Le terrain est plein !",
+														"Erreur",
+														JOptionPane.ERROR_MESSAGE);
+											}
+
+										}else {
+											manaJ1.useManaTurn(tempCard.getMana());
+											labelMana.setText("Mana : "+manaJ1.getRemainingMana());
+											jButton.setIcon(null);
+											jButton.setValue(null);
+											handJ1.removeCard(tempCard);
+											if(tempCard.getName() == "katon"  || tempCard.getName() == "raiton") {
+												gameText.append("Choisir la cible du sort : "+tempCard.getName()+"\n");
+												cardAttack = tempCard;
+											}else if(tempCard.getName() == "rasengan") {
+												Spell s = (Spell)tempCard;
+												gameText.append(tempCard.getName()+" enlève "+s.getDamage()+" point(s) de vie à tous les monstres\n");
+												for (JReferencingButton Jbutton : listBtnAdversaire) {
+													if(Jbutton.getValue() != null) {
+														Monster m = (Monster)Jbutton.getValue();
+														s.action(m);
+														if(m.isDeath()) {
+															Jbutton.setIcon(null);
+															Jbutton.setValue(null);
+															monstresJ2.remove(m);
+														}
+													}
+												}
 											}
 										}
+									}else {
+										JOptionPane.showMessageDialog(myFrame,
+												"Pas assez de mana pour jouer cette carte !",
+												"Erreur",
+												JOptionPane.ERROR_MESSAGE);
+									}
+
+								}else if(jSelected == 2) {
+									if(tempCard.getMana() <= manaJ2.getRemainingMana()) {
+										if(tempCard instanceof Monster) {
+											if(monstresJ2.size()!=4) {
+												manaJ2.useManaTurn(tempCard.getMana());
+												labelMana.setText("Mana : "+manaJ2.getRemainingMana());
+												jButton.setIcon(null);
+												jButton.setValue(null);
+												handJ2.removeCard(tempCard);
+												monstresJ2.add(tempCard);
+												gameText.append("Pose sur le plateau le monstre : "+tempCard.getName()+"\n");
+												((Monster) tempCard).effect(monstresJ2,monstresJ1,heroJ2);
+												life.setText("Vie : "+heroJ2.getHp());
+												for (int i = 0; i < listBtnMonstre.size(); i++) {
+													listBtnMonstre.get(i).setIcon(null);
+													listBtnMonstre.get(i).setValue(null);
+												}
+												for(int i = 0; i < monstresJ2.size(); i++) {
+													listBtnMonstre.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ2.get(i).getImg(), 150, 225)));
+													listBtnMonstre.get(i).setValue(monstresJ2.get(i));
+												}
+												for (int i = 0; i < listBtnAdversaire.size(); i++) {
+													listBtnAdversaire.get(i).setIcon(null);
+													listBtnAdversaire.get(i).setValue(null);
+												}
+												for(int i = 0; i < monstresJ1.size(); i++) {
+													listBtnAdversaire.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ1.get(i).getImg(), 150, 225)));
+													listBtnAdversaire.get(i).setValue(monstresJ1.get(i));
+												}
+											}else {
+												JOptionPane.showMessageDialog(myFrame,
+														"Impossible de placer le monstre. Le terrain est plein !",
+														"Erreur",
+														JOptionPane.ERROR_MESSAGE);
+											}
+										}else {
+											manaJ2.useManaTurn(tempCard.getMana());
+											labelMana.setText("Mana : "+manaJ2.getRemainingMana());
+											jButton.setIcon(null);
+											jButton.setValue(null);
+											handJ2.removeCard(tempCard);
+											if(tempCard.getName() == "katon" || tempCard.getName() == "raiton") {
+												gameText.append("Choisir la cible du sort : "+tempCard.getName()+"\n");
+												cardAttack = tempCard;
+											}else if(tempCard.getName() == "rasengan") {
+												Spell s = (Spell)tempCard;
+												gameText.append(tempCard.getName()+" enlève "+s.getDamage()+" point(s) de vie à tous les monstres\n");
+												for (JReferencingButton Jbutton : listBtnAdversaire) {
+													if(Jbutton.getValue() != null) {
+														Monster m = (Monster)Jbutton.getValue();
+														s.action(m);
+														if(m.isDeath()) {
+															Jbutton.setIcon(null);
+															Jbutton.setValue(null);
+															monstresJ1.remove(m);
+														}
+													}
+												}
+											}
+										}
+									}else {
+										JOptionPane.showMessageDialog(myFrame,
+												"Pas assez de mana pour jouer cette carte !",
+												"Erreur",
+												JOptionPane.ERROR_MESSAGE);
 									}
 								}
+							}else {
+								JOptionPane.showMessageDialog(myFrame,
+										"Vous devez d'abord terminer l'action en cours",
+										"Erreur",
+										JOptionPane.ERROR_MESSAGE);
 							}
 						}else {
 							JOptionPane.showMessageDialog(myFrame,
-									"Pas assez de mana pour jouer cette carte !",
-									"Erreur",
-									JOptionPane.ERROR_MESSAGE);
-						}
-						
-					}else if(jSelected == 2) {
-						if(tempCard.getMana() <= manaJ2.getRemainingMana()) {
-							if(tempCard instanceof Monster) {
-								if(monstresJ2.size()!=4) {
-									manaJ2.useManaTurn(tempCard.getMana());
-									labelMana.setText("Mana : "+manaJ2.getRemainingMana());
-									jButton.setIcon(null);
-									jButton.setValue(null);
-									handJ2.removeCard(tempCard);
-									monstresJ2.add(tempCard);
-									gameText.append("Pose sur le plateau le monstre : "+tempCard.getName()+"\n");
-									((Monster) tempCard).effect(monstresJ2,monstresJ1);
-									for(int i = 0; i < monstresJ2.size(); i++) {
-										listBtnMonstre.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ2.get(i).getImg(), 150, 225)));
-										listBtnMonstre.get(i).setValue(monstresJ2.get(i));
-									}
-									for (int i = 0; i < listBtnAdversaire.size(); i++) {
-										listBtnAdversaire.get(i).setIcon(null);
-										listBtnAdversaire.get(i).setValue(null);
-									}
-									for(int i = 0; i < monstresJ1.size(); i++) {
-										listBtnAdversaire.get(i).setIcon(new ImageIcon(getScaledImage(monstresJ1.get(i).getImg(), 150, 225)));
-										listBtnAdversaire.get(i).setValue(monstresJ1.get(i));
-									}
-								}else {
-									JOptionPane.showMessageDialog(myFrame,
-											"Impossible de placer le monstre. Le terrain est plein !",
-											"Erreur",
-											JOptionPane.ERROR_MESSAGE);
-								}
-							}else {
-								manaJ2.useManaTurn(tempCard.getMana());
-								labelMana.setText("Mana : "+manaJ2.getRemainingMana());
-								jButton.setIcon(null);
-								jButton.setValue(null);
-								handJ2.removeCard(tempCard);
-								if(tempCard.getName() == "katon" || tempCard.getName() == "raiton") {
-									gameText.append("Choisir la cible du sort : "+tempCard.getName()+"\n");
-									cardAttack = tempCard;
-								}else if(tempCard.getName() == "rasengan") {
-									Spell s = (Spell)tempCard;
-									gameText.append(tempCard.getName()+" enlève "+s.getDamage()+" point(s) de vie à tous les monstres\n");
-									for (JReferencingButton Jbutton : listBtnAdversaire) {
-										if(Jbutton.getValue() != null) {
-											Monster m = (Monster)Jbutton.getValue();
-											s.action(m);
-											if(m.isDeath()) {
-												Jbutton.setIcon(null);
-												Jbutton.setValue(null);
-												monstresJ1.remove(m);
-											}
-										}
-									}
-								}
-							}
-						}else {
-							JOptionPane.showMessageDialog(myFrame,
-									"Pas assez de mana pour jouer cette carte !",
+									"Vous n'avez pas encore pioché !",
 									"Erreur",
 									JOptionPane.ERROR_MESSAGE);
 						}
@@ -603,30 +664,46 @@ public class GameManager {
 			jButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e)
 				{
-					cleanTextArea(gameText);
 					Card tempCard = (Card)jButton.getValue();
-					if(tempCard.isAttack()) {
-						tempCard.setAttack(false);
-						gameText.append("Choisir la cible du monstre : "+tempCard.getName()+"\n");
-						cardAttack = tempCard;
-					}else {
-						JOptionPane.showMessageDialog(myFrame,
-								"Le monstre "+tempCard.getName()+" ne peut pas attaquer !",
-								"Erreur",
-								JOptionPane.ERROR_MESSAGE);
+					if(tempCard != null){
+						if(pioche == true ) {
+							if(cardAttack == null) {
+								cleanTextArea(gameText);
+								if(tempCard.isAttack()) {
+									tempCard.setAttack(false);
+									gameText.append("Choisir la cible du monstre : "+tempCard.getName()+"\n");
+									cardAttack = tempCard;
+								}else {
+									JOptionPane.showMessageDialog(myFrame,
+											"Le monstre "+tempCard.getName()+" ne peut pas attaquer !",
+											"Erreur",
+											JOptionPane.ERROR_MESSAGE);
+								}
+							}
+							else {
+								JOptionPane.showMessageDialog(myFrame,
+										"Vous devez d'abord terminer l'action en cours",
+										"Erreur",
+										JOptionPane.ERROR_MESSAGE);
+							}	
+						}else {
+							JOptionPane.showMessageDialog(myFrame,
+									"Vous n'avez pas encore pioché !",
+									"Erreur",
+									JOptionPane.ERROR_MESSAGE);
+						}	
 					}
-					
 				}
 			});
 		}
-		
+
 		for (JReferencingButton jButton : listBtnAdversaire) {
 			jButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e)
 				{
-					cleanTextArea(gameText);
 					Monster tempCard = (Monster)jButton.getValue();
-					if(cardAttack != null) {
+					if(cardAttack != null && tempCard != null) {
+						cleanTextArea(gameText);
 						if(jSelected == 1) {
 							if(cardAttack instanceof Monster) {
 								Monster m = (Monster)cardAttack;
@@ -689,7 +766,7 @@ public class GameManager {
 							}
 						}
 						cardAttack = null;
-						
+
 					}
 				}
 			});
@@ -698,8 +775,8 @@ public class GameManager {
 		btnHeroAdversaire.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-				cleanTextArea(gameText);
-				if(cardAttack != null) {
+				if(cardAttack != null ) {
+					cleanTextArea(gameText);
 					if(jSelected == 1) {
 						if(cardAttack instanceof Monster) {
 							Monster m = (Monster)cardAttack;
@@ -804,7 +881,7 @@ public class GameManager {
 
 
 	public void endGame() {
-		
+
 	}
 
 	public void endTurn() {
