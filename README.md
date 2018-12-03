@@ -1,6 +1,6 @@
 # MehStone
 
-![](http://random.io/content/images/2013/Sep/shut_down_old_infrastructure.gif)
+![](https://raw.githubusercontent.com/JavaSTMN/MehStone/master/assets/img/MEHSTONE.gif)
 
 
 
