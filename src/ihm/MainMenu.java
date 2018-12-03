@@ -4,6 +4,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import core.Deck;
+import core.GameManager;
 import tool.ImagePaths;
 
 import java.awt.Color;
@@ -21,7 +23,7 @@ import java.util.ArrayList;
 
 public class MainMenu {
 	
-
+	static boolean deck = false;
 	public MainMenu() {
 		JPanel panneau = new JPanel();
 		panneau.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -29,11 +31,18 @@ public class MainMenu {
 	}
 
 	public static void main(String[] args) throws MalformedURLException, IOException {
+		
 		BufferedImage myImage = ImageIO.read(new File(ImagePaths._BACKGROUND));
 		ImagePanel content = new ImagePanel(myImage);
+		content.setMain(true);
+		
 		
 		Frame menuFrame = new JFrame();
 		Frame gameFrame = new JFrame();
+		CreateDeck c = new CreateDeck(menuFrame);
+		GameManager gameManager = new GameManager(menuFrame);
+		gameManager.chargement();
+		c.chargement();
 		gameFrame.setUndecorated(true); // Permet de set full screen à virer en dev
 		gameFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
@@ -97,21 +106,35 @@ public class MainMenu {
 		buttonPlay.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e)
 		    {
-		    	menuFrame.setVisible(false);
-		    	testFrame.setVisible(true);
+		    	
+		    	if(c.getDeckJ1() == null || c.getDeckJ2() == null) {
+		    		JOptionPane.showMessageDialog(menuFrame,
+							"Impossible de jouer sans avoir créé le deck du joueur 1 et du joueur 2 !",
+							"Erreur",
+							JOptionPane.ERROR_MESSAGE);
+		    	}else {
+		    		content.setVisible(false);
+		    		gameManager.startGame(c.getDeckJ1(),c.getDeckJ2());
+		    	}
+		    	
+		    	//content.setVisible(false);
+		    	//gameManager.startGame(new Deck(1),new Deck(2));
 		    }
 		});
 		
 		buttonDeck.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e)
 		    {
-		    	content.setVisible(false);
-				CreateDeck c = new CreateDeck(menuFrame);
-				try {
-					c.main();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+		    	if(!deck) {
+		    		try {
+						c.main(content);
+						deck = true;
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+		    	}else {
+		    		c.visible(content);
+		    	}
 		    }
 		});
 	}
